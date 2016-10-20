@@ -110,7 +110,17 @@ gulp.task('default', ['images', 'less', 'webpack', 'media'], function() {
 });
 
 //自动刷新
-gulp.task('sync', ['images', 'less', 'webpack', 'media','browsersync']);
+gulp.task('sync', ['images', 'less', 'webpack', 'media','browsersync'], function() {
+
+    gulp.watch(imageSrc, ['images']);
+    
+    gulp.watch(lessDict, ['less']);
+    
+    gulp.watch(jsSrc, ['webpack']);
+
+    gulp.watch(media, ['media']);
+
+});
 
 //压缩
 gulp.task('zip', ['images', 'lessmin', 'webpack:build', 'media']);
