@@ -1,0 +1,22 @@
+{
+  "name": "tx-ay",
+  "version": "0.0.1",
+  "description": "",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-copy": "0.0.2",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-imagemin": "^3.0.2",
+    "gulp-less": "^3.1.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-qn": "^0.1.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-util": "^3.0.7",
+    "imports-loader": "^0.6.5",
+    "less": "^2.7.0",
+    "style-loader": "^0.13.0",
+    "url-loader": "*",
+    "webpack": "^1.12.2",
+    "browser-sync": "^2.0.0"
+  }
+}
