@@ -6,8 +6,8 @@ var gulp = require("gulp"),
     plumer = require("gulp-plumber"),
     webpack = require("webpack"),
     webpackConfig = require("./config.js").webpack,
-    browsersync = require("browser-sync"),
     browsersyncConfig = require("./config.js").browsersync,
+    browsersync = require("browser-sync"),
     webpackConfig = require("./webpack.config.js"),
     path = require("path");
 
