@@ -7,7 +7,7 @@
 5. 浏览器自动刷新 + 实时编译：gulp sync
 4. 压缩编译: gulp zip
 
-##图片自动转base64，改"url"为"datauri"
+####图片自动转base64，改"url"为"datauri"
     background-image: datauri(..);
 
 ## License

@@ -8,6 +8,7 @@ var gulp = require("gulp"),
     webpackConfig = require("./config.js").webpack,
     browsersync = require("browser-sync"),
     browsersyncConfig = require("./config.js").browsersync,
+    webpackConfig = require("./webpack.config.js"),
     path = require("path");
 
 var lessSrc = './src/less/**/style.less',
@@ -113,5 +114,3 @@ gulp.task('sync', ['images', 'less', 'webpack', 'media','browsersync']);
 
 //压缩
 gulp.task('zip', ['images', 'lessmin', 'webpack:build', 'media']);
-
-

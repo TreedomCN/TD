@@ -38,7 +38,7 @@ module.exports = {
         server: {
             baseDir: "./"
         },
-        port: 80,
+        // port: 80,
         files: ["dist/**/*.*","./*.html"]
     }
 };
