@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <![endif]-->
+    <title>最”英雄——5秒看懂新英雄</title>
+    <meta name="description" content="最”英雄——5秒看懂新英雄" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="stylesheet" type="text/css" href="dist/css/style.css">
+    <script type="text/javascript">
+    (function(doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function() {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        recalc();
+    })(document, window);
+    </script>
+</head>
+<body>
+    <div class="m-main-wrap">
+
+        <!-- 开始页 -->
+        <div class="m-begin abs">
+            <div class="loadProcess"></div>
+            <div class="txt"></div>
+            <div class="btn-play abcter">开始</div>
+        </div>
+
+        <!-- 结束页 -->
+        <div class="m-end abs">
+            <div class="lastpage abcter sizcon">
+                <div class="btn-wrap">
+                    <div class="btn-toShare btn"></div>
+                    <div class="btn-seeAgain btn"></div>
+                </div>
+            </div>
+
+            <!-- 分享蒙版 -->
+            <div class="share-wrap abs">
+                <div class="share-img sizcon"></div>
+            </div>
+        </div>
+
+        <!-- 视频 -->
+        <div class="video-wrap abs">
+            <video class="video-main abcter" width="750" height="1200" webkit-playsinline src="http://7xvl2z.com1.z0.glb.clouddn.com/nigg2.mp4"></video>
+        </div>
+
+    </div>
+    
+    <script type="text/javascript" src="dist/js/lib/zepto.min.js"></script>
+    <script type="text/javascript" src="dist/js/main.js"></script>
+    <!-- cnzz统计，根据实际注册情况去替换‘1259179479’ -->
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259179479'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1259179479' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        $("#cnzz_stat_icon_1259179479").hide();
+    </script>
+</body>
+</html>
