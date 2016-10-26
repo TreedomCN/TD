@@ -13,18 +13,23 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="stylesheet" type="text/css" href="dist/css/style.css">
     <script type="text/javascript">
-    (function(doc, win) {
-        var docEl = doc.documentElement,
-            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-            recalc = function() {
-                var clientWidth = docEl.clientWidth;
-                if (!clientWidth) return;
-                docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'
-            };
-        if (!doc.addEventListener) return;
-        win.addEventListener(resizeEvt, recalc, false);
-        recalc();
-    })(document, window);
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    var clientHeight = docEl.clientHeight;
+                    if (!clientWidth) return;
+                    if ( (clientWidth/clientHeight) > (750/1200) ) {
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'
+                    }else{
+                        docEl.style.fontSize = 100 * (clientHeight / 1200) + 'px'
+                    }
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            recalc();
+        })(document, window);
     </script>
 </head>
 <body>
