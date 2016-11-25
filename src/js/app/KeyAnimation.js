@@ -351,4 +351,3 @@ var KeyAnimation = function(el, type, imgs, options){
 };
 
 module.exports = KeyAnimation;
-	

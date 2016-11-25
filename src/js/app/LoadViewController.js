@@ -31,7 +31,7 @@ var LoadViewController = function(){
     //私有变量
     var _private = {};
     
-    _private.pageEl = $('.m-loading');
+    _private.pageEl = $('.m-begin');
     
     _private.isInit = false;
     
@@ -43,7 +43,7 @@ var LoadViewController = function(){
         initProject();
         
         //加载体现在页面上
-        _private.processLineEl = _private.pageEl.find('.loadProcess .inner');
+        _private.processLineEl = _private.pageEl.find('.loadProcess');
         
         _private.gload = new Config.Preload(Config.pageImgs);
         
@@ -68,19 +68,19 @@ var LoadViewController = function(){
     };
     
     //显示
-    _that.show = function(){ //
+    _that.show = function(){ 
         _private.pageEl.show();
     };
     
     //隐藏
-    _that.hide = function(){ //
+    _that.hide = function(){ 
         _private.pageEl.hide();
         
-        _that.onhide && _that.onhide();//
+        _that.onhide && _that.onhide();
     };
     
     //执行加载
-    _that.load = function(){ //
+    _that.load = function(){ 
         _private.gload.load();
     };
     

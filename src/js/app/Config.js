@@ -4,6 +4,9 @@ var Preload = require('./Preload');
 
 var Config = Config || {};
 
+//ajax请求链接
+Config.requireUrl = '';
+
 //默认分享语
 Config.defShare = {
 	title: '分享标题',
@@ -16,6 +19,7 @@ Config.defShare = {
 	//填写公众号绑定的appid
 	appid: 'wx12380ea254191f1b'
 };
+
 // 同步设置手Q分享
 $('#share-name').attr('content', Config.defShare.title);
 $('#share-description').attr('content', Config.defShare.desc);
@@ -35,7 +39,6 @@ Config.wxShare = function (val) {
 Config.imgPath = 'img/';
 
 Config.isAndroid = navigator.userAgent.indexOf('Android') > -1;
-
 
 Config.scale = 1;
 
