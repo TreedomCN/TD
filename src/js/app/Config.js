@@ -16,6 +16,20 @@ Config.defShare = {
 	//填写公众号绑定的appid
 	appid: 'wx12380ea254191f1b'
 };
+// 同步设置手Q分享
+$('#share-name').attr('content', Config.defShare.title);
+$('#share-description').attr('content', Config.defShare.desc);
+$('#share-image').attr('content', Config.defShare.img);
+
+// 需重新设置分享时调用此接口，同步设置微信和手Q分享
+Config.wxShare = function (val) {
+    Config.defShare.title = val.title;
+    Config.defShare.desc = val.desc;
+    TD.wxShare(Config.defShare);
+    $('#share-name').attr('content', Config.defShare.title);
+    $('#share-description').attr('content', Config.defShare.desc);
+    $('#share-image').attr('content', Config.defShare.img);
+}
 
 //图片路径前缀
 Config.imgPath = 'img/';
