@@ -46,6 +46,8 @@ var MediaSprite = function (config) {
 
             media.setAttribute('webkit-playsinline', '');
 
+            media.setAttribute('playsinline', '');
+
             media.setAttribute('preload', 'preload');
 
         } else {
@@ -189,7 +191,7 @@ var MediaSprite = function (config) {
 
         media.addEventListener('timeupdate', playHandler);
 
-        //0延时将plpy()请求置于队列末位消除回调里直接play的报错，by————xsy
+        //异步执行防止直接play的报错
         setTimeout(function () {
             media.play();
         }, 0)
