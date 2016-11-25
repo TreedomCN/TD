@@ -7,92 +7,40 @@ html, body {
     overflow: hidden;
     background: #000;
     font-size: 14px;
+    -webkit-user-select: none;
+    user-select: none;
 }
-
-.abs {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-.abcter {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
-.sizcon{
-    background-repeat: no-repeat;
-    -webkit-background-size: contain;
-}
-
 .m-main-wrap{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     overflow: hidden;
 }
 
 .m-begin {
-    background-color: #3c3c3c;
-    z-index: 3;
-    .btn-play{
-        width: 1.0rem;
-        height: 1.0rem;
-        margin: -0.5rem 0 0 -0.5rem;
-        background-color: red;
-        font-size: 0.2rem;
-        text-align: center;
-        line-height: 1.0rem;
-    }
+    
 }
-.video-wrap{
-    z-index: 1;
-    .video-main{
-        width: .1px;
-        height: auto;
-    }
-    .playing{
-        width: 7.5rem;
-        height: 12.0rem;
-        margin: -6.0rem 0 0 -3.75rem;
-    }
-}
+
 .m-end {
     display: none;
-    z-index: 2;
-    background-color: #000;
+    z-index: 12;
     .lastpage {
-        width: 7.5rem;
-        height: 12.0rem;
-        margin: -6.0rem 0 0 -3.75rem;
-        background-color: red;
         .btn-wrap{
-            margin-top: 0.36rem;
-            padding-right: 0.5rem;
-            overflow: hidden;
             .btn{
-                float: right;
-                margin-right: 0.25rem;
-                width: 1.1rem;
-                height: .8rem;
+                width: 3.1rem;
+                height: 1.5rem;
+            }
+            .btn-toShare{
+                margin: 2.8rem 0.1rem;
+            }
+            .btn-seeAgain{
+                margin: 2.8rem -3.2rem;
             }
         }
 
     }
-
     .share-wrap {
         display: none;
         background-color: rgba(0,0,0,0.8);
         .share-img{
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 7.5rem;
-            height: 5.07rem;
-            background-color: blue;
+            background-image: url(../img/share-bg.png);
         }
     }
 }

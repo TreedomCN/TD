@@ -1,12 +1,7 @@
 "use strict";
 
 //引入的包根据实际情况而定
-var TD = require('./app/TD'),
-    Config = require('./app/Config'),
-    Preload = require('./app/Preload'),
-    KeyAnimation = require('./app/KeyAnimation'),
-    MediaSprite = require('./app/MediaSprite'),
-    LoadViewController = require('./app/LoadViewController'),
+var LoadViewController = require('./app/LoadViewController'),
     IndexViewController = require('./app/IndexViewController');
 
 /*
@@ -24,8 +19,16 @@ var pagePool = {
 };
 
 var init = function() {
-    pagePool.loadView = pagePool.loadView || new LoadViewController();
-    var loadView = pagePool.loadView;
+    //load页面
+    var loadPageBack = function() {
+        pagePool.loadView = pagePool.loadView || new LoadViewController();
+            
+        var loadView = pagePool.loadView;
+        loadView.show();
+        loadView.onhide = indexPageBack;
+
+        loadView.load();
+    };
 
     //index页面
     var indexPageBack = function() {
@@ -36,10 +39,7 @@ var init = function() {
         //indexView.onhide = gamePageBack;
     };
 
-    loadView.show();
-    loadView.onhide = indexPageBack;
-
-    loadView.load();
+    loadPageBack();
 
 };
 

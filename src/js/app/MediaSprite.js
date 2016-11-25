@@ -1,7 +1,7 @@
 /*
  雪碧音
 
- var MediaSprite = new TD.MediaSprite({
+ var MediaSprite = new MediaSprite({
     wrap: '#videoWrap',   //如果没有wrap,直接添加到body
     type: 'video',         //如果是雪碧音可以填audio, 也可以不填
     src: 'http://hymm.treedom.cn/sound/bg.mp3',
@@ -45,6 +45,8 @@ var MediaSprite = function (config) {
             media = document.createElement('video');
 
             media.setAttribute('webkit-playsinline', '');
+
+            media.setAttribute('playsinline', '');
 
             media.setAttribute('preload', 'preload');
 
@@ -142,7 +144,7 @@ var MediaSprite = function (config) {
 
                     media.addEventListener('timeupdate', playHandler);
                     
-                    //0延时将plpy()请求置于队列末位消除回调里直接play的报错，by————xsy
+                    //异步执行防止直接play的报错
                     setTimeout(function () {
                         media.play();
                     }, 0)
@@ -189,7 +191,7 @@ var MediaSprite = function (config) {
 
         media.addEventListener('timeupdate', playHandler);
 
-        //0延时将plpy()请求置于队列末位消除回调里直接play的报错，by————xsy
+        //异步执行防止直接play的报错
         setTimeout(function () {
             media.play();
         }, 0)

@@ -1,8 +1,8 @@
 "use strict";
 
-var TD = require('./TD');
-var Config = require('./Config');
-var KeyAnimation = require('./KeyAnimation');
+var TD = require('./TD'),
+    Config = require('./Config'),
+    KeyAnimation = require('./KeyAnimation');
 
 //项目初始化的一些函数
 var initProject = function(){
@@ -10,9 +10,15 @@ var initProject = function(){
     //初始化微信接口
     TD.initWxApi(Config.defShare);
 	
+    //禁止微信下拉
 	$(document.documentElement).on('touchmove', function(e) {
 		e.preventDefault();
 	});
+
+    //禁止微信长按浏览器打开
+    $(document.documentElement).on('touchstart', function(e) {
+        e.preventDefault();
+    });
     
 };
 
@@ -62,19 +68,19 @@ var LoadViewController = function(){
     };
     
     //显示
-    _that.show = function(){ //
+    _that.show = function(){ 
         _private.pageEl.show();
     };
     
     //隐藏
-    _that.hide = function(){ //
+    _that.hide = function(){ 
         _private.pageEl.hide();
         
-        _that.onhide && _that.onhide();//
+        _that.onhide && _that.onhide();
     };
     
     //执行加载
-    _that.load = function(){ //
+    _that.load = function(){ 
         _private.gload.load();
     };
     

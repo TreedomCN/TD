@@ -1,6 +1,5 @@
 "use strict";
 
-var TD = require('./TD');
 //动画帧播放器v.0.3
 /*
 el：canvas容器，jq对象；
@@ -352,4 +351,3 @@ var KeyAnimation = function(el, type, imgs, options){
 };
 
 module.exports = KeyAnimation;
-	

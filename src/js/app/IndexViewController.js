@@ -14,7 +14,7 @@ var IndexViewController = function(){
     //私有变量
     var _private = {};
 
-    _private.pageEl = $('');
+    _private.pageEl = $('.m-index');
 
     _private.isInit = false;
 
@@ -27,7 +27,6 @@ var IndexViewController = function(){
             return;
         }
 
-
         _private.isInit = true;
 
     };
@@ -38,8 +37,8 @@ var IndexViewController = function(){
     };
 
     //隐藏
-    _that.hide = function(){ //
-        _that.onhide && _that.onhide();//
+    _that.hide = function(){ 
+        _that.onhide && _that.onhide();
         _private.pageEl.hide();
     };
 
