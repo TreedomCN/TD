@@ -24,8 +24,16 @@ var pagePool = {
 };
 
 var init = function() {
-    pagePool.loadView = pagePool.loadView || new LoadViewController();
-    var loadView = pagePool.loadView;
+    //load页面
+    var loadPageBack = function() {
+        pagePool.loadView = pagePool.loadView || new LoadViewController();
+            
+        var loadView = pagePool.loadView;
+        loadView.show();
+        loadView.onhide = indexPageBack;
+
+        loadView.load();
+    };
 
     //index页面
     var indexPageBack = function() {
@@ -36,10 +44,7 @@ var init = function() {
         //indexView.onhide = gamePageBack;
     };
 
-    loadView.show();
-    loadView.onhide = indexPageBack;
-
-    loadView.load();
+    loadPageBack();
 
 };
 
