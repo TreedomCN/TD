@@ -1,7 +1,7 @@
 /*
  雪碧音
 
- var MediaSprite = new TD.MediaSprite({
+ var MediaSprite = new MediaSprite({
     wrap: '#videoWrap',   //如果没有wrap,直接添加到body
     type: 'video',         //如果是雪碧音可以填audio, 也可以不填
     src: 'http://hymm.treedom.cn/sound/bg.mp3',

@@ -5,7 +5,7 @@
     <!--[if IE]>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <![endif]-->
-    <title>最英雄——5秒看懂新英雄</title>
+    <title>出手吧，少年！</title>
     <meta id="share-name" itemprop="name" content="">
     <meta id="share-description" itemprop="description" content="">
     <meta id="share-image" itemprop="image" content="">
@@ -14,19 +14,59 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="stylesheet" type="text/css" href="dist/css/style.css">
+    <script type="text/javascript">
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    var clientHeight = docEl.clientHeight;
+                    if (!clientWidth) return;
+                    if ( (clientWidth/clientHeight) > (750/1200) ) {
+                        var fontSize = (100 * ( clientWidth / 750 ));
+                    }else{
+                        var fontSize = ( 100 * ( clientHeight / 1200 ) );
+                    }
+                    docEl.style.fontSize = (fontSize > 110 ? 110 : fontSize) + 'px';
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc);
+            recalc();
+        })(document, window);
+    </script>
 </head>
 <body>
-    <div class="m-loading">
-        <div class="wrap" data-response="true">
-            <div class="loadProcess"></div>
-            <div class="txt"></div>
+    <div class="m-main-wrap absf">
+
+        <!-- 开始页 -->
+        <div class="m-begin absf">
+
         </div>
-    </div>
-    <div class="m-index">
-        <div class="wrap" data-response="true">
+
+        <!-- 游戏页 -->
+        <div class="m-play-wrap absf sizcon fadein800">
+            
         </div>
+
+        <!-- 结束页 -->
+        <div class="m-end absf fadein800">
+            <div class="lastpage absf sizcon">
+                <div class="btn-wrap">
+                    <div class="btn-toShare btn abcter"></div>
+                    <div class="btn-seeAgain btn  abcter"></div>
+                </div>
+            </div>
+
+            <!-- 分享蒙版 -->
+            <div class="share-wrap absf">
+                <div class="share-img absf sizcon"></div>
+            </div>
+        </div>
+
+        <!-- 视频 -->
+        <div class="video-wrap absf" id="videoWrap"></div>
+
     </div>
-    
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript" src="dist/js/lib/zepto.min.js"></script>
     <script type="text/javascript" src="dist/js/main.js"></script>

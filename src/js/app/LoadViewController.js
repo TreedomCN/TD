@@ -1,27 +1,24 @@
 "use strict";
 
-var TD = require('./TD');
-var Config = require('./Config');
-var KeyAnimation = require('./KeyAnimation');
+var TD = require('./TD'),
+    Config = require('./Config'),
+    KeyAnimation = require('./KeyAnimation');
 
 //项目初始化的一些函数
 var initProject = function(){
     
-    //让部分元素去适配屏幕
-    setTimeout(function(){
-        Config.scale = TD.responseBody({
-            width: 375, 
-            height: 600,
-            type: 'contain'
-        });
-    }, 300);
-    
     //初始化微信接口
     TD.initWxApi(Config.defShare);
 	
+    //禁止微信下拉
 	$(document.documentElement).on('touchmove', function(e) {
 		e.preventDefault();
 	});
+
+    //禁止微信长按浏览器打开
+    $(document.documentElement).on('touchstart', function(e) {
+        e.preventDefault();
+    });
     
 };
 

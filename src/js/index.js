@@ -1,12 +1,7 @@
 "use strict";
 
 //引入的包根据实际情况而定
-var TD = require('./app/TD'),
-    Config = require('./app/Config'),
-    Preload = require('./app/Preload'),
-    KeyAnimation = require('./app/KeyAnimation'),
-    MediaSprite = require('./app/MediaSprite'),
-    LoadViewController = require('./app/LoadViewController'),
+var LoadViewController = require('./app/LoadViewController'),
     IndexViewController = require('./app/IndexViewController');
 
 /*
