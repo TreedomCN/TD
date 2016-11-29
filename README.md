@@ -1,5 +1,7 @@
 # TD
 
+##rem布局方案
+
 0. 安装nodejs环境
 1. 运行npm install 安装对应的node依赖包
 2. 编译js和css运行：gulp
