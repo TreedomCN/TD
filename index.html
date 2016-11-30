@@ -14,6 +14,23 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="stylesheet" type="text/css" href="dist/css/style.css">
+    <script>
+    (function  () {
+        var getQuery = function(name){
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        };
+        if ( !getQuery('_wv') ) {
+            if ( location.search ) {
+                location.href += '&_wv=1'
+            }else{
+                location.href += '?_wv=1'
+            }
+        }
+    }())
+    </script>
 </head>
 <body>
     <div class="m-loading">
