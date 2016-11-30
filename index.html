@@ -34,6 +34,23 @@
             recalc();
         })(document, window);
     </script>
+    <script>
+    (function  () {
+        var getQuery = function(name){
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        };
+        if ( !getQuery('_wv') ) {
+            if ( location.search ) {
+                location.href += '&_wv=1'
+            }else{
+                location.href += '?_wv=1'
+            }
+        }
+    }())
+    </script>
 </head>
 <body>
     <div class="m-main-wrap absf">
