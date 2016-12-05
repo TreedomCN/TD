@@ -343,7 +343,6 @@ TD.rotateScreen = (function (){
         removeListener: remove
     };
 })(); 
-
 //网络工具包
 TD.util = {}
 TD.util.getQuery = function(name){
