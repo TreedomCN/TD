@@ -5,9 +5,8 @@ var gulp = require("gulp"),
     cssmin = require("gulp-cssmin"),
     plumer = require("gulp-plumber"),
     webpack = require("webpack"),
-    webpackConfig = require("./config.js").webpack,
+    webpackConfig = require("./webpack.config.js"),
     browsersync = require("browser-sync").create(),
-    browsersyncConfig = require("./config.js").browsersync,
     path = require("path");
 
 var lessSrc = './src/less/**/style.less',
@@ -61,7 +60,14 @@ gulp.task("webpack", function(callback) {
 
 //browsersync自动刷新
 gulp.task("browsersync",function () {
-    browsersync.init(browsersyncConfig);
+    browsersync.init({
+        open: "external",
+        server: {
+            baseDir: "./"
+        },
+        // port: 80,
+        files: ["dist/**/*.*","./*.html"]
+    });
 })
 
 //压缩less
