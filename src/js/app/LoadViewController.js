@@ -31,7 +31,7 @@ var LoadViewController = function(){
     //私有变量
     var _private = {};
     
-    _private.pageEl = $('.m-begin');
+    _private.pageEl = $('.m-loading');
     
     _private.isInit = false;
     
@@ -43,17 +43,17 @@ var LoadViewController = function(){
         initProject();
         
         //加载体现在页面上
-        _private.processLineEl = _private.pageEl.find('.loadProcess');
+        // _private.processLineEl = _private.pageEl.find('.loadProcess');
         
         _private.gload = new Config.Preload(Config.pageImgs);
         
         _private.gload.onloading = function(p){
     		console.log(p);
-            _private.processLineEl.css('height', p + '%');
+            // _private.processLineEl.css('height', p + '%');
     	};
         
         _private.gload.onload = function(){
-            _that.hide();
+            // _that.hide();
     	};
         
         _private.gload.onfail = function(msg){
@@ -63,8 +63,6 @@ var LoadViewController = function(){
         // _private.loadAudio();
         
         _private.isInit = true;
-        
-        
     };
     
     //显示

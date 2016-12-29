@@ -14,7 +14,7 @@ var IndexViewController = function(){
     //私有变量
     var _private = {};
 
-    _private.pageEl = $('.m-index');
+    _private.pageEl = $('.m-begin');
 
     _private.isInit = false;
 
