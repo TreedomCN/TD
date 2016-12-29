@@ -371,4 +371,38 @@ TD.util.getCookie = function (name) {
     return '';
 };
 
+/*移动端console.log()*/ 
+TD.log = function (info,num) {
+    var num = num || 50;
+    console.log(info);
+    if ( info instanceof Array ) {
+        info.join();
+    } else if ( typeof info == 'object' ) {
+        var info = JSON.stringify(info);
+    }else{
+        info.toString();
+    }
+    if ( !window.lloogg ) {
+        var dom = document.createElement('div');
+        dom.setAttribute('id', 'log');
+        document.body.appendChild(dom);
+        dom.style.position = 'absolute';
+        dom.style.zIndex = '9999';
+        dom.style.color = '#fff';
+        dom.style.backgroundColor = 'rgba(0,0,0,0.6)';
+        dom.style.fontSize = '13px';
+        window.lloogg = 0;
+    }
+    var domWrap = document.getElementById('log');
+    if( window.lloogg > num ){
+        domWrap.removeChild(domWrap.childNodes[0]);
+    }
+    var text = document.createElement('p');
+    text.style.margin = '0';
+    text.style.padding = '0';
+    text.innerHTML = info + '</br>';
+    domWrap.appendChild(text);
+    window.lloogg++;
+}
+
 module.exports = TD;
