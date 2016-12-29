@@ -33,31 +33,34 @@
             win.addEventListener(resizeEvt, recalc);
             recalc();
         })(document, window);
-    </script>
-    <script>
-    (function  () {
-        var getQuery = function(name){
-            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                results = regex.exec(location.search);
-            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-        };
-        if ( !getQuery('_wv') ) {
-            if ( location.search ) {
-                location.href += '&_wv=1'
-            }else{
-                location.href += '?_wv=1'
+        (function  () {
+            var getQuery = function(name){
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                    results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            };
+            if ( !getQuery('_wv') ) {
+                if ( location.search ) {
+                    location.href += '&_wv=1'
+                }else{
+                    location.href += '?_wv=1'
+                }
             }
-        }
-    }())
+        }())
     </script>
 </head>
 <body>
     <div class="m-main-wrap absf">
 
         <!-- 开始页 -->
-        <div class="m-begin absf">
+        <div class="m-loading absf">
+            <p style="text-align: center;">loading页</p>
+        </div>
 
+        <!-- 开始页 -->
+        <div class="m-begin absf">
+            <p style="text-align: center;">开始页</p>
         </div>
 
         <!-- 游戏页 -->
@@ -81,18 +84,11 @@
         </div>
 
         <!-- 视频 -->
-        <div class="video-wrap absf" id="videoWrap"></div>
+        <div class="m-video-wrap absf" id="videoWrap"></div>
 
     </div>
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript" src="dist/js/lib/zepto.min.js"></script>
     <script type="text/javascript" src="dist/js/main.js"></script>
-    <!-- cnzz统计，根据实际注册情况去替换‘1259179479’ -->
-    <script type="text/javascript">
-    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259179479'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1259179479' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-        $("#cnzz_stat_icon_1259179479").hide();
-    </script>
 </body>
 </html>

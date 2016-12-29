@@ -1,5 +1,7 @@
 "use strict";
 
+var Config = require('./Config');
+
 var TD = {};
 
 //美林版ajax对应接口
@@ -53,7 +55,7 @@ TD.wxShare = function(data, callback){
                 console.log(msg);
             });
 
-            _czc && _czc.push(['_trackEvent', '分享', "朋友圈"]);
+            TD.push(['_trackEvent', '分享', "朋友圈"]);
 		},
 		cancel: function () {
 			// 用户取消分享后执行的回调函数
@@ -81,7 +83,7 @@ TD.wxShare = function(data, callback){
                 console.log(msg);
             });
 
-            _czc && _czc.push(['_trackEvent', '分享', "好友"]);
+            TD.push(['_trackEvent', '分享', "好友"]);
         },
         cancel: function () {
             // 用户取消分享后执行的回调函数
@@ -110,13 +112,12 @@ TD.wxShare = function(data, callback){
 	                console.log(msg);
 	            });
 
-	            _czc && _czc.push(['_trackEvent', '分享', "QQ好友"]);
+	            TD.push(['_trackEvent', '分享', "QQ好友"]);
 	    },
 	    cancel: function () { 
 	       // 用户取消分享后执行的回调函数
 	    }
 	});
-
     wx.onMenuShareQZone({
         title: data.title, // 分享标题
         desc: data.desc, // 分享描述
@@ -140,12 +141,17 @@ TD.wxShare = function(data, callback){
 	                console.log(msg);
 	            });
 
-	            _czc && _czc.push(['_trackEvent', '分享', "QZone"]);
+	            TD.push(['_trackEvent', '分享', "QZone"]);
 	    },
 	    cancel: function () { 
 	        // 用户取消分享后执行的回调函数
 	    }
 	});
+
+    //手Q分享
+    $('#share-name').attr('content', data.title);
+    $('#share-description').attr('content', data.desc);
+    $('#share-image').attr('content', data.img);
 };
 
 //初始化微信接口
@@ -193,7 +199,7 @@ TD.initWxApi = function(shareData, errback, succback){
 			wx.getNetworkType({
 	            success: function (res) {
 	                var networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
-	                _czc && _czc.push(['_trackEvent', '网络类型', networkType]);
+	                TD.push(['_trackEvent', '网络类型', networkType]);
 	            }
 	        });
 		});
@@ -343,6 +349,7 @@ TD.rotateScreen = (function (){
         removeListener: remove
     };
 })(); 
+
 //网络工具包
 TD.util = {}
 TD.util.getQuery = function(name){
@@ -370,5 +377,91 @@ TD.util.getCookie = function (name) {
     }
     return '';
 };
+
+/*移动端console.log()*/ 
+TD.log = function (info,num) {
+    var num = num || 50;
+    console.log(info);
+    if ( info instanceof Array ) {
+        info.join();
+    } else if ( typeof info == 'object' ) {
+        var info = JSON.stringify(info);
+    }else{
+        info.toString();
+    }
+    if ( !window.lloogg ) {
+        var dom = document.createElement('div');
+        dom.setAttribute('id', 'log');
+        document.body.appendChild(dom);
+        dom.style.position = 'absolute';
+        dom.style.zIndex = '9999';
+        dom.style.color = '#fff';
+        dom.style.backgroundColor = 'rgba(0,0,0,0.6)';
+        dom.style.fontSize = '13px';
+        window.lloogg = 0;
+    }
+    var domWrap = document.getElementById('log');
+    if( window.lloogg > num ){
+        domWrap.removeChild(domWrap.childNodes[0]);
+    }
+    var text = document.createElement('p');
+    text.style.margin = '0';
+    text.style.padding = '0';
+    text.innerHTML = info + '</br>';
+    domWrap.appendChild(text);
+    window.lloogg++;
+}
+
+
+//cnzz统计代码
+var cnzzID = Config.defShare.cnzz;
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_" + cnzzID + "'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D"+ cnzzID +"' type='text/javascript'%3E%3C/script%3E"));
+    $("#cnzz_stat_icon_" + cnzzID).hide();
+
+// cnzz事件统计
+TD.push = function (category,action,label,value) {
+    /*category:事件类别;action:事件操作;label:事件标签;value:事件值;*/
+    var category = category || '';
+    var action = action || '';
+    var label = label || '';
+    var value = value || '';
+     try {
+         _czc.push(['_trackEvent', category, action,label,value]);
+     } catch(e) {
+         console.log(e);
+     }
+}
+
+/*
+判断访问终端和语言
+    使用：
+    if ( TD.browser.versions.qq ) {
+        console.log('go go');
+    } 
+    注意BUG：在微信内TD.browser.versions.qq也会返回true；
+    解决：在判断手Q之后加上微信判断；
+*/
+TD.browser={
+    versions:function(){
+        var u = navigator.userAgent, app = navigator.appVersion;
+        return {
+            trident: u.indexOf('Trident') > -1, //IE内核
+            presto: u.indexOf('Presto') > -1, //opera内核
+            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+            android: u.indexOf('Android') > -1 || u.indexOf('Adr') > -1, //android终端
+            iPhone: u.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
+            iPad: u.indexOf('iPad') > -1, //是否iPad
+            webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+            weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+            qq: u.match(/QQ/i) == "QQ" //是否QQ
+        };
+    }(),
+    language:(navigator.browserLanguage || navigator.language).toLowerCase()
+}
+
 
 module.exports = TD;

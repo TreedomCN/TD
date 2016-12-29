@@ -58,18 +58,6 @@ gulp.task("webpack", function(callback) {
     });
 });
 
-//browsersync自动刷新
-gulp.task("browsersync",function () {
-    browsersync.init({
-        open: "external",
-        server: {
-            baseDir: "./"
-        },
-        // port: 80,
-        files: ["dist/**/*.*","./*.html"]
-    });
-})
-
 //压缩less
 gulp.task('lessmin', function () {
     return gulp.src(lessSrc)
@@ -88,6 +76,9 @@ gulp.task("webpack:build", function(callback) {
         new webpack.optimize.UglifyJsPlugin()
     );
 
+    //过滤任意函数插件
+    myConfig.module.loaders.push({text: /\.js$/,loader: "webpack-strip?strip[]=TD.log"});
+
     myConfig.output.filename = distPath + 'js/main.js';
 
     // run webpack
@@ -100,6 +91,18 @@ gulp.task("webpack:build", function(callback) {
         callback();
     });
 });
+
+//browsersync自动刷新
+gulp.task("browsersync",function () {
+    browsersync.init({
+        open: "external",
+        server: {
+            baseDir: "./"
+        },
+        // port: 80,
+        files: ["dist/**/*.*","./*.html"]
+    });
+})
 
 //默认侦听
 gulp.task('default', ['images', 'less', 'webpack', 'media'], function() {
