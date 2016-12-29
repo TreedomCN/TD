@@ -1,5 +1,7 @@
 "use strict";
 
+var Config = require('./Config');
+
 var TD = {};
 
 //美林版ajax对应接口
@@ -371,5 +373,25 @@ TD.util.getCookie = function (name) {
     }
     return '';
 };
+
+//cnzz统计代码
+var cnzzID = Config.defShare.cnzz;
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_" + cnzzID + "'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D"+ cnzzID +"' type='text/javascript'%3E%3C/script%3E"));
+    $("#cnzz_stat_icon_" + cnzzID).hide();
+
+// cnzz事件统计
+TD.push = function (category,action,label,value) {
+    /*category:事件类别;action:事件操作;label:事件标签;value:事件值;*/
+    var category = category || '';
+    var action = action || '';
+    var label = label || '';
+    var value = value || '';
+     try {
+         _czc.push(['_trackEvent', category, action,label,value]);
+     } catch(e) {
+         console.log(e);
+     }
+}
 
 module.exports = TD;
