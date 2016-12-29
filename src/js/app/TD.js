@@ -6,62 +6,62 @@ var TD = {};
 
 //美林版ajax对应接口
 TD.ajax = function(pm, succback, errorback){
-	$.ajax({
-		type: pm.type || 'GET',
-		url: pm.url,
-		dataType: 'json',
-		data: pm.data || '',
-		success: function(data){
-			if (data.status == 1) {
-				succback && succback(data.data);
-			}else {
-				errorback && errorback(data.message);
-			}
-		},
-		error: function(xhr, status, thrown){
-			errorback && errorback('网络连接不稳定，请重试或刷新页面！');
-		}
-	});
+    $.ajax({
+        type: pm.type || 'GET',
+        url: pm.url,
+        dataType: 'json',
+        data: pm.data || '',
+        success: function(data){
+            if (data.status == 1) {
+                succback && succback(data.data);
+            }else {
+                errorback && errorback(data.message);
+            }
+        },
+        error: function(xhr, status, thrown){
+            errorback && errorback('网络连接不稳定，请重试或刷新页面！');
+        }
+    });
 };
 
 /*data参数说明
 data = {
-	title: string, 朋友圈标题，给朋友的描述
-	desc: string, 给朋友的标题
-	link: string, 链接
-	img: string, 图标
-	track: string, 分享数据上报地址,post {btn:'1'}朋友或{btn:'2'}朋友圈
+    title: string, 朋友圈标题，给朋友的描述
+    desc: string, 给朋友的标题
+    link: string, 链接
+    img: string, 图标
+    track: string, 分享数据上报地址,post {btn:'1'}朋友或{btn:'2'}朋友圈
 }
 */
 TD.wxShare = function(data, callback){
-	wx.onMenuShareTimeline({
-		title: data.title, // 分享标题
-		link: data.link, // 分享链接
-		imgUrl: data.img, // 分享图标
-		success: function () {
-			callback && callback();
-			//上报朋友圈
-			TD.ajax({
-				url: 'http://click.treedom.cn/log',
-				type: 'POST',
-				data: {
-					key: 'wechat',
+    wx.onMenuShareTimeline({
+        title: data.title, // 分享标题
+        link: data.link, // 分享链接
+        imgUrl: data.img, // 分享图标
+        success: function () {
+            callback && callback();
+            //上报朋友圈
+            TD.ajax({
+                url: 'http://click.treedom.cn/log',
+                type: 'POST',
+                data: {
+                    key: 'wechat',
                     val: 'timeline',
                     pro: data.proj
-				}
-			}, function(data){
-				console.log(data);
-			}, function(msg){
+                }
+            }, function(data){
+                console.log(data);
+            }, function(msg){
                 console.log(msg);
             });
 
-            _czc && _czc.push(['_trackEvent', '分享', "朋友圈"]);
-		},
-		cancel: function () {
-			// 用户取消分享后执行的回调函数
-		}
-	});
-	wx.onMenuShareAppMessage({
+            TD.push(['_trackEvent', '分享', "朋友圈"]);
+        },
+        cancel: function () {
+            // 用户取消分享后执行的回调函数
+        }
+    });
+    wx.onMenuShareAppMessage({
         title: data.title, // 分享标题
         desc: data.desc, // 分享描述
         link: data.link, // 分享链接
@@ -83,7 +83,7 @@ TD.wxShare = function(data, callback){
                 console.log(msg);
             });
 
-            _czc && _czc.push(['_trackEvent', '分享', "好友"]);
+            TD.push(['_trackEvent', '分享', "好友"]);
         },
         cancel: function () {
             // 用户取消分享后执行的回调函数
@@ -94,60 +94,59 @@ TD.wxShare = function(data, callback){
         desc: data.desc, // 分享描述
         link: data.link, // 分享链接
         imgUrl: data.img, // 分享图标
-	    success: function () { 
-	       // 用户确认分享后执行的回调函数
-	            callback && callback();
-	            //上报朋友
-	            TD.ajax({
-	                url: 'http://click.treedom.cn/log',
-	                type: 'POST',
-	                data: {
-	                    key: 'wechat',
-	                    val: 'QQ',
-	                    pro: data.proj
-	                }
-	            }, function(data){
+        success: function () { 
+           // 用户确认分享后执行的回调函数
+                callback && callback();
+                //上报朋友
+                TD.ajax({
+                    url: 'http://click.treedom.cn/log',
+                    type: 'POST',
+                    data: {
+                        key: 'wechat',
+                        val: 'QQ',
+                        pro: data.proj
+                    }
+                }, function(data){
 
-	            }, function(msg){
-	                console.log(msg);
-	            });
+                }, function(msg){
+                    console.log(msg);
+                });
 
-	            _czc && _czc.push(['_trackEvent', '分享', "QQ好友"]);
-	    },
-	    cancel: function () { 
-	       // 用户取消分享后执行的回调函数
-	    }
-	});
-
+                TD.push(['_trackEvent', '分享', "QQ好友"]);
+        },
+        cancel: function () { 
+           // 用户取消分享后执行的回调函数
+        }
+    });
     wx.onMenuShareQZone({
         title: data.title, // 分享标题
         desc: data.desc, // 分享描述
         link: data.link, // 分享链接
         imgUrl: data.img, // 分享图标
-	    success: function () { 
-	       // 用户确认分享后执行的回调函数
-	            callback && callback();
-	            //上报朋友
-	            TD.ajax({
-	                url: 'http://click.treedom.cn/log',
-	                type: 'POST',
-	                data: {
-	                    key: 'wechat',
-	                    val: 'QZone',
-	                    pro: data.proj
-	                }
-	            }, function(data){
+        success: function () { 
+           // 用户确认分享后执行的回调函数
+                callback && callback();
+                //上报朋友
+                TD.ajax({
+                    url: 'http://click.treedom.cn/log',
+                    type: 'POST',
+                    data: {
+                        key: 'wechat',
+                        val: 'QZone',
+                        pro: data.proj
+                    }
+                }, function(data){
 
-	            }, function(msg){
-	                console.log(msg);
-	            });
+                }, function(msg){
+                    console.log(msg);
+                });
 
-	            _czc && _czc.push(['_trackEvent', '分享', "QZone"]);
-	    },
-	    cancel: function () { 
-	        // 用户取消分享后执行的回调函数
-	    }
-	});
+                TD.push(['_trackEvent', '分享', "QZone"]);
+        },
+        cancel: function () { 
+            // 用户取消分享后执行的回调函数
+        }
+    });
 
     //手Q分享
     $('#share-name').attr('content', data.title);
@@ -158,163 +157,163 @@ TD.wxShare = function(data, callback){
 //初始化微信接口
 //注意，与微信标准data相比，这里多了data.share属性，对应的是初始化页面时有默认的分享数据
 TD.initWxApi = function(shareData, errback, succback){
-	//服务器获取验证信息
-	TD.ajax({
-		url: 'http://click.treedom.cn/wx/signature',
-		type: 'POST',
-		data: {
-			appid: shareData.appid,
-        	url:  encodeURIComponent(shareData.link)
-		}
-	}, function(data){
-		wx.config({
-			debug: false,
-			appId: data.appId,
-			timestamp: data.timestamp,
-			nonceStr: data.nonceStr,
-			signature: data.signature,
-			jsApiList: [
-				'onMenuShareTimeline',
-				'onMenuShareAppMessage',
-	            'onMenuShareQQ',
-	            'onMenuShareQZone',
-				'startRecord',
-				'stopRecord',
-				'onVoiceRecordEnd',
-				'playVoice',
-				'pauseVoice',
-				'stopVoice',
-				'onVoicePlayEnd',
-				'uploadVoice',
-				'downloadVoice',
-				'chooseImage',
-				'previewImage',
-				'uploadImage',
-				'downloadImage',
-				'getNetworkType'
-			]
-		});
-		wx.ready(function(){
-			succback && succback();
-			TD.wxShare(shareData);
-			wx.getNetworkType({
-	            success: function (res) {
-	                var networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
-	                _czc && _czc.push(['_trackEvent', '网络类型', networkType]);
-	            }
-	        });
-		});
-	},function(err){
-		console.log(err);
-	});
-	
+    //服务器获取验证信息
+    TD.ajax({
+        url: 'http://click.treedom.cn/wx/signature',
+        type: 'POST',
+        data: {
+            appid: shareData.appid,
+            url:  encodeURIComponent(shareData.link)
+        }
+    }, function(data){
+        wx.config({
+            debug: false,
+            appId: data.appId,
+            timestamp: data.timestamp,
+            nonceStr: data.nonceStr,
+            signature: data.signature,
+            jsApiList: [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareQZone',
+                'startRecord',
+                'stopRecord',
+                'onVoiceRecordEnd',
+                'playVoice',
+                'pauseVoice',
+                'stopVoice',
+                'onVoicePlayEnd',
+                'uploadVoice',
+                'downloadVoice',
+                'chooseImage',
+                'previewImage',
+                'uploadImage',
+                'downloadImage',
+                'getNetworkType'
+            ]
+        });
+        wx.ready(function(){
+            succback && succback();
+            TD.wxShare(shareData);
+            wx.getNetworkType({
+                success: function (res) {
+                    var networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
+                    TD.push(['_trackEvent', '网络类型', networkType]);
+                }
+            });
+        });
+    },function(err){
+        console.log(err);
+    });
+    
 };
 
 //元素基于屏幕自适应缩放，dom上有data-response属性的元素都会受它影响
 /*
 config = {
-	width: 375,
-	height: 600,
-	type: 'cover' // 'contain'
+    width: 375,
+    height: 600,
+    type: 'cover' // 'contain'
 }
 return config定义的scale值
 v1 新增，在dom上增加data-type属性，可选内容有"cover"、"contain"
 */
 TD.responseBody = function(config) {
-	config = config || {};
-	config.width = config.width || 375;
-	config.height = config.height || 600;
-	config.type = config.type || 'cover'; //'cover'、'contain'
-	console.log(config);
+    config = config || {};
+    config.width = config.width || 375;
+    config.height = config.height || 600;
+    config.type = config.type || 'cover'; //'cover'、'contain'
+    console.log(config);
 
-	var responseList = $('[data-response]');
+    var responseList = $('[data-response]');
 
-	var rate;
-	var rateCover;
-	var rateContain;
+    var rate;
+    var rateCover;
+    var rateContain;
 
-	var responseFn = function(){
-		var rateX = window.innerWidth / config.width;
-		var rateY = window.innerHeight / config.height;
+    var responseFn = function(){
+        var rateX = window.innerWidth / config.width;
+        var rateY = window.innerHeight / config.height;
 
-		rateCover = rateX > rateY ? rateX : rateY;
-		rateContain = rateX < rateY ? rateX : rateY;
+        rateCover = rateX > rateY ? rateX : rateY;
+        rateContain = rateX < rateY ? rateX : rateY;
 
-		switch (config.type) {
-			case 'cover':
-				rate = rateCover;
-				break;
-			case 'contain':
-				rate = rateContain;
-				break;
-			default:
-				rate = 1;
-		}
+        switch (config.type) {
+            case 'cover':
+                rate = rateCover;
+                break;
+            case 'contain':
+                rate = rateContain;
+                break;
+            default:
+                rate = 1;
+        }
 
-		responseList.each(function(i){
-			var type = $(this).attr('data-type');
-			var elRate;
-			if(type == 'cover'){
-				elRate = rateCover;
-			}else if(type == 'contain') {
-				elRate = rateContain;
-			}else {
-				elRate = rate;
-			}
-			this.style.webkitTransform = 'scale(' + elRate + ')';
-		});
-	};
+        responseList.each(function(i){
+            var type = $(this).attr('data-type');
+            var elRate;
+            if(type == 'cover'){
+                elRate = rateCover;
+            }else if(type == 'contain') {
+                elRate = rateContain;
+            }else {
+                elRate = rate;
+            }
+            this.style.webkitTransform = 'scale(' + elRate + ')';
+        });
+    };
 
-	responseFn();
+    responseFn();
 
-	$(window).on('resize', function(){
-		responseFn();
-	});
+    $(window).on('resize', function(){
+        responseFn();
+    });
 
-	return rate;
+    return rate;
 }
 
 //提示竖屏函数
 TD.portraitTips = function(el) {
-	var portraitFloat = (typeof el === 'string') ? $(el) : el ;
+    var portraitFloat = (typeof el === 'string') ? $(el) : el ;
 
-	var orientHandler = function(){
-		if(window.orientation == 90|| window.orientation == -90){
-			portraitFloat.show();
-		} else {
-			portraitFloat.hide();
-		}
-	};
-	orientHandler();
+    var orientHandler = function(){
+        if(window.orientation == 90|| window.orientation == -90){
+            portraitFloat.show();
+        } else {
+            portraitFloat.hide();
+        }
+    };
+    orientHandler();
 
-	$(window).on('resize', function(){
-		orientHandler();
-	});
+    $(window).on('resize', function(){
+        orientHandler();
+    });
 };
 
 /*检测转屏函数用法
 API：TD.rotateScreen.addListener(callback);//添加事件侦听
-	 TD.rotateScreen.removeListener();//取消事件侦听
+     TD.rotateScreen.removeListener();//取消事件侦听
 
 example： 
-	TD.rotateScreen.addListener(function (data) {
-		if(data == 1){
-			console.log('左转屏');
-			TD.rotateScreen.removeListener();//注销事件侦听
-		}
+    TD.rotateScreen.addListener(function (data) {
+        if(data == 1){
+            console.log('左转屏');
+            TD.rotateScreen.removeListener();//注销事件侦听
+        }
 
-		if(data == 2){
-			console.log('右转屏');
-		}
+        if(data == 2){
+            console.log('右转屏');
+        }
 
-		if(data == 3){
-			console.log('竖屏');
-		}
+        if(data == 3){
+            console.log('竖屏');
+        }
 
-		if(data == 4){
-			console.log('倒屏');
-		}
-	})*/
+        if(data == 4){
+            console.log('倒屏');
+        }
+    })*/
 TD.rotateScreen = (function (){
     var rotate;
 
@@ -379,6 +378,41 @@ TD.util.getCookie = function (name) {
     return '';
 };
 
+/*移动端console.log()*/ 
+TD.log = function (info,num) {
+    var num = num || 50;
+    console.log(info);
+    if ( info instanceof Array ) {
+        info.join();
+    } else if ( typeof info == 'object' ) {
+        var info = JSON.stringify(info);
+    }else{
+        info.toString();
+    }
+    if ( !window.lloogg ) {
+        var dom = document.createElement('div');
+        dom.setAttribute('id', 'log');
+        document.body.appendChild(dom);
+        dom.style.position = 'absolute';
+        dom.style.zIndex = '9999';
+        dom.style.color = '#fff';
+        dom.style.backgroundColor = 'rgba(0,0,0,0.6)';
+        dom.style.fontSize = '13px';
+        window.lloogg = 0;
+    }
+    var domWrap = document.getElementById('log');
+    if( window.lloogg > num ){
+        domWrap.removeChild(domWrap.childNodes[0]);
+    }
+    var text = document.createElement('p');
+    text.style.margin = '0';
+    text.style.padding = '0';
+    text.innerHTML = info + '</br>';
+    domWrap.appendChild(text);
+    window.lloogg++;
+}
+
+
 //cnzz统计代码
 var cnzzID = Config.defShare.cnzz;
     var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
@@ -428,5 +462,6 @@ TD.browser={
     }(),
     language:(navigator.browserLanguage || navigator.language).toLowerCase()
 }
+
 
 module.exports = TD;

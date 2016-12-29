@@ -18,5 +18,8 @@
     "webpack": "^1.12.2",
     "browser-sync": "^2.0.0",
     "webpack": "^1.12.2"
+  },
+  "dependencies": {
+    "webpack-strip": "^0.1.0"
   }
 }
