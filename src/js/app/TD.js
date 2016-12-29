@@ -148,6 +148,11 @@ TD.wxShare = function(data, callback){
 	        // 用户取消分享后执行的回调函数
 	    }
 	});
+
+    //手Q分享
+    $('#share-name').attr('content', data.title);
+    $('#share-description').attr('content', data.desc);
+    $('#share-image').attr('content', data.img);
 };
 
 //初始化微信接口
