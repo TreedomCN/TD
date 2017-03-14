@@ -214,7 +214,8 @@ TD.initWxApi = function(shareData, errback, succback){
 config = {
     width: 375,
     height: 600,
-    type: 'cover' // 'contain'
+    type: 'cover' // 'contain',
+    direction: 'vertical' // 'horizontal'
 }
 return config定义的scale值
 v1 新增，在dom上增加data-type属性，可选内容有"cover"、"contain"
@@ -224,6 +225,7 @@ TD.responseBody = function(config) {
     config.width = config.width || 375;
     config.height = config.height || 600;
     config.type = config.type || 'cover'; //'cover'、'contain'
+    config.direction = config.direction || 'vertical'; //'vertical','horizontal'
     console.log(config);
 
     var responseList = $('[data-response]');
@@ -233,8 +235,8 @@ TD.responseBody = function(config) {
     var rateContain;
 
     var responseFn = function(){
-        var rateX = window.innerWidth / config.width;
-        var rateY = window.innerHeight / config.height;
+        var rateX = document.documentElement.clientWidth / config.width;
+        var rateY = document.documentElement.clientHeight / config.height;
 
         rateCover = rateX > rateY ? rateX : rateY;
         rateContain = rateX < rateY ? rateX : rateY;
@@ -426,11 +428,11 @@ TD.push = function (category,action,label,value) {
     var action = action || '';
     var label = label || '';
     var value = value || '';
-     try {
+    try {
          _czc.push(['_trackEvent', category, action,label,value]);
-     } catch(e) {
+    } catch(e) {
          console.log(e);
-     }
+    }
 }
 
 /*

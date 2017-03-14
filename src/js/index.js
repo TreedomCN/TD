@@ -1,12 +1,7 @@
 "use strict";
 
 //引入的包根据实际情况而定
-var TD = require('./app/TD'),
-    Config = require('./app/Config'),
-    Preload = require('./app/Preload'),
-    KeyAnimation = require('./app/KeyAnimation'),
-    MediaSprite = require('./app/MediaSprite'),
-    LoadViewController = require('./app/LoadViewController'),
+var LoadViewController = require('./app/LoadViewController'),
     IndexViewController = require('./app/IndexViewController');
 
 /*
@@ -16,7 +11,9 @@ var TD = require('./app/TD'),
 *  复制到相应的文件夹
 *  引入的less会对less进行编译存放到css文件夹
 * */
+
 require('zepto');
+
 //页面级对象池
 var pagePool = {
     loadView: null,
