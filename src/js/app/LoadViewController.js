@@ -1,8 +1,8 @@
 "use strict";
 
-var TD = require('./TD');
+var TD = require('./module/TD');
 var Config = require('./Config');
-var KeyAnimation = require('./KeyAnimation');
+var KeyAnimation = require('./module/KeyAnimation');
 
 //项目初始化的一些函数
 var initProject = function(){

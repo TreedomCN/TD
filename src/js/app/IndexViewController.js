@@ -1,9 +1,9 @@
 "use strict";
 
-var TD = require('./TD'),
+var TD = require('./module/TD'),
     Config = require('./Config'),
-    Preload = require('./Preload'),
-    KeyAnimation = require('./KeyAnimation');
+    Preload = require('./module/Preload'),
+    KeyAnimation = require('./module/KeyAnimation');
 
 //加载页对象
 var IndexViewController = function(){

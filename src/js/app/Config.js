@@ -1,6 +1,6 @@
 "use strict";
 
-var Preload = require('./Preload');
+var Preload = require('./module/Preload');
 
 var Config = Config || {};
 
