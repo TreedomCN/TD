@@ -6,6 +6,14 @@ var KeyAnimation = require('./KeyAnimation');
 
 //项目初始化的一些函数
 var initProject = function(){
+
+    //cnzz统计代码
+    (function () {
+        var cnzzID = Config.defShare.cnzz;
+        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_" + cnzzID + "'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D"+ cnzzID +"' type='text/javascript'%3E%3C/script%3E"));
+        $("#cnzz_stat_icon_" + cnzzID).hide();
+    }())
     
     //让部分元素去适配屏幕
     setTimeout(function(){
