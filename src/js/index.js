@@ -12,12 +12,10 @@ var LoadViewController = require('./app/LoadViewController'),
 *  引入的less会对less进行编译存放到css文件夹
 * */
 
-require('zepto');
+// require('zepto');//本地调试无网络时可释放此项；已集成fx，touch模块；
 
 /*可按需加载Zepto模块*/
-// require('./app/fx');//The animate()方法
 // require('./app/fx_methods');//以动画形式的 show, hide, toggle, 和 fade*()方法.依赖fx模块。
-// require('./app/touch');//tap– 和 swipe– 相关事件
 
 //页面级对象池
 var pagePool = {
