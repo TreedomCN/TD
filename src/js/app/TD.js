@@ -1,7 +1,5 @@
 "use strict";
 
-var Config = require('./Config');
-
 var TD = {};
 
 //美林版ajax对应接口
@@ -411,13 +409,6 @@ TD.log = function (info,num) {
     domWrap.appendChild(text);
     window.lloogg++;
 }
-
-
-//cnzz统计代码
-var cnzzID = Config.defShare.cnzz;
-    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    document.write(unescape("%3Cspan id='cnzz_stat_icon_" + cnzzID + "'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D"+ cnzzID +"' type='text/javascript'%3E%3C/script%3E"));
-    $("#cnzz_stat_icon_" + cnzzID).hide();
 
 // cnzz事件统计
 TD.push = function (category,action,label,value) {

@@ -11,7 +11,9 @@ var LoadViewController = require('./app/LoadViewController'),
 *  复制到相应的文件夹
 *  引入的less会对less进行编译存放到css文件夹
 * */
+
 require('zepto');
+
 //页面级对象池
 var pagePool = {
     loadView: null,
@@ -40,7 +42,6 @@ var init = function() {
     };
 
     loadPageBack();
-
 };
 
 //$(window).on('load', init);
