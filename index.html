@@ -39,6 +39,24 @@
     </script>
     <!-- 授权加代码统计系统end -->
     <script>
+    (function(doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function() {
+                var clientWidth = docEl.clientWidth;
+                var clientHeight = docEl.clientHeight;
+                if (!clientWidth) return;
+                if ( (clientWidth/clientHeight) > (750/1200) ) {
+                    var fontSize = (100 * ( clientWidth / 750 ));
+                }else{
+                    var fontSize = ( 100 * ( clientHeight / 1200 ) );
+                }
+                docEl.style.fontSize = (fontSize > 110 ? 110 : fontSize) + 'px';
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc);
+        recalc();
+    })(document, window);
     (function  () {
         var getQuery = function(name){
             name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
