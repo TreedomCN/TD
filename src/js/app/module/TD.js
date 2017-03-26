@@ -412,6 +412,21 @@ TD.log = function (info,num) {
     window.lloogg++;
 }
 
+/*隐藏手势功能，在视频项目时非常好用；
+el：
+    TD.jump(function () {
+        _video.currentTime = 100; 
+    })*/
+TD.jump = function (callback) {
+    $('body').one('doubleTap',function (e) {
+        $('body').one('swipeLeft',function (e) {
+            $('body').one('swipeLeft',function (e) {
+                callback && callback();
+            })
+        })
+    })
+}
+
 // cnzz事件统计
 TD.push = function (category,action,label,value) {
     /*category:事件类别;action:事件操作;label:事件标签;value:事件值;*/
