@@ -377,9 +377,8 @@ TD.util.getCookie = function (name) {
     }
     return '';
 };
-
 /*移动端console.log()*/ 
-TD.log = function (info,num) {
+TD.debug.log = function (info,num) {
     var num = num || 50;
     console.log(info);
     if ( info instanceof Array ) {
@@ -414,10 +413,10 @@ TD.log = function (info,num) {
 
 /*隐藏手势功能，在视频项目时非常好用；
 el：
-    TD.jump(function () {
+    TD.debug.jump(function () {
         _video.currentTime = 100; 
     })*/
-TD.jump = function (callback) {
+TD.debug.jump = function (callback) {
     $('body').one('doubleTap',function (e) {
         $('body').one('swipeLeft',function (e) {
             $('body').one('swipeLeft',function (e) {

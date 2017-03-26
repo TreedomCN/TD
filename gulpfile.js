@@ -77,12 +77,9 @@ gulp.task("webpack:build", function(callback) {
     );
 
     //过滤任意函数插件
-    myConfig.module.loaders.push({text: /\.js$/,loader: "webpack-strip?strip[]=TD.log"});
+    myConfig.module.loaders.push({text: /\.js$/,loader: "webpack-strip?strip[]=TD.debug"});
 
     myConfig.output.filename = distPath + 'js/main.js';
-
-    //过滤任意函数插件
-    myConfig.module.loaders.push({text: /\.js$/,loader: "webpack-strip?strip[]=TD.log"});
 
     // run webpack
     webpack(myConfig, function(err, stats) {
