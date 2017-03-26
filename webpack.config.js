@@ -14,6 +14,11 @@ module.exports = {
                 loader: 'url-loader?importLoaders=1&limit=1000&name=/dist/js/lib/[name].[ext]'
             },
             {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components|js[\/|\\]lib[\/||\\][\w|\.|_|-]+js$)/,
+                loader: 'babel-loader?presets[]=es2015'
+            },
+            {
                 test: /\.hbs/,
                 loader: "handlebars-loader"
             }
