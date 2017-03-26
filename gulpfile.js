@@ -76,6 +76,9 @@ gulp.task("webpack:build", function(callback) {
         new webpack.optimize.UglifyJsPlugin()
     );
 
+    //过滤任意函数插件
+    myConfig.module.loaders.push({text: /\.js$/,loader: "webpack-strip?strip[]=TD.log"});
+
     myConfig.output.filename = distPath + 'js/main.js';
 
     //过滤任意函数插件

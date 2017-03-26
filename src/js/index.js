@@ -4,15 +4,8 @@
 var LoadViewController = require('./app/LoadViewController'),
     IndexViewController = require('./app/IndexViewController');
 
-/*
-*
-*  引入lib库文件和LESS文件
-*  必须要引入,过滤器会过滤lib文件夹里面的JS文件,做一个简单的复制
-*  复制到相应的文件夹
-*  引入的less会对less进行编译存放到css文件夹
-* */
-
-// require('zepto');//本地调试无网络时可释放此项；已集成fx，touch模块；
+/*本地调试无网络时可释放此项；已集成fx，touch模块；*/
+// require('zepto');
 
 /*可按需加载Zepto模块*/
 // require('./app/fx_methods');//以动画形式的 show, hide, toggle, 和 fade*()方法.依赖fx模块。
@@ -45,7 +38,6 @@ var init = function() {
     };
 
     loadPageBack();
-
 };
 
 //$(window).on('load', init);

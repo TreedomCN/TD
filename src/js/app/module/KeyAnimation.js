@@ -1,7 +1,6 @@
 "use strict";
 
 //动画帧播放器v.0.3
-
 /*<div id="kf" data-keyto="13" data-prefix="boss2_"></div>*/
 
 /*
@@ -354,4 +353,3 @@ var KeyAnimation = function(el, type, imgs, options){
 };
 
 module.exports = KeyAnimation;
-	
