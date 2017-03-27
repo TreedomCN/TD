@@ -412,15 +412,21 @@ TD.debug.log = function (info,num) {
 }
 
 /*隐藏手势功能，在视频项目时非常好用；
+触发方式：相对于竖屏状态的双击左划左划；
 el：
     TD.debug.jump(function () {
         _video.currentTime = 100; 
     })*/
 TD.debug.jump = function (callback) {
     $('body').one('doubleTap',function (e) {
+        var data = new Date().getTime();
         $('body').one('swipeLeft',function (e) {
             $('body').one('swipeLeft',function (e) {
-                callback && callback();
+                if ( (new Date().getTime() - data) > 2000 ) {
+                    return;
+                }else{
+                    callback && callback();
+                }
             })
         })
     })
