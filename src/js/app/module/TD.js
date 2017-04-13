@@ -377,6 +377,10 @@ TD.util.getCookie = function (name) {
     }
     return '';
 };
+
+/*debug工具包*/
+TD.debug = {}
+
 /*移动端console.log()*/ 
 TD.debug.log = function (info,num) {
     var num = num || 50;
