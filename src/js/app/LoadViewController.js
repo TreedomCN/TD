@@ -18,12 +18,12 @@ var initProject = function(){
     TD.initWxApi(Config.defShare);
 
     //禁止微信下拉
-	$(document.documentElement).on('touchmove', function(e) {
-		e.preventDefault();
-	});
+    $(document.documentElement).on('touchmove', function(e) {
+        e.preventDefault();
+    });
 
     //禁止微信长按浏览器打开
-    $(document.documentElement).on('touchstart', function(e) {
+    $(document.documentElement).on('longTap', function(e) {
         e.preventDefault();
     });
     
@@ -55,13 +55,13 @@ var LoadViewController = function(){
         _private.gload = new Config.Preload(Config.pageImgs);
         
         _private.gload.onloading = function(p){
-    		console.log(p);
+            console.log(p);
             // _private.processLineEl.css('height', p + '%');
-    	};
+        };
         
         _private.gload.onload = function(){
             // _that.hide();
-    	};
+        };
         
         _private.gload.onfail = function(msg){
             console.log(msg);
@@ -92,5 +92,5 @@ var LoadViewController = function(){
     _private.init();
     
 };
-	
+    
 module.exports = LoadViewController;
