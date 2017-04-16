@@ -18,7 +18,7 @@ var initProject = function(){
     TD.initWxApi(Config.defShare);
 
     //禁止微信下拉
-    $(document.documentElement).on('touchmove', function(e) {
+    $(document.documentElement).on('swipeDown', function(e) {
         e.preventDefault();
     });
 
