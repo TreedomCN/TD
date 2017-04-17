@@ -1,7 +1,5 @@
 "use strict";
 
-var Config = require('./Config');
-
 var TD = {};
 
 //美林版ajax对应接口
@@ -55,7 +53,7 @@ TD.wxShare = function(data, callback){
                 console.log(msg);
             });
 
-            TD.push(['_trackEvent', '分享', "朋友圈"]);
+            TD.push('分享', "朋友圈");
         },
         cancel: function () {
             // 用户取消分享后执行的回调函数
@@ -83,7 +81,7 @@ TD.wxShare = function(data, callback){
                 console.log(msg);
             });
 
-            TD.push(['_trackEvent', '分享', "好友"]);
+            TD.push('分享', "好友");
         },
         cancel: function () {
             // 用户取消分享后执行的回调函数
@@ -112,7 +110,7 @@ TD.wxShare = function(data, callback){
                     console.log(msg);
                 });
 
-                TD.push(['_trackEvent', '分享', "QQ好友"]);
+                TD.push('分享', "QQ好友");
         },
         cancel: function () { 
            // 用户取消分享后执行的回调函数
@@ -141,7 +139,7 @@ TD.wxShare = function(data, callback){
                     console.log(msg);
                 });
 
-                TD.push(['_trackEvent', '分享', "QZone"]);
+                TD.push('分享', "QZone");
         },
         cancel: function () { 
             // 用户取消分享后执行的回调函数
@@ -199,7 +197,7 @@ TD.initWxApi = function(shareData, errback, succback){
             wx.getNetworkType({
                 success: function (res) {
                     var networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
-                    TD.push(['_trackEvent', '网络类型', networkType]);
+                    TD.push('网络类型', networkType);
                 }
             });
         });
@@ -280,7 +278,7 @@ TD.portraitTips = function(el) {
     var portraitFloat = (typeof el === 'string') ? $(el) : el ;
 
     var orientHandler = function(){
-        if(window.orientation == 90|| window.orientation == -90){
+        if(window.orientation == 90 || window.orientation == -90){
             portraitFloat.show();
         } else {
             portraitFloat.hide();
@@ -380,8 +378,11 @@ TD.util.getCookie = function (name) {
     return '';
 };
 
+/*debug工具包*/
+TD.debug = {}
+
 /*移动端console.log()*/ 
-TD.log = function (info,num) {
+TD.debug.log = function (info,num) {
     var num = num || 50;
     console.log(info);
     if ( info instanceof Array ) {
@@ -414,12 +415,26 @@ TD.log = function (info,num) {
     window.lloogg++;
 }
 
-
-//cnzz统计代码
-var cnzzID = Config.defShare.cnzz;
-    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    document.write(unescape("%3Cspan id='cnzz_stat_icon_" + cnzzID + "'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D"+ cnzzID +"' type='text/javascript'%3E%3C/script%3E"));
-    $("#cnzz_stat_icon_" + cnzzID).hide();
+/*隐藏手势功能，在视频项目时非常好用；
+触发方式：相对于竖屏状态的双击左划左划；
+el：
+    TD.debug.jump(function () {
+        _video.currentTime = 100; 
+    })*/
+TD.debug.jump = function (callback) {
+    $('body').one('doubleTap',function (e) {
+        var data = new Date().getTime();
+        $('body').one('swipeLeft',function (e) {
+            $('body').one('swipeLeft',function (e) {
+                if ( (new Date().getTime() - data) > 2000 ) {
+                    return;
+                }else{
+                    callback && callback();
+                }
+            })
+        })
+    })
+}
 
 // cnzz事件统计
 TD.push = function (category,action,label,value) {

@@ -14,38 +14,127 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" type="text/css" href="dist/css/style.css">
     <link rel="icon" href="http://7xvsf2.com1.z0.glb.clouddn.com/favicon.ico">
-    <script>
-    (function  () {
-        var getQuery = function(name){
-            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                results = regex.exec(location.search);
-            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-        };
-        if ( !getQuery('_wv') ) {
-            if ( location.search ) {
-                location.href += '&_wv=1'
-            }else{
-                location.href += '?_wv=1'
+    <!-- 授权加代码统计系统 -->
+    <script type="text/javascript" src="http://ga.treedom.cn/ga.js?v=0.2.1"></script>
+    <script type="text/javascript">
+        /*
+            参数有3种用法：
+            1. 需要授权，不需要统计，关键参数：pid为空或者不填；
+            2. 不需要授权，需要统计，关键参数：wxverify设为0，query有渠道id的时候会自动调用静默授权；
+            3. 需要授权，需要统计，关键参数：pid必填，wxverify设为1；
+            4. 不需要授权，不需要统计，那你丫引入这套代码干嘛。
+        */
+        new _tdga({
+            //项目名，必填
+            pname: 'tdga',
+            //项目id，值由老司机提供，为空或不填为不上报
+            pid: '9999',
+            //有默认值，建议不改
+            //appid: 'wx875c7888a7aef3f7',
+            //授权方式，静默授权:snsapi_base，完整授权:snsapi_userinfo
+            scope: 'snsapi_base',
+            //强制微信验证，0不强制，1强制，默认0
+            wxverify: 0
+        });
+    </script>
+    <!-- 授权加代码统计系统end -->
+    
+    <!-- rem布局初始化设置start -->
+    <script type="text/javascript">
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                rszEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                reCalc = (function() {
+                    var reCalc = function () {
+                        var winWidth = docEl.clientWidth;
+                        var winHeight = docEl.clientHeight;
+                        if (!winWidth) return;
+
+                        if ( winWidth < winHeight ) {
+                            if ( (winWidth/winHeight) > (750/1200) ) {
+                                var fontSize = (100 * ( winWidth / 750 ));
+                                console.log(1);
+                            }else{
+                                var fontSize = ( 100 * ( winHeight / 1200 ));
+                                console.log(2);
+                            }
+                        } else {
+                            if ( (winWidth/winHeight) > (1200/750) ) {
+                                var fontSize = (100 * ( winWidth / 1200 ));
+                                console.log(3);
+                            }else{
+                                var fontSize = ( 100 * ( winHeight / 750 ));
+                                console.log(4);
+                            }
+                        }
+
+                        docEl.style.fontSize = (fontSize > 110 ? 110 : fontSize) + 'px';
+                        return reCalc;
+                    }
+                    return reCalc();
+                })();
+            if (!doc.addEventListener) return;
+            win.addEventListener(rszEvt, reCalc);
+        })(document, window);
+    </script>
+    <!-- rem布局初始化设置end -->
+    <script type="text/javascript">
+        (function  () {
+            var getQuery = function(name){
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                    results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            };
+            if ( !getQuery('_wv') ) {
+                if ( location.search ) {
+                    location.href += '&_wv=1'
+                }else{
+                    location.href += '?_wv=1'
+                }
             }
-        }
-    }())
+        }())
     </script>
 </head>
 <body>
-    <div class="m-loading">
-        <div class="wrap" data-response="true">
-            <div class="loadProcess"></div>
-            <div class="txt"></div>
+    <div class="m-main-wrap absf">
+
+        <!-- 开始页 -->
+        <div class="m-loading absf">
+            <p style="text-align: center;">loading页</p>
         </div>
-    </div>
-    <div class="m-index">
-        <div class="wrap" data-response="true">
+
+        <!-- 开始页 -->
+        <div class="m-begin absf">
+            <p style="text-align: center;">开始页</p>
         </div>
+
+        <!-- 游戏页 -->
+        <div class="m-play-wrap absf sizcon fadein800">
+            
+        </div>
+
+        <!-- 结束页 -->
+        <div class="m-end absf fadein800">
+            <div class="lastpage absf sizcon">
+                <div class="btn-wrap">
+                    <div class="btn-toShare btn abcter"></div>
+                    <div class="btn-seeAgain btn  abcter"></div>
+                </div>
+            </div>
+
+            <!-- 分享蒙版 -->
+            <div class="share-wrap absf">
+                <div class="share-img absf sizcon"></div>
+            </div>
+        </div>
+
+        <!-- 视频 -->
+        <div class="m-video-wrap absf" id="videoWrap"></div>
+
     </div>
-    
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="https://cdn.staticfile.org/zepto/1.0rc1/zepto.min.js"></script>
+    <script src="//cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
     <script src="dist/js/main.js"></script>
 </body>
 </html>

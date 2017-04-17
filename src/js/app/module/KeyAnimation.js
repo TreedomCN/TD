@@ -1,7 +1,8 @@
 "use strict";
 
 //动画帧播放器v.0.3
-// <div id="kf" data-keyto="13" data-prefix="boss2_"></div>
+/*<div id="kf" data-keyto="13" data-prefix="boss2_"></div>*/
+
 /*
 el：canvas容器，jq对象；
 type：图片源模式，'array'和'sprite'模式，array需要后面提供图片对象数组，sprite需要提供基于宽度扩展的单张雪碧图
@@ -352,4 +353,3 @@ var KeyAnimation = function(el, type, imgs, options){
 };
 
 module.exports = KeyAnimation;
-	
