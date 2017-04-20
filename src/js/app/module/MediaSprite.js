@@ -1,7 +1,7 @@
 /*
- 雪碧音
+ 雪碧音&雪碧音
 
- var MediaSprite = new MediaSprite({
+ var newMediaSprite = new MediaSprite({
     wrap: '#videoWrap',   //如果没有wrap,直接添加到body
     type: 'video',         //如果是雪碧音可以填audio, 也可以不填
     src: 'http://hymm.treedom.cn/sound/bg.mp3',
@@ -17,202 +17,134 @@
     }
  });
 
+接口：
 
- {string} 雪碧音的命名
- {function} 回调函数, 函数参数为雪碧音名字
- {bool} 是否循环播放
+newMediaSprite.play(string,function,bool)       {string} 雪碧音的命名
+                                                {function} 回调函数
+                                                {bool} 是否循环播放
 
- mediaSprite.play('first', function (name) {
+newMediaSprite.started(function)  media开始播放时触发function一次，视频项目时利器；
+
+newMediaSprite.view       返回当前media的dom节点；
+
+el:
+mediaSprite.play('first', function (name) {
     console.log(name + ' end');
- }, true);
+}, true);
 
 
 
  */
 
 var MediaSprite = function (config) {
+    this.config = config;
+    this.media = null;
 
-    var _config = config;
-    var media = null,
-        isLoad = false,
-        loadCb = null,
-        _currentHandler = null;
+    this.createMedia();
+    this.started();
+    this.view = this.media;
+}
 
-    var _createMedia = function () {
+MediaSprite.prototype.createMedia = function() {
+    var config = this.config,
+        media = this.media;
 
-        if(_config.type == 'video'){
+    if(config.type == 'video'){
 
-            media = document.createElement('video');
+        media = document.createElement('video');
 
-            media.setAttribute('webkit-playsinline', '');
+        media.setAttribute('webkit-playsinline', '');
 
-            media.setAttribute('playsinline', '');
+        media.setAttribute('playsinline', '');
 
-            media.setAttribute('preload', 'preload');
+        media.setAttribute('preload', 'preload');
 
-        } else {
+        //没播放前最小化，防止部分机型闪现微信原生按钮
+        media.style.width = '1px';
+        media.style.height = 'auto';
 
-            media = document.createElement('audio');
+    } else {
 
-        }
+        media = document.createElement('audio');
 
-        media.src = _config.src;
+    }
 
-        media.id = 'spriteMedia' + Math.floor(Math.random()*100000);
+    media.src = config.src;
 
-        if( _config.wrap ) {
+    media.id = 'spriteMedia' + Math.floor(Math.random()*100000);
 
-            document.querySelector(_config.wrap).appendChild(media);
+    if( config.wrap ) {
 
-        } else {
+        document.querySelector(config.wrap).appendChild(media);
 
-            document.body.appendChild(media);
+    } else {
 
-        }
+        document.body.appendChild(media);
 
-        media = document.querySelector('#' + media.id);
+    }
 
-        _loadMedia();
+    this.media = document.querySelector('#' + media.id);
+    
+};
 
-    };
+MediaSprite.prototype.play = function(name, callback, loop) {
 
-    var _loadMedia = function () {
+    var begin = this.config.timeline[name].begin,
+        end = this.config.timeline[name].end,
+        media = this.media;
 
-        var loadHandler = function (e) {
+    media.currentTime = begin;
 
-            if (this.currentTime > 0) {
+    console.log(media.currentTime);
+
+    var playHandler = function () {
+
+        if(this.currentTime >= end){
+            if(loop){
+
+                media.currentTime = begin;
+
+            } else {
 
                 this.pause();
 
-                this.removeEventListener('timeupdate', loadHandler);
+                media.removeEventListener('timeupdate', playHandler);
 
-                setTimeout(function(){
+                callback && callback(name);
 
-                    loadCb && loadCb();
-
-                }, 200);
-
-                isLoad = true;
             }
-        };
-
-        media.addEventListener('timeupdate', loadHandler);
-
-        media.play();
-
+        }
     };
 
-    var play = function (name, callback, loop) {
+    media.addEventListener('timeupdate', playHandler);
 
-        if( isLoad ) {
+    //异步执行防止直接play的报错
+    setTimeout(function () {
+        media.play();
+    }, 0)
 
-            gotoAndPlay(name, callback, loop);
+};
 
-        } else {
+MediaSprite.prototype.started = function(callback) {
+    var media = this.media;
+    var beginTime = function () {
 
-            loadCb = (function(name, callback, loop){
+        if( this.currentTime > 0 ){
 
-                return function(){
-                    var begin = _config.timeline[name].begin,
-                        end = _config.timeline[name].end;
+            media.style.width = '100%';
 
-                    media.currentTime = begin;
+            callback && callback();
 
-                    console.log(media.currentTime);
-
-                    var playHandler = function () {
-
-                        if(this.currentTime >= end){
-                            if(loop){
-
-                                media.currentTime = begin;
-
-                            } else {
-
-                                this.pause();
-
-                                media.removeEventListener('timeupdate', playHandler);
-
-                                callback && callback(name);
-
-                            }
-
-                        }
-                    };
-
-                    media.removeEventListener('timeupdate', _currentHandler);
-
-                    media.addEventListener('timeupdate', playHandler);
-                    
-                    //异步执行防止直接play的报错
-                    setTimeout(function () {
-                        media.play();
-                    }, 0)
-
-                    _currentHandler = playHandler;
-                };
-
-            })(name, callback, loop);
+            media.removeEventListener('timeupdate', beginTime);
 
         }
-
-    };
-
-    var gotoAndPlay = function (name, callback, loop) {
-
-        var begin = _config.timeline[name].begin,
-            end = _config.timeline[name].end;
-
-        media.currentTime = begin;
-
-        console.log(media.currentTime);
-
-        var playHandler = function () {
-
-            if(this.currentTime >= end){
-                if(loop){
-
-                    media.currentTime = begin;
-
-                } else {
-
-                    this.pause();
-
-                    media.removeEventListener('timeupdate', playHandler);
-
-                    callback && callback(name);
-
-                }
-
-            }
-        };
-
-        media.removeEventListener('timeupdate', _currentHandler);
-
-        media.addEventListener('timeupdate', playHandler);
-
-        //异步执行防止直接play的报错
-        setTimeout(function () {
-            media.play();
-        }, 0)
-
-        _currentHandler = playHandler;
-
-    };
-
-    var _init = function () {
-
-        _createMedia();
-
-    };
-
-    _init();
-
-    return {
-
-        play: play
-
+         
     }
+
+    media.addEventListener('timeupdate', beginTime);
+    
 };
+
+MediaSprite.prototype.view = null;
 
 module.exports = MediaSprite;

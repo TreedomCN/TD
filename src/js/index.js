@@ -2,7 +2,8 @@
 
 //引入的包根据实际情况而定
 var LoadViewController = require('./app/LoadViewController'),
-    IndexViewController = require('./app/IndexViewController');
+    IndexViewController = require('./app/IndexViewController'),
+    MediaSprite = require('./app/module/MediaSprite');
 
 /*本地调试无网络时可释放此项；已集成fx，touch模块；*/
 // require('zepto');

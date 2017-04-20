@@ -2,8 +2,7 @@
 
 var TD = require('./module/TD'),
     Config = require('./Config'),
-    Preload = require('./module/Preload'),
-    KeyAnimation = require('./module/KeyAnimation');
+    Preload = require('./module/Preload');
 
 //加载页对象
 var IndexViewController = function(){
