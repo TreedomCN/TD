@@ -15,12 +15,8 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components|js[\/|\\]lib[\/||\\][\w|\.|_|-]+js$)/,
-                loader: 'babel-loader?presets[]=es2015'
-            },
-            {
-                test: /\.hbs/,
-                loader: "handlebars-loader"
+                exclude: /(node_modules|dist|js[\/|\\]lib[\/||\\][\w|\.|_|-]+js$|fx_methods)/,
+                loaders: ['babel-loader', 'eslint-loader']
             }
         ]
     },
