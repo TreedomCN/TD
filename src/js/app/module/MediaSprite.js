@@ -1,150 +1,207 @@
 /*
- 雪碧音&雪碧音
+*
+***  How to use ***
 
- var newMediaSprite = new MediaSprite({
-    wrap: '#videoWrap',   //如果没有wrap,直接添加到body
-    type: 'video',         //如果是雪碧音可以填audio, 也可以不填
-    src: 'http://hymm.treedom.cn/sound/bg.mp3',
-    timeline: {
-        'first': {
-            begin: 0.0,
-            end: 6.0
-        },
-        'second': {
-            begin: 10.0,
-            end: 15.0
-        }
+** style **
+.m-video{
+  position: absolute;
+  z-index: 0;
+  width: 1px;
+  height: 1px;
+}
+
+** 初始化 **
+let MediaSprite = new TD.MediaSprite({
+  wrap: '#videoWrap',   //如果没有wrap,直接添加到body
+  type: 'video',         //如果是雪碧音可以填audio, 也可以不填
+  src: 'http://hymm.treedom.cn/sound/bg.mp3',
+  classname: '.m-video'
+  timeline: {
+    'first': {
+       begin: 0.0,
+       end: 6.0
+    },
+    'second': {
+      begin: 10.0,
+      end: 15.0
     }
- });
+  }
+});
 
-接口：
+** gotoAndPlay() **
+ @param {string} 雪碧音的命名
+ @param {function} 回调函数, 函数参数为雪碧音名字
+ @param {bool} 是否循环播放
 
-newMediaSprite.play(string,function,bool)       {string} 雪碧音的命名
-                                                {function} 回调函数
-                                                {bool} 是否循环播放
-
-newMediaSprite.started(function)  media开始播放时触发function一次，视频项目时利器；
-
-newMediaSprite.view       返回当前media的dom节点；
-
-el:
-mediaSprite.play('first', function (name) {
-    console.log(name + ' end');
-}, true);
-
-
+ mediaSprite.play('first', function (name) {
+ console.log(name + ' end');
+ }, true);
 
  */
 
-var MediaSprite = function (config) {
-    this.config = config;
-    this.media = null;
+const MediaSprite = function (config) {
 
-    this.createMedia();
-    this.started();
-    this.view = this.media;
-}
+    const _config = config;
+    let media = null;
+    let dom_wrap = config.wrap ? document.querySelector(config.wrap) : null;
+    let isInit = false;
+    let _currentHandler = null;
 
-MediaSprite.prototype.createMedia = function() {
-    var config = this.config,
-        media = this.media;
+    let resizeVideo = function (config) {
 
-    if(config.type == 'video'){
+        config = config || {};
+        config.width = config.width || 750;
+        config.height = config.height || 1200;
+        config.type = config.type || 'contain'; // 'cover'、'contain'
+        // console.log(config);
+        console.log("resizeVideo");
 
-        media = document.createElement('video');
+        let resizeGo = function () {
 
-        media.setAttribute('webkit-playsinline', '');
+            if( this.currentTime > 0 ) {
+                let width = config.width/100+'rem';
 
-        media.setAttribute('playsinline', '');
+                let height = config.height/100+'rem';
 
-        media.setAttribute('preload', 'preload');
+                if(config.type == 'cover'){
+                    media.style.top = '50%';
+                    media.style.left = '50%';
+                    media.style.width = width;
+                    media.style.height = height;
+                    media.style.margin = '-6.83rem 0 0 -3.75rem';
+                }else{
+                    media.style.width = '100%';
+                    media.style.height = '100%';
+                }
 
-        //没播放前最小化，防止部分机型闪现微信原生按钮
-        media.style.width = '1px';
-        media.style.height = 'auto';
+                media.removeEventListener('timeupdate', resizeGo);
 
-    } else {
-
-        media = document.createElement('audio');
-
-    }
-
-    media.src = config.src;
-
-    media.id = 'spriteMedia' + Math.floor(Math.random()*100000);
-
-    if( config.wrap ) {
-
-        document.querySelector(config.wrap).appendChild(media);
-
-    } else {
-
-        document.body.appendChild(media);
-
-    }
-
-    this.media = document.querySelector('#' + media.id);
-    
-};
-
-MediaSprite.prototype.play = function(name, callback, loop) {
-
-    var begin = this.config.timeline[name].begin,
-        end = this.config.timeline[name].end,
-        media = this.media;
-
-    media.currentTime = begin;
-
-    console.log(media.currentTime);
-
-    var playHandler = function () {
-
-        if(this.currentTime >= end){
-            if(loop){
-
-                media.currentTime = begin;
-
-            } else {
-
-                this.pause();
-
-                media.removeEventListener('timeupdate', playHandler);
-
-                callback && callback(name);
+                media.currentTime = 0;
 
             }
-        }
+
+        };
+
+        media.addEventListener('timeupdate', resizeGo);
+
     };
 
-    media.addEventListener('timeupdate', playHandler);
+    let _createMedia = function () {
 
-    //异步执行防止直接play的报错
-    setTimeout(function () {
-        media.play();
-    }, 0)
+        if(_config.type == 'video'){
 
-};
+            media = document.createElement('video');
 
-MediaSprite.prototype.started = function(callback) {
-    var media = this.media;
-    var beginTime = function () {
+            media.setAttribute('webkit-playsinline', '');
+            media.setAttribute('playsinline', '');
+            media.setAttribute('preload', 'preload');
+            media.className = _config.classname;
 
-        if( this.currentTime > 0 ){
-
-            media.style.width = '100%';
-
-            callback && callback();
-
-            media.removeEventListener('timeupdate', beginTime);
-
+        } else {
+            media = document.createElement('audio');
         }
-         
+
+        media.src = _config.src;
+
+        media.id = 'spriteMedia' + Math.floor(Math.random()*100000);
+
+        if( dom_wrap ) {
+            dom_wrap.querySelector('.wrap') ? dom_wrap.querySelector('.wrap').appendChild(media) : dom_wrap.appendChild(media);
+            dom_wrap.style.zIndex = 0;
+        } else {
+            document.body.appendChild(media);
+        }
+
+    };
+
+    let gotoAndPlay = function (name, callback, loop) {
+
+        let begin = _config.timeline[name].begin;
+        let end = _config.timeline[name].end;
+
+        console.log(name, begin, end);
+
+        media.currentTime = begin;
+
+        media.style.visibility = 'visible';
+
+        if (!isInit) {
+            // todo: 放大视频
+            resizeVideo();
+            isInit = true;
+        }
+
+        let playHandler = function () {
+
+            if(this.currentTime >= end){
+
+                if(loop){
+                    media.currentTime = begin;
+                } else {
+
+                    this.pause();
+
+                    if (dom_wrap) {
+                        dom_wrap.style.zIndex = 0;
+                    } else {
+                        media.style.zIndex = 0;
+                    }
+
+                    media.style.visibility = 'hidden';
+                    media.removeEventListener('timeupdate', playHandler);
+
+                    callback && callback(name);
+
+                }
+
+            }
+        };
+
+        media.removeEventListener('timeupdate', _currentHandler);
+
+        media.addEventListener('timeupdate', playHandler);
+
+        // 0延时将plpy()请求置于队列末位消除回调里直接play的报错，by————xsy
+        setTimeout(function () {
+            media.play();
+            if (dom_wrap) {
+                dom_wrap.style.zIndex = 99;
+            } else {
+                media.style.zIndex = 99;
+            }
+        }, 0);
+
+        _currentHandler = playHandler;
+    };
+
+    let _init = function () {
+
+        _createMedia();
+
+    };
+
+    let pause = function () {
+        media.pause();
+    };
+
+    let play = function () {
+        media.play();
+    };
+
+    let stop = function () {
+        media.pause();
+        media.style.visibility = 'hidden';
+    };
+
+    _init();
+
+    return {
+        gotoAndPlay: gotoAndPlay,
+        pause: pause,
+        play: play,
+        dom: media,
+        stop: stop
     }
-
-    media.addEventListener('timeupdate', beginTime);
-    
 };
-
-MediaSprite.prototype.view = null;
 
 module.exports = MediaSprite;
