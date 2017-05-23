@@ -23,5 +23,10 @@
     "url-loader": "*",
     "webpack": "^1.12.2",
     "webpack-strip": "^0.1.0"
+  },
+  "dependencies": {
+    "del": "^2.2.2",
+    "gulp-rev": "^7.1.2",
+    "gulp-rev-collector": "^1.1.1"
   }
 }
