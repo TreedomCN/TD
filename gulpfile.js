@@ -1,4 +1,7 @@
 var gulp = require("gulp"),
+    del = require("del"),
+    rev  = require("gulp-rev"),
+    revCollector = require('gulp-rev-collector'),
     less = require("gulp-less"),
     gutil = require("gulp-util"),
     rename = require("gulp-rename"),
@@ -19,12 +22,30 @@ var distPath = './dist/';
 
 //编译less
 gulp.task('less', function () {
+    del(['./dist/css/*.css']);
     return gulp.src(lessSrc)
         .pipe(plumer())
         .pipe(less({
             paths: [ path.join(__dirname, 'less', 'includes') ]
         }))
-        .pipe(gulp.dest(distPath + 'css'));
+        .pipe(gulp.dest(distPath + 'css'))
+});
+
+//生成MD5
+gulp.task('md5', function() {
+    return gulp.src(distPath + 'css/*.css')
+        .pipe(rev())
+        .pipe(gulp.dest(distPath + 'css'))
+        .pipe(rev.manifest())      
+        .pipe(gulp.dest('./src/less'));
+});
+
+//替换HTML内MD5
+gulp.task('remd5', ['md5'], function() {
+    return gulp.src(['./src/less/*.json', './index.html'])   
+        .pipe(revCollector())
+        .pipe(rename("index.html"))
+        .pipe(gulp.dest(''));
 });
 
 //复制图片
@@ -60,12 +81,13 @@ gulp.task("webpack", function(callback) {
 
 //压缩less
 gulp.task('lessmin', function () {
+    del(['./dist/css/*.css']);
     return gulp.src(lessSrc)
         .pipe(less({
             paths: [ path.join(__dirname, 'less', 'includes') ]
         }))
         .pipe(cssmin())
-        .pipe(gulp.dest(distPath + 'css'));
+        .pipe(gulp.dest(distPath + 'css'))
 });
 
 //压缩js
@@ -118,7 +140,7 @@ gulp.task('default', ['images', 'less', 'webpack', 'media'], function() {
 });
 
 //自动刷新
-gulp.task('sync', ['images', 'less', 'webpack', 'media','browsersync'], function() {
+gulp.task('sync', ['images', 'less', 'webpack', 'media', 'browsersync'], function() {
 
     gulp.watch(imageSrc, ['images']);
     

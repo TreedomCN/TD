@@ -1,4 +1,3 @@
-
 var TD = require('./module/TD');
 var Config = require('./Config');
 
@@ -12,6 +11,13 @@ var initProject = function () {
             type: 'contain'
         });
     }, 300);
+
+    // cnzz统计代码 强制HTTPS，防劫持
+    (function () {
+        var cnzzID = Config.defShare.cnzz;
+        document.write(unescape('%3Cspan id="cnzz_stat_icon_' + cnzzID + '"%3E%3C/span%3E%3Cscript src="' + 'https://s4.cnzz.com/z_stat.php%3Fid%3D' + cnzzID + '" type="text/javascript"%3E%3C/script%3E'));
+        $('#cnzz_stat_icon_' + cnzzID).hide();
+    })();
 
     // 初始化微信接口
     TD.initWxApi(Config.defShare);
