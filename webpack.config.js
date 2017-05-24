@@ -1,14 +1,17 @@
 
+const path = require('path');
+const webpack = require('webpack');
+
 module.exports = {
     entry: {
         main: "./src/js/index.js",
     },
     output: {
-        path: '.',
-        filename: "./dist/js/[name].js"
+        path: path.resolve(__dirname, './'),
+        filename: "./js/[name].js"
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /js[\/|\\]lib[\/||\\][\w|\.|_|-]+js$/,
                 loader: 'url-loader?importLoaders=1&limit=1000&name=/dist/js/lib/[name].[ext]'
