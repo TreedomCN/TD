@@ -12,33 +12,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="stylesheet" type="text/css" href="dist/css/style.css">
-    <link rel="icon" href="http://qrs.treedom.cn/favicon.ico">
+    <link rel="icon" href="http://7xvsf2.com1.z0.glb.clouddn.com/favicon.ico">
+
+    <!--
+        html中图片用法
+        <img src="<%= require('./src/img/test.jpg') %>"alt="">
+    -->
+
+    <% if (process.env.NODE_ENV === 'handover') { %>
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <% var cssFile = htmlWebpackPlugin.files.css[css] %>
+
+    <link href="<%= cssFile %>" rel="stylesheet">
+    <% } %>
+
+    <% } else { %>
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <% var cssFile = htmlWebpackPlugin.files.css[css].substr(htmlWebpackPlugin.files.publicPath.length); %>
+
+    <link href="<%= cssFile %>" rel="stylesheet">
+    <% } %>
+
+    <% } %>
     <!-- 授权加代码统计系统 -->
-    <script type="text/javascript" src="http://ga.treedom.cn/ga.js?v=0.2.1"></script>
-    <script type="text/javascript">
-        /*
-            参数有3种用法：
-            1. 需要授权，不需要统计，关键参数：pid为空或者不填；
-            2. 不需要授权，需要统计，关键参数：wxverify设为0，query有渠道id的时候会自动调用静默授权；
-            3. 需要授权，需要统计，关键参数：pid必填，wxverify设为1；
-            4. 不需要授权，不需要统计，那你丫引入这套代码干嘛。
-        */
-        new _tdga({
-            //项目名，必填
-            pname: 'tdga',
-            //项目id，值由老司机提供，为空或不填为不上报
-            pid: '9999',
-            //有默认值，建议不改
-            //appid: 'wx875c7888a7aef3f7',
-            //授权方式，静默授权:snsapi_base，完整授权:snsapi_userinfo
-            scope: 'snsapi_base',
-            //强制微信验证，0不强制，1强制，默认0
-            wxverify: 0
-        });
-    </script>
-    <!-- 授权加代码统计系统end -->
-    
+    <script id="__ga" type="text/javascript" src="http://ga.treedom.cn/ga.js?v=0.3.2&pid=9999"></script>
+
     <!-- rem布局初始化设置start -->
     <script type="text/javascript">
         (function(doc, win) {
@@ -131,6 +129,27 @@
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="//cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
-    <script src="dist/js/main.js"></script>
-</body>
+
+
+    <% if (process.env.NODE_ENV === 'handover') { %>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+
+    <% var jsFile = htmlWebpackPlugin.files.chunks[chunk].entry.substr(htmlWebpackPlugin.files.publicPath.length + 3); %>
+
+    <script type="text/javascript" src="<%= jsFile %>"></script>
+
+    <% } %>
+
+    <% } else { %>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+
+    <% var jsFile = htmlWebpackPlugin.files.chunks[chunk].entry.substr(htmlWebpackPlugin.files.publicPath.length); %>
+
+    <script type="text/javascript" src="<%= jsFile %>"></script>
+
+    <% } %>
+
+    <% } %>
+
+    </body>
 </html>

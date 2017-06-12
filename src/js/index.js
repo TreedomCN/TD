@@ -1,5 +1,5 @@
 
-// require('zepto');
+require('../less/style.less');
 
 // require('./app/module/fx_methods');// 以动画形式的 show, hide, toggle, 和 fade*()方法.依赖fx模块。
 
@@ -44,5 +44,4 @@ var init = function () {
     loadPageBack();
 };
 
-// $(window).on('load', init);
 init();
