@@ -1,4 +1,3 @@
-
 // 加载页对象
 var IndexViewController = function () {
     // 公共变量
