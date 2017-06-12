@@ -8,7 +8,8 @@ Config.requireUrl = '';
 
 // 图片路径前缀
 //  Config.imgPath = 'http://qrs.treedom.cn/streetgame/';
-Config.imgPath = './dist/img/';
+
+Config.imgPath = process.env.NODE_ENV === 'handover' ? process.env.PATH : process.env.PATH + 'img/';
 
 // 默认分享语
 Config.defShare = {
@@ -31,12 +32,10 @@ Config.Preload = Preload;
 // 预加载的图片
 Config.pageImgs = {
     imgs: [
-        /*
         {
-            name: 'bg_end_bg',
-            url: Config.imgPath + 'bg_end_bg.jpg'
+            name: 'test',
+            url: Config.imgPath + 'test.jpg'
         }
-        */
     ],
     sprites: [
         /*
