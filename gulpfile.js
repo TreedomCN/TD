@@ -22,7 +22,6 @@ var distPath = './dist/';
 
 //编译less
 gulp.task('less', function () {
-    del(['./dist/css/*.css']);
     return gulp.src(lessSrc)
         .pipe(plumer())
         .pipe(less({
@@ -81,7 +80,6 @@ gulp.task("webpack", function(callback) {
 
 //压缩less
 gulp.task('lessmin', function () {
-    del(['./dist/css/*.css']);
     return gulp.src(lessSrc)
         .pipe(less({
             paths: [ path.join(__dirname, 'less', 'includes') ]
@@ -126,6 +124,13 @@ gulp.task("browsersync",function () {
     });
 })
 
+//清理dist/img文件夹，避免重复文件
+gulp.task('cleanImg',function (cb) {
+    del([
+        distPath + 'img/**/*'
+    ], cb)
+})
+
 //默认侦听
 gulp.task('default', ['images', 'less', 'webpack', 'media'], function() {
 
@@ -153,4 +158,4 @@ gulp.task('sync', ['images', 'less', 'webpack', 'media', 'browsersync'], functio
 });
 
 //压缩
-gulp.task('zip', ['images', 'lessmin', 'webpack:build', 'media']);
+gulp.task('zip', ['images', 'lessmin', 'webpack:build', 'media', 'cleanImg']);
