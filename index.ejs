@@ -13,12 +13,10 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="icon" href="http://7xvsf2.com1.z0.glb.clouddn.com/favicon.ico">
-
     <!--
         html中图片用法
         <img src="<%= require('./src/img/test.jpg') %>"alt="">
     -->
-
     <% if (process.env.NODE_ENV === 'handover') { %>
     <% for (var css in htmlWebpackPlugin.files.css) { %>
     <% var cssFile = htmlWebpackPlugin.files.css[css] %>
@@ -35,62 +33,14 @@
 
     <% } %>
 
-
     <!-- 授权加代码统计系统 -->
     <script id="__ga" type="text/javascript" src="http://ga.treedom.cn/ga.js?v=0.3.2&pid=9999"></script>
 
     <!-- rem布局初始化设置start -->
     <script type="text/javascript">
-        (function(doc, win) {
-            var docEl = doc.documentElement,
-                rszEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-                reCalc = (function() {
-                    var reCalc = function () {
-                        var winWidth = docEl.clientWidth;
-                        var winHeight = docEl.clientHeight;
-                        if (!winWidth) return;
-
-                        if ( winWidth < winHeight ) {
-                            if ( (winWidth/winHeight) > (750/1200) ) {
-                                var fontSize = (100 * ( winWidth / 750 ));
-                            }else{
-                                var fontSize = ( 100 * ( winHeight / 1200 ));
-                            }
-                        } else {
-                            if ( (winWidth/winHeight) > (1200/750) ) {
-                                var fontSize = (100 * ( winWidth / 1200 ));
-                            }else{
-                                var fontSize = ( 100 * ( winHeight / 750 ));
-                            }
-                        }
-
-                        docEl.style.fontSize = (fontSize > 110 ? 110 : fontSize) + 'px';
-                        return reCalc;
-                    }
-                    return reCalc();
-                })();
-            if (!doc.addEventListener) return;
-            win.addEventListener(rszEvt, reCalc);
-        })(document, window);
+        <%= htmlWebpackPlugin.options.remjs %>
     </script>
     <!-- rem布局初始化设置end -->
-    <script type="text/javascript">
-        (function  () {
-            var getQuery = function(name){
-                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                    results = regex.exec(location.search);
-                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-            };
-            if ( !getQuery('_wv') ) {
-                if ( location.search ) {
-                    location.href += '&_wv=1'
-                }else{
-                    location.href += '?_wv=1'
-                }
-            }
-        }())
-    </script>
 </head>
 <body>
     <div class="m-main-wrap absf">
