@@ -2,8 +2,10 @@
   "name": "tx-mod",
   "version": "1.0.0",
   "scripts": {
+    "g": "git checkout -b qq1 && git pull https://github.com/TreedomCN/TD.git master",
     "dev": "webpack-dev-server --config webpack.config.dev.js",
-    "dist": "set NODE_ENV=dist && webpack --config webpack.config.prod.js",
+    "dist": "npm run a && webpack --config webpack.config.prod.js",
+    "a": "NODE_ENV=dist || set NODE_ENV=dist",
     "build": "set NODE_ENV=prod && webpack --config webpack.config.prod.js",
     "handover": "webpack --config webpack.config.handover.js"
   },
