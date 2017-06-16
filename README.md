@@ -53,6 +53,8 @@ tx-star-web-20160320（腾讯-明星大作战(项目名)-前端平台-时间）
 
 > 其它外部js直接在index.ejs中用script引入 
 
+> 新增`rem.js` 如不需要rem布局，请在index.ejs将`<%= htmlWebpackPlugin.options.remjs %>`去掉。
+
 ## TODO
 
 1. 多入口文件配置

@@ -3,6 +3,7 @@
  */
 const path = require('path');
 const webpack = require('webpack');
+const fs = require('fs');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -21,7 +22,7 @@ module.exports = function () {
                 {
                     test: /\.(png|jpg|gif|svg)$/,
                     use: 'url-loader?limit=10000&name=img/[name].[ext]?[hash:8]'
-                },
+                }
             ]
         },
         resolve: {
@@ -41,7 +42,8 @@ module.exports = function () {
                 minify: {
                     removeComments: true, // 移除HTML中的注释
                     collapseWhitespace: false, // 删除空白符与换行符
-                }
+                },
+                remjs: fs.readFileSync('src/js/app/rem.js', 'utf8'),
             })
         ],
         externals: {

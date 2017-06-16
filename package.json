@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
-    "dist": "NODE_ENV=dist webpack --config webpack.config.prod.js",
-    "build": "NODE_ENV=prod webpack --config webpack.config.prod.js",
+    "dist": "set NODE_ENV=dist && webpack --config webpack.config.prod.js",
+    "build": "set NODE_ENV=prod && webpack --config webpack.config.prod.js",
     "handover": "webpack --config webpack.config.handover.js"
   },
   "author": "flowers1225",
@@ -42,10 +42,5 @@
     "webpack-dev-server": "^2.4.5",
     "webpack-merge": "^4.1.0",
     "webpack-strip": "^0.1.0"
-  },
-  "dependencies": {
-    "del": "^2.2.2",
-    "gulp-rev": "^7.1.2",
-    "gulp-rev-collector": "^1.1.1"
   }
 }
