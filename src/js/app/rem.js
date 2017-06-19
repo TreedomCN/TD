@@ -4,25 +4,29 @@
         rszEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
         reCalc = (function () {
             var reCalc = function () {
+                var width = 1200, height = 640;
                 var winWidth = docEl.clientWidth;
                 var winHeight = docEl.clientHeight;
+
                 if (!winWidth) return;
 
                 if (winWidth < winHeight) {
-                    if ((winWidth/winHeight) > (750 / 1200)) {
-                        var fontSize = (100 * ( winWidth / 750 ));
-                    }else{
-                        var fontSize = ( 100 * ( winHeight / 1200 ));
+                    //竖屏
+                    if ((winWidth / winHeight) <= (height / width)) {
+                        var fontSize = 100 * (winWidth / height);
+                    } else {
+                        var fontSize = 100 * (winHeight / width );
                     }
                 } else {
-                    if ((winWidth/winHeight) > (1200/750)) {
-                        var fontSize = (100 * ( winWidth / 1200 ));
-                    }else{
-                        var fontSize = ( 100 * ( winHeight / 750 ));
+                    //横屏
+                    if ((winWidth / winHeight) <= (width / height)) {
+                        var fontSize = 100 * (winWidth / width);
+                    } else {
+                        var fontSize = 100 * (winHeight / height);
                     }
                 }
 
-                docEl.style.fontSize = (fontSize > 110 ? 110 : fontSize) + 'px';
+                docEl.style.fontSize = fontSize + 'px';
                 return reCalc;
             };
             return reCalc();

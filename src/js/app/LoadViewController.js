@@ -83,6 +83,18 @@ var LoadViewController = function () {
         _private.gload.load();
     };
 
+    var rotateELSize = function (e) {
+        var winWidth = document.documentElement.clientWidth;
+        var winHeight = document.documentElement.clientHeight;
+        // var width,height;
+
+        if (e && winWidth / winHeight < 1.2 && winWidth / winHeight > 0.8) {
+            return false;
+        }
+
+        window.addEventListener('resize', rotateELSize);
+    };
+
     _private.init();
 };
 
