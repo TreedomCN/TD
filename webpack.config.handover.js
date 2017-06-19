@@ -45,7 +45,7 @@ module.exports = function () {
                 {
                     test: /\.js$/,
                     exclude: /(node_modules|dist|lib|fx_methods)/,
-                    use: ['webpack-strip?strip[]=TD.debug.log', 'babel-loader', 'eslint-loader']
+                    use: ['webpack-strip?strip[]=TD.debug.*', 'babel-loader', 'eslint-loader']
                 }
             ]
         },
@@ -56,9 +56,13 @@ module.exports = function () {
             new CleanPlugin('dist'),
             new ExtractTextPlugin('[name].[hash:8].css'),
             new CopyWebpackPlugin([{
-                context: __dirname,
                 from: 'src/media',
-                to: './'
+                to: './',
+                flatten: true
+            },{
+                from: 'src/img/kf',
+                to: './',
+                flatten: true
             }]),
             new DefinePlugin({
                 'process.env': {

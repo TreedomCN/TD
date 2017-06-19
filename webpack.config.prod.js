@@ -19,13 +19,13 @@ const isProduction = function () {
     return process.env.NODE_ENV === 'prod';
 };
 
-let jsRules = {};
+var jsRules = {};
 
 if (isProduction()) {
     jsRules = {
         test: /\.js$/,
         exclude: /(node_modules|dist|lib|fx_methods)/,
-        use: ['webpack-strip?strip[]=TD.debug.log', 'babel-loader', 'eslint-loader']
+        use: ['webpack-strip?strip[]=TD.debug.*', 'babel-loader', 'eslint-loader']
     }
 }else {
     jsRules = {

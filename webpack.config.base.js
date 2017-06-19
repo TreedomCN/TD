@@ -30,9 +30,13 @@ module.exports = function () {
         },
         plugins: [
             new CopyWebpackPlugin([{
-                context: __dirname,
                 from: 'src/media',
-                to: 'img'
+                to: 'img',
+                flatten: true
+            },{
+                from: 'src/img/kf',
+                to: 'img',
+                flatten: true
             }]),
             new HtmlWebpackPlugin({
                 filename: './index.html',
