@@ -14,6 +14,20 @@ const DefinePlugin = webpack.DefinePlugin;
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
+var copyItem = [{
+    from: 'src/media',
+    to: 'img',
+    flatten: true
+}];
+
+if (fs.existsSync('src/img/kf')) {
+    copyItem.push({
+        from: 'src/img/kf',
+        to: 'img',
+        flatten: true
+    });
+}
+
 module.exports = function () {
     return {
         entry: {
@@ -55,15 +69,7 @@ module.exports = function () {
         plugins: [
             new CleanPlugin('dist'),
             new ExtractTextPlugin('[name].[hash:8].css'),
-            new CopyWebpackPlugin([{
-                from: 'src/media',
-                to: './',
-                flatten: true
-            },{
-                from: 'src/img/kf',
-                to: './',
-                flatten: true
-            }]),
+            new CopyWebpackPlugin(copyItem),
             new DefinePlugin({
                 'process.env': {
                     'NODE_ENV': JSON.stringify('handover'),

@@ -8,6 +8,20 @@ const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+var copyItem = [{
+    from: 'src/media',
+    to: 'img',
+    flatten: true
+}];
+
+if (fs.existsSync('src/img/kf')) {
+    copyItem.push({
+        from: 'src/img/kf',
+        to: 'img',
+        flatten: true
+    });
+}
+
 module.exports = function () {
     return {
         entry: {
@@ -29,15 +43,7 @@ module.exports = function () {
             alias: {}
         },
         plugins: [
-            new CopyWebpackPlugin([{
-                from: 'src/media',
-                to: 'img',
-                flatten: true
-            },{
-                from: 'src/img/kf',
-                to: 'img',
-                flatten: true
-            }]),
+            new CopyWebpackPlugin(copyItem),
             new HtmlWebpackPlugin({
                 filename: './index.html',
                 template: 'index.ejs',
