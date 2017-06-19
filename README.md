@@ -2,8 +2,7 @@
 
 0. 安装nodejs环境
 1. 运行npm install 安装对应的node依赖包
-2. 编译js和css运行：gulp
-3. $ npm run **(对应的环境)
+2. $ npm run **(对应的环境)
 
 ## 项目命名规范
 
@@ -11,7 +10,7 @@ tx-star-web-20160320（腾讯-明星大作战(项目名)-前端平台-时间）
 
 ## 主要开发文件目录
 ```
-	 .
+	.
     ├── src
     │   ├── img     // 存放图片资源
     │   ├── js      
@@ -54,6 +53,8 @@ tx-star-web-20160320（腾讯-明星大作战(项目名)-前端平台-时间）
 > 其它外部js直接在index.ejs中用script引入 
 
 > 新增`rem.js` 如不需要rem布局，请在index.ejs将`<%= htmlWebpackPlugin.options.remjs %>`去掉。
+
+> 项目中有逐帧时，在img中创建kf文件夹，将逐帧图放入kf文件中。
 
 ## TODO
 
