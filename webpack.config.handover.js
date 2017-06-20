@@ -4,6 +4,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const config = require('./config.path');
+const fs = require('fs');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -16,14 +17,14 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 var copyItem = [{
     from: 'src/media',
-    to: 'img',
+    to: './',
     flatten: true
 }];
 
 if (fs.existsSync('src/img/kf')) {
     copyItem.push({
         from: 'src/img/kf',
-        to: 'img',
+        to: './',
         flatten: true
     });
 }

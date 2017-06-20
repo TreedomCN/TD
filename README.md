@@ -52,7 +52,9 @@ tx-star-web-20160320（腾讯-明星大作战(项目名)-前端平台-时间）
 
 > 其它外部js直接在index.ejs中用script引入 
 
-> 新增`rem.js` 如不需要rem布局，请在index.ejs将`<%= htmlWebpackPlugin.options.remjs %>`去掉。
+> 新增`rem.js` 如不需要rem布局，请在index.ejs将`<%= require('raw-loader!./src/js/app/rem.js') %>`去掉。
+
+> 如需要内联其它js代码，按照rem.js在index.ejs中引入方式即可`<%= require('raw-loader!inline js path') %>`
 
 > 项目中有逐帧时，在img中创建kf文件夹，将逐帧图放入kf文件中。
 

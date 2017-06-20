@@ -9,7 +9,6 @@
   },
   "author": "flowers1225",
   "devDependencies": {
-    "uglify-js": "2.8.18",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.2",
     "babel-loader": "^6.4.1",
@@ -37,7 +36,9 @@
     "imports-loader": "^0.6.5",
     "less": "^2.7.0",
     "less-loader": "^4.0.4",
+    "raw-loader": "^0.5.1",
     "style-loader": "^0.13.2",
+    "uglify-js": "2.8.18",
     "uglifyjs-webpack-plugin": "^0.4.3",
     "url-loader": "*",
     "webpack": "^2.6.0",
