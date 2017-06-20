@@ -38,7 +38,7 @@
 
     <!-- rem布局初始化设置start -->
     <script type="text/javascript">
-        <%= htmlWebpackPlugin.options.remjs %>
+        <%= require('raw-loader!./src/js/app/rem.js') %>
     </script>
     <!-- rem布局初始化设置end -->
 </head>

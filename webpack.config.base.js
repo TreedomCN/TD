@@ -52,8 +52,7 @@ module.exports = function () {
                 minify: {
                     removeComments: true, // 移除HTML中的注释
                     collapseWhitespace: false, // 删除空白符与换行符
-                },
-                remjs: fs.readFileSync('src/js/app/rem.js', 'utf8'),
+                }
             })
         ],
         externals: {
