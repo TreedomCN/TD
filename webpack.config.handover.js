@@ -15,11 +15,7 @@ const DefinePlugin = webpack.DefinePlugin;
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-var copyItem = [{
-    from: 'src/media',
-    to: './',
-    flatten: true
-}];
+var copyItem = [];
 
 if (fs.existsSync('src/img/kf')) {
     copyItem.push({
@@ -54,8 +50,8 @@ module.exports = function () {
                     use: 'url-loader?limit=1000&name=js/lib/[name].[ext]'
                 },
                 {
-                    test: /\.(png|jpg|gif|svg)$/,
-                    use: 'url-loader?limit=10000&name=[name].[ext]?[hash:8]'
+                    test: /\.(png|jpg|gif|svg|mp3|mp4)$/,
+                    use: 'url-loader?limit=10000&name=[name].[hash:8].[ext]'
                 },
                 {
                     test: /\.js$/,

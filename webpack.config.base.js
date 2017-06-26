@@ -8,11 +8,7 @@ const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var copyItem = [{
-    from: 'src/media',
-    to: 'img',
-    flatten: true
-}];
+var copyItem = [];
 
 if (fs.existsSync('src/img/kf')) {
     copyItem.push({
@@ -34,8 +30,8 @@ module.exports = function () {
                     use: 'url-loader?limit=1000&name=js/lib/[name].[ext]'
                 },
                 {
-                    test: /\.(png|jpg|gif|svg)$/,
-                    use: 'url-loader?limit=10000&name=img/[name].[ext]?[hash:8]'
+                    test: /\.(png|jpg|gif|svg|mp3|mp4)$/,
+                    use: 'url-loader?limit=10000&name=img/[name].[hash:8].[ext]'
                 }
             ]
         },

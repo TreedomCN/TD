@@ -50,7 +50,6 @@ module.exports = function(env) {
             port: 3000,
             inline: true,
             hot: true,
-            open: true,
             disableHostCheck: true
         }
     })
