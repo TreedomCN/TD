@@ -36,10 +36,17 @@ tx-star-web-20160320（腾讯-明星大作战(项目名)-前端平台-时间）
 | 交接              | webpack.config.handover.js |  客户提供    | npm run handover    | dist／ossweb-img |handover  |否              |
 
 
->  使用ejs模版，模版中的图片必需用`require`引入:
+>  使用ejs模版，模版中的图片必需用`require`引入：
 
 ```
 <img src="<%= require('./src/img/test.jpg') %>"alt="">
+
+```
+
+> js中使用图片与流媒体需用`require`引入：
+
+```
+require('../../img/test.jpg') or require('../../media/test.mp3') 相对路径
 
 ```
 
@@ -60,8 +67,9 @@ tx-star-web-20160320（腾讯-明星大作战(项目名)-前端平台-时间）
 
 ## TODO
 
-1. 多入口文件配置
-2. dll配置
+1. 逐帧图片引入
+2. 多入口文件配置
+3. dll配置
 
 ## License
 

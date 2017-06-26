@@ -40,36 +40,33 @@ let MediaSprite = new TD.MediaSprite({
  */
 
 const MediaSprite = function (config) {
-
     const _config = config;
     let media = null;
-    let dom_wrap = config.wrap ? document.querySelector(config.wrap) : null;
+    let domWrap = config.wrap ? document.querySelector(config.wrap) : null;
     let isInit = false;
     let _currentHandler = null;
 
     let resizeVideo = function (config) {
-
         config = config || {};
         config.width = config.width || 750;
         config.height = config.height || 1200;
         config.type = config.type || 'contain'; // 'cover'、'contain'
         // console.log(config);
-        console.log("resizeVideo");
+        console.log('resizeVideo');
 
         let resizeGo = function () {
+            if (this.currentTime > 0) {
+                let width = config.width / 100 + 'rem';
 
-            if( this.currentTime > 0 ) {
-                let width = config.width/100+'rem';
+                let height = config.height / 100 + 'rem';
 
-                let height = config.height/100+'rem';
-
-                if(config.type == 'cover'){
+                if (config.type === 'cover') {
                     media.style.top = '50%';
                     media.style.left = '50%';
                     media.style.width = width;
                     media.style.height = height;
                     media.style.margin = '-6.83rem 0 0 -3.75rem';
-                }else{
+                } else {
                     media.style.width = '100%';
                     media.style.height = '100%';
                 }
@@ -77,45 +74,37 @@ const MediaSprite = function (config) {
                 media.removeEventListener('timeupdate', resizeGo);
 
                 media.currentTime = 0;
-
             }
-
         };
 
         media.addEventListener('timeupdate', resizeGo);
-
     };
 
     let _createMedia = function () {
-
-        if(_config.type == 'video'){
-
+        if (_config.type === 'video') {
             media = document.createElement('video');
 
             media.setAttribute('webkit-playsinline', '');
             media.setAttribute('playsinline', '');
             media.setAttribute('preload', 'preload');
             media.className = _config.classname;
-
         } else {
             media = document.createElement('audio');
         }
 
         media.src = _config.src;
 
-        media.id = 'spriteMedia' + Math.floor(Math.random()*100000);
+        media.id = 'spriteMedia' + Math.floor(Math.random() * 100000);
 
-        if( dom_wrap ) {
-            dom_wrap.querySelector('.wrap') ? dom_wrap.querySelector('.wrap').appendChild(media) : dom_wrap.appendChild(media);
-            dom_wrap.style.zIndex = 0;
+        if (domWrap) {
+            domWrap.querySelector('.wrap') ? domWrap.querySelector('.wrap').appendChild(media) : domWrap.appendChild(media);
+            domWrap.style.zIndex = 0;
         } else {
             document.body.appendChild(media);
         }
-
     };
 
     let gotoAndPlay = function (name, callback, loop) {
-
         let begin = _config.timeline[name].begin;
         let end = _config.timeline[name].end;
 
@@ -132,17 +121,14 @@ const MediaSprite = function (config) {
         }
 
         let playHandler = function () {
-
-            if(this.currentTime >= end){
-
-                if(loop){
+            if (this.currentTime >= end) {
+                if (loop) {
                     media.currentTime = begin;
                 } else {
-
                     this.pause();
 
-                    if (dom_wrap) {
-                        dom_wrap.style.zIndex = 0;
+                    if (domWrap) {
+                        domWrap.style.zIndex = 0;
                     } else {
                         media.style.zIndex = 0;
                     }
@@ -151,9 +137,7 @@ const MediaSprite = function (config) {
                     media.removeEventListener('timeupdate', playHandler);
 
                     callback && callback(name);
-
                 }
-
             }
         };
 
@@ -164,8 +148,8 @@ const MediaSprite = function (config) {
         // 0延时将plpy()请求置于队列末位消除回调里直接play的报错，by————xsy
         setTimeout(function () {
             media.play();
-            if (dom_wrap) {
-                dom_wrap.style.zIndex = 99;
+            if (domWrap) {
+                domWrap.style.zIndex = 99;
             } else {
                 media.style.zIndex = 99;
             }
@@ -175,9 +159,7 @@ const MediaSprite = function (config) {
     };
 
     let _init = function () {
-
         _createMedia();
-
     };
 
     let pause = function () {
@@ -201,7 +183,7 @@ const MediaSprite = function (config) {
         play: play,
         dom: media,
         stop: stop
-    }
+    };
 };
 
 module.exports = MediaSprite;

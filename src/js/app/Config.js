@@ -3,13 +3,19 @@ var Preload = require('./module/Preload');
 
 var Config = {};
 
+/*
+ var audioPath = require('../../media/test_audio.mp3');
+
+ var audio = new Audio(audioPath);
+
+ console.log(audio);
+ */
+
 // ajax请求链接
 Config.requireUrl = '';
 
 // 图片路径前缀
-//  Config.imgPath = 'http://qrs.treedom.cn/streetgame/';
-
-Config.imgPath = process.env.NODE_ENV === 'handover' ? process.env.PATH : process.env.PATH + 'img/';
+Config.imgPath = '../../img/';
 
 // 默认分享语
 Config.defShare = {
@@ -34,7 +40,7 @@ Config.pageImgs = {
     imgs: [
         {
             name: 'test',
-            url: Config.imgPath + 'test.jpg'
+            url: require('../../img/test.jpg')
         }
     ],
     sprites: [
