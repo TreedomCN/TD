@@ -32,7 +32,7 @@ module.exports = function () {
         },
         output: {
             path: path.resolve(__dirname, './dist/ossweb-img'),
-            filename: '../js/[name].[hash:8].js',
+            filename: '../js/[name].js',
             publicPath: config.handover
         },
         module: {
@@ -51,7 +51,7 @@ module.exports = function () {
                 },
                 {
                     test: /\.(png|jpg|gif|svg|mp3|mp4)$/,
-                    use: 'url-loader?limit=10000&name=[name].[hash:8].[ext]'
+                    use: 'url-loader?limit=10000&name=[name].[ext]'
                 },
                 {
                     test: /\.js$/,
@@ -65,7 +65,7 @@ module.exports = function () {
         },
         plugins: [
             new CleanPlugin('dist'),
-            new ExtractTextPlugin('[name].[hash:8].css'),
+            new ExtractTextPlugin('[name].css'),
             new CopyWebpackPlugin(copyItem),
             new DefinePlugin({
                 'process.env': {
