@@ -59,7 +59,7 @@ module.exports = function(env) {
             new CleanPlugin('dist'),
             new DefinePlugin({
                 'process.env': {
-                    'NODE_ENV': JSON.stringify(isProduction() ? config.prod : config.dist),
+                    'NODE_ENV': JSON.stringify(isProduction() ? 'prod' : 'dist'),
                     'PATH': JSON.stringify(isProduction() ? config.prod : config.dist)
                 }
             }),

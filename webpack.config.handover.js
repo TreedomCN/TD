@@ -32,7 +32,7 @@ module.exports = function () {
         },
         output: {
             path: path.resolve(__dirname, './dist/ossweb-img'),
-            filename: '../js/[name].js',
+            filename: '[name].js',
             publicPath: config.handover
         },
         module: {
