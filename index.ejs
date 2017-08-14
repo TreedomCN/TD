@@ -86,7 +86,7 @@
     <% if (process.env.NODE_ENV === 'handover') { %>
     <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
 
-    <% var jsFile = htmlWebpackPlugin.files.chunks[chunk].entry.substr(htmlWebpackPlugin.files.publicPath.length + 3); %>
+    <% var jsFile = htmlWebpackPlugin.files.chunks[chunk].entry; %>
 
     <script type="text/javascript" src="<%= jsFile %>"></script>
 
