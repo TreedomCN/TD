@@ -2,6 +2,7 @@
   "name": "tx-mod",
   "version": "1.0.0",
   "scripts": {
+    "g": "git checkout -b qq1 && git pull https://github.com/TreedomCN/TD.git master",
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "dist": "cross-env NODE_ENV=dist webpack --config webpack.config.prod.js",
     "build": "cross-env NODE_ENV=prod webpack --config webpack.config.prod.js",
