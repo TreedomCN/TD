@@ -50,6 +50,25 @@ require('../../img/test.jpg') or require('../../media/test.mp3') 相对路径
 
 ```
 
+> 兼容横竖屏模式：
+
+```
+<!-- 竖屏页 -->
+<div class="m-vertical absf">
+    <div class="m-wrap sizcont abcter">
+        竖屏内容放在这，保留div.m-wrap
+    </div>
+</div>
+
+<!-- 横屏页 -->
+<div class="m-horizontal absf">
+    <div class="m-wrap sizcont abcter">
+        横屏内容放在这，保留div.m-wrap
+    </div>
+</div>
+
+```
+
 > 资源路径配置文件： `config.path.js` cnd与交接地址根据自己项目需求修改对应地址即可。
 
  

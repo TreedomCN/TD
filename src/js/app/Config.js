@@ -39,8 +39,8 @@ Config.Preload = Preload;
 Config.pageImgs = {
     imgs: [
         {
-            name: 'test',
-            url: require('../../img/test.jpg')
+            // name: 'test',
+            // url: require('../../img/test.jpg')
         }
     ],
     sprites: [

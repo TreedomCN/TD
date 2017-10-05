@@ -15,7 +15,7 @@
     <link rel="icon" href="http://7xvsf2.com1.z0.glb.clouddn.com/favicon.ico">
     <!--
         html中图片用法
-        <img src="<%= require('./src/img/test.jpg') %>"alt="">
+        <img src="<%= require('./src/img/1.png') %>"alt="">
     -->
     <% if (process.env.NODE_ENV === 'handover') { %>
     <% for (var css in htmlWebpackPlugin.files.css) { %>
@@ -45,39 +45,21 @@
 <body>
     <div class="m-main-wrap absf">
 
-        <!-- 开始页 -->
-        <div class="m-loading absf">
-            <p style="text-align: center;">loading页</p>
+        <!-- 可删除start -->
+        <button style="position: absolute;z-index: 2;top: 40%;left: 20%;" onclick="document.querySelector('.m-vertical').style.display='block';document.querySelector('.m-horizontal').style.display='none'">竖屏显示</button>
+        <button style="position: absolute;z-index: 2;right: 20%;top: 40%;" onclick="document.querySelector('.m-vertical').style.display='none';document.querySelector('.m-horizontal').style.display='block'">横屏显示</button>
+        <!-- 可删除end -->
+        
+        <!-- 竖屏页 -->
+        <div class="m-vertical absf">
+            <div class="m-wrap sizcont abcter"></div>
         </div>
-
-        <!-- 开始页 -->
-        <div class="m-begin absf">
-            <p style="text-align: center;">开始页</p>
+        
+        <!-- 横屏页 -->
+        <div class="m-horizontal absf">
+            <div class="m-wrap sizcont abcter"></div>
         </div>
-
-        <!-- 游戏页 -->
-        <div class="m-play-wrap absf sizcon fadein800">
-            
-        </div>
-
-        <!-- 结束页 -->
-        <div class="m-end absf fadein800">
-            <div class="lastpage absf sizcon">
-                <div class="btn-wrap">
-                    <div class="btn-toShare btn abcter"></div>
-                    <div class="btn-seeAgain btn  abcter"></div>
-                </div>
-            </div>
-
-            <!-- 分享蒙版 -->
-            <div class="share-wrap absf">
-                <div class="share-img absf sizcon"></div>
-            </div>
-        </div>
-
-        <!-- 视频 -->
-        <div class="m-video-wrap absf" id="videoWrap"></div>
-
+        
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="//cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
