@@ -15,7 +15,8 @@ var Config = {};
 Config.requireUrl = '';
 
 // 图片路径前缀
-Config.imgPath = '../../img/';
+// 如kf文件里图片不使用require时 img地址：Config.imgPath
+Config.imgPath = process.env.NODE_ENV === 'handover' ? process.env.PATH : process.env.PATH + 'img/';
 
 // 默认分享语
 Config.defShare = {
