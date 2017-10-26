@@ -442,7 +442,7 @@ TD.debug.jump = function (callback) {
 };
 
 // cnzz事件统计
-TD.push = function (category, action, label, value) {
+TD.push = function (category, action, label, value, e, el) {
     /*
     category:事件类别;action:事件操作;label:事件标签;value:事件值;
     */
@@ -452,6 +452,8 @@ TD.push = function (category, action, label, value) {
     var _value = value || '';
     try {
         _czc.push(['_trackEvent', _category, _action, _label, _value]);
+        _tdga && _tdga.addEvent(_category, _action, _label, _value, e, el);
+
     } catch (e) {
         console.log(e);
     }
