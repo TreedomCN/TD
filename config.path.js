@@ -5,6 +5,6 @@
 module.exports = {
     dev: '',
     dist: '/',
-    prod: 'http://qrs.treedom.cn/streetgame/',
+    prod: 'https://qrs.treedom.cn/streetgame/',
     handover: 'http://ossweb-img.qq.com/images/'
 };
