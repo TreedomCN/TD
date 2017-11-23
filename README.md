@@ -34,6 +34,7 @@ tx-star-web-20160320（腾讯-明星大作战(项目名)-前端平台-时间）
 | 测试              | webpack.config.prod.js     |  ／         | npm run dist        | dist             |dist      |是 (保留console.log)|
 | 线上              | webpack.config.prod.js     |  cnd地址    | npm run build       | dist             |prod      |是              |
 | 交接              | webpack.config.handover.js |  客户提供    | npm run handover    | dist／ossweb-img |handover  |否              |
+| 交接zip           | webpack.config.zip.js      |  客户提供    | npm run zip         | dist／           |zip       |是              |
 
 
 >  使用ejs模版，模版中的图片必需用`require`引入：
@@ -83,6 +84,8 @@ require('../../img/test.jpg') or require('../../media/test.mp3') 相对路径
 > 如需要内联其它js代码，按照rem.js在index.ejs中引入方式即可`<%= require('raw-loader!inline js path') %>`
 
 > 项目中有逐帧时，在img中创建kf文件夹，将逐帧图放入kf文件中。
+
+> 新增`npm run zip` 直接拉取config.path.js中项目名生成文件夹和压缩包，方便上传QCP；
 
 ## TODO
 
