@@ -13,24 +13,17 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="icon" href="http://7xvsf2.com1.z0.glb.clouddn.com/favicon.ico">
-    <!--
-        html中图片用法
-        <img src="<%= require('./src/img/1.png') %>"alt="">
-    -->
+
     <% if (process.env.NODE_ENV === 'handover') { %>
-    <% for (var css in htmlWebpackPlugin.files.css) { %>
-    <% var cssFile = htmlWebpackPlugin.files.css[css] %>
-
-    <link href="<%= cssFile %>" rel="stylesheet">
-    <% } %>
-
+        <% for (var css in htmlWebpackPlugin.files.css) { %>
+            <% var cssFile = htmlWebpackPlugin.files.css[css] %>
+            <link href="<%= cssFile %>" rel="stylesheet">
+        <% } %>
     <% } else { %>
-    <% for (var css in htmlWebpackPlugin.files.css) { %>
-    <% var cssFile = htmlWebpackPlugin.files.css[css].substr(htmlWebpackPlugin.files.publicPath.length); %>
-
-    <link href="<%= cssFile %>" rel="stylesheet">
-    <% } %>
-
+        <% for (var css in htmlWebpackPlugin.files.css) { %>
+            <% var cssFile = htmlWebpackPlugin.files.css[css].substr(htmlWebpackPlugin.files.publicPath.length); %>
+            <link href="<%= cssFile %>" rel="stylesheet">
+        <% } %>
     <% } %>
 
     <!-- 授权加代码统计系统 -->
@@ -45,44 +38,48 @@
 <body>
     <div class="m-main-wrap absf">
 
-        <!-- 可删除start -->
+        <!-- 可删除 start -->
         <button style="position: absolute;z-index: 2;top: 40%;left: 20%;" onclick="document.querySelector('.m-vertical').style.display='block';document.querySelector('.m-horizontal').style.display='none'">竖屏显示</button>
         <button style="position: absolute;z-index: 2;right: 20%;top: 40%;" onclick="document.querySelector('.m-vertical').style.display='none';document.querySelector('.m-horizontal').style.display='block'">横屏显示</button>
-        <!-- 可删除end -->
+        <!-- 可删除 end -->
         
         <!-- 竖屏页 -->
         <div class="m-vertical absf">
-            <div class="m-wrap sizcont abcter"></div>
+            <div class="m-wrap sizcover abcter">
+                <!-- 业务逻辑代码 stat -->
+
+                <div class="m-loading"></div>
+                <div class="m-end"></div>
+                
+                <!-- 业务逻辑代码 end -->
+            </div>
         </div>
         
         <!-- 横屏页 -->
         <div class="m-horizontal absf">
-            <div class="m-wrap sizcont abcter"></div>
+            <div class="m-wrap sizcover abcter">
+                <!-- 同上 -->
+            </div>
         </div>
+
+        <div class="aa"></div>
         
     </div>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="//cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
-
-
+    <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <!--  正式上线可替换此zepto（腾讯CDN） -->
+    <!-- <script src="//cdnjs.gtimg.com/cdnjs/libs/zepto/1.0rc1/zepto.min.js"></script> -->
+    <script src="<%= require('./src/js/lib/zepto.min.js') %>"></script>
+    
     <% if (process.env.NODE_ENV === 'handover') { %>
-    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-
-    <% var jsFile = htmlWebpackPlugin.files.chunks[chunk].entry; %>
-
-    <script type="text/javascript" src="<%= jsFile %>"></script>
-
-    <% } %>
-
+        <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+            <% var jsFile = htmlWebpackPlugin.files.chunks[chunk].entry; %>
+            <script type="text/javascript" src="<%= jsFile %>"></script>
+        <% } %>
     <% } else { %>
-    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-
-    <% var jsFile = htmlWebpackPlugin.files.chunks[chunk].entry.substr(htmlWebpackPlugin.files.publicPath.length); %>
-
-    <script type="text/javascript" src="<%= jsFile %>"></script>
-
-    <% } %>
-
+        <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+            <% var jsFile = htmlWebpackPlugin.files.chunks[chunk].entry.substr(htmlWebpackPlugin.files.publicPath.length); %>
+            <script type="text/javascript" src="<%= jsFile %>"></script>
+        <% } %>
     <% } %>
 
     </body>

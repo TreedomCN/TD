@@ -2,10 +2,7 @@
 @import "keyframe.less";
 @import "common.less";
 
-@data: '../img/';
-
 @img: '../img/';
-// @img: 'http://qrs.treedom.cn/joymj/';
 
 html, body {
     width: 100%;
@@ -20,6 +17,7 @@ html, body {
     overflow: hidden;
 }
 
+// 横竖屏布局相关，慎删；
 .m-vertical {
     // display: none;
     -webkit-transform-origin: center center;
@@ -27,10 +25,11 @@ html, body {
     .m-wrap {
         width: 7.5rem;
         height: 15rem;
-        background-image: url('../img/1.png');
+        background-image: url('@{img}1.png');
     }
 }
 
+// 横竖屏布局相关，慎删；
 .m-horizontal {
     display: none;
     -webkit-transform-origin: center center;
@@ -40,11 +39,12 @@ html, body {
     .m-wrap {
         width: 15rem;
         height: 7.5rem;
-        background-image: url('../img/2.png');
+        background-image: url('@{img}2.png');
     }
 }
 
 
+// 横竖屏布局相关，慎删；
 @media all and (orientation: landscape) {
     .m-horizontal {
         -webkit-transform: rotate(0deg);

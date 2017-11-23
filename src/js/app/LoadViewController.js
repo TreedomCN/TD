@@ -3,15 +3,6 @@ var Config = require('./Config');
 
 // 项目初始化的一些函数
 var initProject = function () {
-    // 让部分元素去适配屏幕
-    setTimeout(() => {
-        Config.scale = TD.responseBody({
-            width: 375,
-            height: 600,
-            type: 'contain'
-        });
-    }, 300);
-
     // cnzz统计代码 强制HTTPS，防劫持
     (function () {
         var cnzzID = Config.defShare.cnzz;
@@ -83,18 +74,20 @@ var LoadViewController = function () {
         _private.gload.load();
     };
 
+/* 此代码解决横竖屏切换时iso上触发多次的bug
     var rotateELSize = function (e) {
         var winWidth = document.documentElement.clientWidth;
         var winHeight = document.documentElement.clientHeight;
-        // var width,height;
 
         if (e && winWidth / winHeight < 1.2 && winWidth / winHeight > 0.8) {
             return false;
         }
 
+        // do something
+
         window.addEventListener('resize', rotateELSize);
     };
-
+*/
     _private.init();
 };
 

@@ -26,16 +26,16 @@ if (isProduction()) {
         test: /\.js$/,
         exclude: /(node_modules|dist|lib|fx_methods)/,
         use: ['webpack-strip?strip[]=TD.debug.*', 'babel-loader', 'eslint-loader']
-    }
-}else {
+    };
+} else {
     jsRules = {
         test: /\.js$/,
         exclude: /(node_modules|dist|lib|fx_methods)/,
         use: ['babel-loader?cacheDirectory', 'eslint-loader']
-    }
+    };
 }
 
-module.exports = function(env) {
+module.exports = function (env) {
     return webpackMerge(commonConfig(), {
         output: {
             path: path.resolve(__dirname, './dist'),
@@ -67,9 +67,10 @@ module.exports = function(env) {
             new UglifyJSPlugin({
                 comments: false,
                 compress: {
-                    drop_console: isProduction() ? true : false
+                    drop_console: !!isProduction()
                 }
             })
         ]
-    })
+    });
 }
+;

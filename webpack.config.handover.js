@@ -13,7 +13,7 @@ const CleanPlugin = require('clean-webpack-plugin');
 
 const DefinePlugin = webpack.DefinePlugin;
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 var copyItem = [];
 
@@ -28,7 +28,7 @@ if (fs.existsSync('src/img/kf')) {
 module.exports = function () {
     return {
         entry: {
-            main: "./src/js/index.js",
+            main: './src/js/index.js'
         },
         output: {
             path: path.resolve(__dirname, './dist/ossweb-img'),
@@ -80,13 +80,13 @@ module.exports = function () {
                 hash: false,
                 minify: {
                     removeComments: true, // 移除HTML中的注释
-                    collapseWhitespace: false, // 删除空白符与换行符
+                    collapseWhitespace: false // 删除空白符与换行符
                 }
             })
         ],
         externals: {
-            '$':'window.$',
-            'global' : 'window.global'
+            '$': 'window.$',
+            'global': 'window.global'
         }
-    }
+    };
 };
