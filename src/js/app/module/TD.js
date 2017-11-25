@@ -39,7 +39,7 @@ TD.wxShare = function (data, callback) {
             callback && callback();
             // 上报朋友圈
             TD.ajax({
-                url: 'http://click.treedom.cn/log',
+                url: 'https://click.treedom.cn/log',
                 type: 'POST',
                 data: {
                     key: 'wechat',
@@ -68,7 +68,7 @@ TD.wxShare = function (data, callback) {
             callback && callback();
             // 上报朋友
             TD.ajax({
-                url: 'http://click.treedom.cn/log',
+                url: 'https://click.treedom.cn/log',
                 type: 'POST',
                 data: {
                     key: 'wechat',
@@ -96,7 +96,7 @@ TD.wxShare = function (data, callback) {
             callback && callback();
             // 上报朋友
             TD.ajax({
-                url: 'http://click.treedom.cn/log',
+                url: 'https://click.treedom.cn/log',
                 type: 'POST',
                 data: {
                     key: 'wechat',
@@ -124,7 +124,7 @@ TD.wxShare = function (data, callback) {
             callback && callback();
             // 上报朋友
             TD.ajax({
-                url: 'http://click.treedom.cn/log',
+                url: 'https://click.treedom.cn/log',
                 type: 'POST',
                 data: {
                     key: 'wechat',
@@ -154,7 +154,7 @@ TD.wxShare = function (data, callback) {
 TD.initWxApi = function (shareData, errback, succback) {
     // 服务器获取验证信息
     TD.ajax({
-        url: 'http://click.treedom.cn/wx/signature',
+        url: 'https://click.treedom.cn/wx/signature',
         type: 'POST',
         data: {
             appid: shareData.appid,
@@ -442,7 +442,7 @@ TD.debug.jump = function (callback) {
 };
 
 // cnzz事件统计
-TD.push = function (category, action, label, value) {
+TD.push = function (category, action, label, value, e, el) {
     /*
     category:事件类别;action:事件操作;label:事件标签;value:事件值;
     */
@@ -452,6 +452,8 @@ TD.push = function (category, action, label, value) {
     var _value = value || '';
     try {
         _czc.push(['_trackEvent', _category, _action, _label, _value]);
+        _tdga && _tdga.addEvent(_category, _action, _label, _value, e, el);
+
     } catch (e) {
         console.log(e);
     }
