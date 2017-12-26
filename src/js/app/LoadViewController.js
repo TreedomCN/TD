@@ -13,6 +13,7 @@ var initProject = function () {
     // 初始化微信接口
     TD.initWxApi(Config.defShare);
 
+    // 防止微信下拉
     $(document.documentElement).on('touchmove', function (e) {
         e.preventDefault();
     });

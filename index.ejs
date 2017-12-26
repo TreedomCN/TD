@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <!--[if IE]>
@@ -12,7 +12,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="icon" href="http://7xvsf2.com1.z0.glb.clouddn.com/favicon.ico">
 
     <% if (process.env.NODE_ENV === 'handover') { %>
         <% for (var css in htmlWebpackPlugin.files.css) { %>
@@ -65,9 +64,14 @@
         <div class="aa"></div>
         
     </div>
-    <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
+    <!-- 微信分享JSDK 需要时打开 -->
+    <!-- <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+
     <!--  正式上线可替换此zepto（腾讯CDN） -->
     <!-- <script src="//cdnjs.gtimg.com/cdnjs/libs/zepto/1.0rc1/zepto.min.js"></script> -->
+
+    <!-- 本地zepto -->
     <script src="<%= require('./src/js/lib/zepto.min.js') %>"></script>
     
     <% if (process.env.NODE_ENV === 'handover') { %>
