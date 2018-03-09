@@ -48,7 +48,7 @@ module.exports = function (env) {
                     test: /\.less$/,
                     use: ExtractTextPlugin.extract({
                         fallback: 'style-loader',
-                        use: ['css-loader?minimize', 'less-loader']
+                        use: ['css-loader', 'postcss-loader', 'less-loader'],
                     }),
                     exclude: /(node_modules|bower_components)/
                 },
