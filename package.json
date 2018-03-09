@@ -38,6 +38,8 @@
         "imports-loader": "^0.6.5",
         "less": "^2.7.0",
         "less-loader": "^4.0.4",
+        "postcss-loader": "^2.1.1",
+        "postcss-pxtorem": "^4.0.1",
         "raw-loader": "^0.5.1",
         "style-loader": "^0.13.2",
         "uglify-js": "2.8.18",

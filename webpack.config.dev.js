@@ -24,8 +24,13 @@ module.exports = function (env) {
             rules: [
                 {
                     test: /\.less$/,
-                    use: ['style-loader', 'css-loader', 'less-loader'],
-                    exclude: /(node_modules|bower_components)/
+                    use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
+                    exclude: /(node_modules|bower_components)/,
+                },
+                {
+                    test: /\.css$/,
+                    use: ['postcss-loader'],
+                    exclude: /(node_modules|bower_components)/,
                 },
                 {
                     test: /\.js$/,

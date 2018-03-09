@@ -22,6 +22,7 @@ tx-star-web-20160320（腾讯-明星大作战(项目名)-前端平台-时间）
     │   └── media   // 存放媒体文件
     ├── index.ejs   // ejs模版
     ├── config.path.js   // 路径配置
+    ├── .postcssrc.js   // postcss 插件配置文件
     └── webpack.config.XX.js
 
 ```
@@ -86,6 +87,8 @@ require('../../img/test.jpg') or require('../../media/test.mp3') 相对路径
 > 项目中有逐帧时，在img中创建kf文件夹，将逐帧图放入kf文件中。
 
 > 新增`npm run zip` 直接拉取config.path.js中项目名生成文件夹和压缩包，方便上传QCP；
+
+> 新增`.postcssrc.js` 配置文件。使用功能：`自动补浏览器前缀，px2rem`，其它插件功能详见：[https://www.postcss.parts/?searchTerm=](https://www.postcss.parts/?searchTerm=)
 
 ## TODO
 
