@@ -16,7 +16,7 @@ var initProject = function () {
     // 防止微信下拉
     $(document.documentElement).on('touchmove', function (e) {
         e.preventDefault();
-    });
+    }, { passive: false });
 };
 
 // 加载页对象
