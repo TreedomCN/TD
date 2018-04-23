@@ -34,7 +34,7 @@ tx-star-web-20160320（腾讯-明星大作战(项目名)-前端平台-时间）
 | 测试              | webpack.config.prod.js     |  ／         | npm run dist        | dist             |dist      |是 (保留console.log)|
 | 线上              | webpack.config.prod.js     |  cnd地址    | npm run build       | dist             |prod      |是              |
 | 交接              | webpack.config.handover.js |  客户提供    | npm run handover    | dist／ossweb-img |handover  |否              |
-| 交接zip           | webpack.config.zip.js      |  客户提供    | npm run zip         | dist／           |zip       |是              |
+| 打包zip           | webpack.config.zip.js      |  客户提供    | npm run zip         | dist／           |zip       |是              |
 
 
 >  使用ejs模版，模版中的图片必需用`require`引入：
