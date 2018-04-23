@@ -1,6 +1,8 @@
 (function (doc, win) {
     var width = 750;
     var height = 1500;
+    var rootValue = 100;  // 此处值与postcss配置中'postcss-pxtorem'的值一样
+
     var docEl = doc.documentElement;
     var rszEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
     var reCalc = (function () {
@@ -11,15 +13,15 @@
             var fontSize;
             if (winWidth < winHeight) {
                 if ((winWidth / winHeight) > (height / width)) {
-                    fontSize = (100 * (winHeight / height));
+                    fontSize = (rootValue * (winHeight / height));
                 } else {
-                    fontSize = (100 * (winWidth / width));
+                    fontSize = (rootValue * (winWidth / width));
                 }
             } else {
                 if ((winWidth / winHeight) > (height / width)) {
-                    fontSize = (100 * (winWidth / height));
+                    fontSize = (rootValue * (winWidth / height));
                 } else {
-                    fontSize = (100 * (winHeight / width));
+                    fontSize = (rootValue * (winHeight / width));
                 }
             }
             docEl.style.fontSize = (fontSize > 110 ? 110 : fontSize) + 'px';
