@@ -12,6 +12,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <!-- rem布局初始化设置start -->
+    <script type="text/javascript">
+        <%= require('raw-loader!./src/js/app/rem.js') %>
+    </script>
+    <!-- rem布局初始化设置end -->
 
     <% if (process.env.NODE_ENV === 'handover') { %>
         <% for (var css in htmlWebpackPlugin.files.css) { %>
@@ -28,11 +34,6 @@
     <!-- 授权加代码统计系统 -->
     <script id="__ga" type="text/javascript" src="https://ga.treedom.cn/ga.js?v=0.3.4&pid=9999"></script>
 
-    <!-- rem布局初始化设置start -->
-    <script type="text/javascript">
-        <%= require('raw-loader!./src/js/app/rem.js') %>
-    </script>
-    <!-- rem布局初始化设置end -->
 </head>
 <body>
     <div class="m-main-wrap absf">
