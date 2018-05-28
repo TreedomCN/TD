@@ -2,7 +2,10 @@
 @import "keyframe.less";
 @import "common.less";
 
+@data: '../img/';
+
 @img: '../img/';
+// @img: 'http://qrs.treedom.cn/joymj/';
 
 html, body {
     width: 100%;
@@ -15,24 +18,19 @@ html, body {
 }
 .m-main-wrap{
     overflow: hidden;
-
 }
 
-// 横竖屏布局相关，慎删；
 .m-vertical {
-    // display: none;
+    display: none;
     -webkit-transform-origin: center center;
     transform-origin: center center;
     .m-wrap {
         width: 750px;
         height: 1500px;
-        background-image: url('@{img}1.png');
     }
 }
 
-// 横竖屏布局相关，慎删；
 .m-horizontal {
-    display: none;
     -webkit-transform-origin: center center;
     transform-origin: center center;
     -webkit-transform: rotate(90deg);
@@ -40,19 +38,199 @@ html, body {
     .m-wrap {
         width: 1500px;
         height: 750px;
-        background-image: url('@{img}2.png');
     }
 }
 
 
-// 横竖屏布局相关，慎删；
 @media all and (orientation: landscape) {
     .m-horizontal {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
+        .m-share-float .share-box .inner {
+            right: -28Px;
+            top: 20Px;
+            left: initial;
+            transform: rotate(103deg);
+        }
     }
     .m-vertical {
         -webkit-transform: rotate(-90deg);
         transform: rotate(-90deg);
+    }
+}
+
+.m-loading {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #e0d3bd;
+    .bg-box {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('@{img}bg_loading.jpg') no-repeat;
+        background-size: 1500px auto;
+        .load-process {
+            position: absolute;
+            top: 502px;
+            left: 0;
+            width: 100%;
+            line-height: 32px;
+            text-align: center;
+            font-size: 24px;
+            color: #9b3e23;
+        }
+    }
+    .begin-box {
+        display: none;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        .begin-tips {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('@{img}bg_load_tips.png') no-repeat;
+            background-size: 1500px auto;
+            .bg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 140px;
+                height: 140px;
+                margin: 83px 0 0 -70px;
+                background: url('@{img}bg_load_tips_bg.png') no-repeat;
+                background-size: cover;
+                animation: tips 1s linear infinite;
+            }
+        }
+        .go-tips {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            margin: 60px 0 0 -40px;
+            .inner {
+                width: 100%;
+                height: 100%;
+            }
+            svg path,
+            svg rect {
+                fill: #a77746;
+            }
+        }
+        .btn-begin {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.m-index {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    .video-box {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        .btn-skip {
+            display: none;
+            position: absolute;
+            top: 10%;
+            right: 12%;
+            width: 32Px;
+            height: 16Px;
+            background: url('@{img}bg_skip.png') no-repeat;
+            background-size: cover;
+            transform: scale(1.5);
+        }
+        .video {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .end-box {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        &.show .bg {
+            opacity: 1;
+            -webkit-transition: opacity linear 500;
+            transition: opacity linear 500ms;
+        }
+        .bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('@{img}bg_end.jpg') no-repeat;
+            background-size: 1500px auto;
+            opacity: 0;
+        }
+        .btn-href {
+            position: absolute;
+            top: 540px;
+            left: 536px;
+            width: 290px;
+            height: 104px;
+        }
+        .btn-share {
+            position: absolute;
+            top: 540px;
+            left: 204px;
+            width: 290px;
+            height: 104px;
+        }
+    }
+}
+
+.m-share-float {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    .share-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        .inner {
+            position: absolute;
+            width: 336px;
+            height: 134px;
+            left: -30Px;
+            top: -2Px;
+            background: url('@{img}bg_float_share.png') no-repeat;
+            background-size: cover;
+        }
     }
 }

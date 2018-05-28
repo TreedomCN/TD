@@ -1,8 +1,8 @@
 /**
  * Created by z on 2017/6/5.
  */
-// const path = require('path');
-// const webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 const fs = require('fs');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -21,7 +21,7 @@ if (fs.existsSync('src/img/kf')) {
 module.exports = function () {
     return {
         entry: {
-            main: './src/js/index.js'
+            main: "./src/js/index.js",
         },
         module: {
             rules: [
@@ -47,13 +47,13 @@ module.exports = function () {
                 hash: false,
                 minify: {
                     removeComments: true, // 移除HTML中的注释
-                    collapseWhitespace: false // 删除空白符与换行符
+                    collapseWhitespace: false, // 删除空白符与换行符
                 }
             })
         ],
         externals: {
-            '$': 'window.$',
-            'global': 'window.global'
+            '$':'window.$',
+            'global' : 'window.global'
         }
-    };
+    }
 };

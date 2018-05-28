@@ -3,6 +3,14 @@ var Preload = require('./module/Preload');
 
 var Config = {};
 
+/*
+ var audioPath = require('../../media/test_audio.mp3');
+
+ var audio = new Audio(audioPath);
+
+ console.log(audio);
+ */
+
 // ajax请求链接
 Config.requireUrl = '';
 
@@ -10,33 +18,29 @@ Config.requireUrl = '';
 // 如kf文件里图片不使用require时 img地址：Config.imgPath
 Config.imgPath = process.env.NODE_ENV === 'handover' ? process.env.PATH : process.env.PATH + 'img/';
 
-// 默认分享语
-Config.defShare = {
-    title: '分享标题',
-    desc: '分享描述',
-    link: location.href,
-    // 分享配图
-    img: Config.imgPath + 'share.jpg',
-    // 项目名，数据查询时候用
-    proj: 'streetgame',
-    // 填写公众号绑定的appid
-    appid: 'wx12380ea254191f1b',
-    cnzz: '1259179479'
-};
+Config.scale = 1;
 
 Config.Preload = Preload;
 
 // 预加载的图片
 Config.pageImgs = {
     imgs: [
-        // {
-        //     name: 'test',
-        //     url: require('../../img/1.png')
-        // },
-        // {
-        //     name: 'test2',
-        //     url: require('../../img/2.png')
-        // }
+        {
+            name: 'bg_load_tips',
+            url: require('../../img/bg_load_tips.png')
+        },
+        {
+            name: 'bg_end',
+            url: require('../../img/bg_end.jpg')
+        },
+        {
+            name: 'bg_float_share',
+            url: require('../../img/bg_float_share.png')
+        },
+        {
+            name: 'bg_skip',
+            url: require('../../img/bg_skip.png')
+        }
     ],
     sprites: [
         /*
@@ -47,15 +51,7 @@ Config.pageImgs = {
         }
         */
     ],
-    keyimgs: [
-        /*
-        {
-            el: $('.m-game .kf-game-video'),
-            pathPrefix: Config.imgPath,
-            postfix: 'jpg'
-        }
-        */
-    ]
+    keyimgs: []
 };
 
 module.exports = Config;

@@ -277,7 +277,6 @@ const KeyAnimation = function (el, type, imgs, options) {
         };
 
         this.fromTo(from, to, 1, fromBack);
-
     };
 
     this.from = function (from, loop, callback) {
@@ -342,7 +341,6 @@ const KeyAnimation = function (el, type, imgs, options) {
     };
 
     init();
-
 };
 
 module.exports = KeyAnimation;

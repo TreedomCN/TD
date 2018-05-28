@@ -52,7 +52,7 @@ module.exports = function (env) {
             host: '0.0.0.0',
             contentBase: path.join(__dirname, './'),
             compress: true,
-            // port: 3000,
+            port: 3000,
             inline: true,
             hot: true,
             disableHostCheck: true

@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8" />
     <!--[if IE]>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <![endif]-->
-    <title>Treedom</title>
+    <title>我的王朝手游</title>
     <meta id="share-name" itemprop="name" content="">
     <meta id="share-description" itemprop="description" content="">
     <meta id="share-image" itemprop="image" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    
     <!-- rem布局初始化设置start -->
     <script type="text/javascript">
         <%= require('raw-loader!./src/js/app/rem.js') %>
@@ -20,68 +19,153 @@
     <!-- rem布局初始化设置end -->
 
     <% if (process.env.NODE_ENV === 'handover') { %>
-        <% for (var css in htmlWebpackPlugin.files.css) { %>
-            <% var cssFile = htmlWebpackPlugin.files.css[css] %>
-            <link href="<%= cssFile %>" rel="stylesheet">
-        <% } %>
-    <% } else { %>
-        <% for (var css in htmlWebpackPlugin.files.css) { %>
-            <% var cssFile = htmlWebpackPlugin.files.css[css].substr(htmlWebpackPlugin.files.publicPath.length); %>
-            <link href="<%= cssFile %>" rel="stylesheet">
-        <% } %>
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <% var cssFile = htmlWebpackPlugin.files.css[css] %>
+
+    <link href="<%= cssFile %>" rel="stylesheet">
     <% } %>
 
-    <!-- 授权加代码统计系统 -->
-    <script id="__ga" type="text/javascript" src="https://ga.treedom.cn/ga.js?v=0.3.4&pid=9999"></script>
+    <% } else { %>
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <% var cssFile = htmlWebpackPlugin.files.css[css].substr(htmlWebpackPlugin.files.publicPath.length); %>
+
+    <link href="<%= cssFile %>" rel="stylesheet">
+    <% } %>
+
+    <% } %>
 
 </head>
 <body>
     <div class="m-main-wrap absf">
-
-        <!-- 可删除 start -->
-        <button style="position: absolute;z-index: 2;top: 40%;left: 20%;" onclick="document.querySelector('.m-vertical').style.display='block';document.querySelector('.m-horizontal').style.display='none'">竖屏显示</button>
-        <button style="position: absolute;z-index: 2;right: 20%;top: 40%;" onclick="document.querySelector('.m-vertical').style.display='none';document.querySelector('.m-horizontal').style.display='block'">横屏显示</button>
-        <!-- 可删除 end -->
         
         <!-- 竖屏页 -->
         <div class="m-vertical absf">
-            <div class="m-wrap sizcover abcter">
-                <!-- 业务逻辑代码 stat -->
-
-                <div class="m-loading"></div>
-                <div class="m-end"></div>
-                
-                <!-- 业务逻辑代码 end -->
-            </div>
+            <div class="m-wrap sizcont abcter"></div>
         </div>
         
         <!-- 横屏页 -->
         <div class="m-horizontal absf">
-            <div class="m-wrap sizcover abcter">
-                <!-- 同上 -->
+            <div class="m-wrap sizcont abcter">
+                <div class="m-loading">
+                    <div class="bg-box">
+                        <div class="load-process">0%</div> 
+                    </div>
+                    <div class="begin-box">
+                        <div class="begin-tips">
+                            <div class="bg"></div>
+                        </div>
+                        <div class="go-tips">
+                            <div class="inner">
+                                <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    width="40px" height="40px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" style="" xml:space="preserve">
+                                    <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                                    <animateTransform attributeType="xml"
+                                    attributeName="transform"
+                                    type="rotate"
+                                    from="0 25 25"
+                                    to="360 25 25"
+                                    dur="0.6s"
+                                    repeatCount="indefinite"/>
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="btn-begin"></div>
+                    </div>
+                </div>
+                <div class="m-index">
+                    <div class="video-box">
+                        <video class="video" src="" webkit-playsinline="" playsinline="" preload="preload" width="100%" height="100%"></video>
+                        <div class="btn-skip"></div>
+                    </div>
+                    <div class="end-box">
+                        <div class="bg"></div>
+                        <a class="btn-href" href="http://wangchao.qq.com/d/index.shtml"></a>
+                        <div class="btn-share"></div>
+                    </div>
+                </div>
+                <div class="m-share-float">
+                    <div class="share-box">
+                        <div class="inner"></div>
+                    </div>
+                </div>
             </div>
         </div>
+        
     </div>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/jquery/jquery-1.11.3.min.js"></script>
+    <!-- 交接版 start -->
+    <!-- 交接版需配合👉👉👉http://tgideas.qq.com/webplat/info/news_version3/804/25810/26096/m16274/201610/517971.shtml -->
+    <script src="http://ossweb-img.qq.com/images/spiderMediaData/wangchao_new/mediaURLData.js"></script>
+    <script src="http://ossweb-img.qq.com/images/js/TGMobileShare/TGMobileShare.min.js"></script>
+    <script>
+        // 分享配置
+        window.shareText = {
+            shareTitle: '英雄浸墨，王朝成作。',
+            shareDesc: '用万里江山的心，写出历史的另一种可能。',
+            shareImgUrl: 'http://game.gtimg.cn/images/tgideas/act/a20151127tgmsdemo/share.jpg',
+            shareLink: '',
+            actName: 'a20180423wangchao'
+        }
+        // mediaURLData需要互娱开发配合上传
+        // $('.m-index .video').attr('src', mediaURLData['3183']);
+        // 👇👇👇跑流程用👇👇👇
+        $('.m-index .video').attr('src', '<%= require('./src/img/video.mp4') %>');
+    </script>
+    <script src="//ossweb-img.qq.com/images/js/PTT/ping_tcss_tgideas_https_min.js"></script>
+    <script>
+        var setSite={
+            siteType: "a20180423wangchao", //必填项:"os"代表是官网，如果不是，则填写actName例如a20160701xxx
+            pageType: "index", //必填项:本页面的定位；按照页面含义填写例如main||list||detail||download||share||page1||pageN
+            pageName: "首页", //必填项:页面中文名
+            osact:0, //选填项:是否是官网专题(在官网运营的专题)boolean；默认是0；可以在链接上加入参数osact=1来灵活设置
+            ingame:0, //选填项:是否投放在游戏APP内boolean；默认是0；可以在链接上加入参数ingame=1来灵活设置
+            stayTime:0 //选填项:是否需要统计停留时长boolean；默认是0
+        }
+        if(typeof(pgvMain)=='function')pgvMain();
+    </script>
+    <!-- 交接版 end -->
 
-    <!-- 微信分享JSDK 需要时打开 -->
-    <!-- <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+    <!-- 本地版 start -->
+    <!--
+    <script>
+        // 分享配置
+        window.shareText = {
+            title: '分享标题',
+            desc: '分享描述',
+            link: location.href,
+            // 分享配图
+            img: 'http://game.gtimg.cn/images/tgideas/act/a20151127tgmsdemo/share.jpg',
+            // 项目名，数据查询时候用
+            proj: 'streetgame',
+            // 填写公众号绑定的appid
+            appid: 'wx12380ea254191f1b',
+            cnzz: '1259179479'
+        }
+        $('.m-index .video').attr('src', '<%= require('./src/img/video.mp4') %>');
+    </script>
+    -->
+    <!-- 本地版 end -->
 
-    <!--  正式上线可替换此zepto（腾讯CDN） -->
-    <!-- <script src="//cdnjs.gtimg.com/cdnjs/libs/zepto/1.0rc1/zepto.min.js"></script> -->
-
-    <!-- 本地zepto -->
-    <script src="<%= require('./src/js/lib/zepto.min.js') %>"></script>
-    
     <% if (process.env.NODE_ENV === 'handover') { %>
-        <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-            <% var jsFile = htmlWebpackPlugin.files.chunks[chunk].entry; %>
-            <script type="text/javascript" src="<%= jsFile %>"></script>
-        <% } %>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+
+    <% var jsFile = htmlWebpackPlugin.files.chunks[chunk].entry; %>
+
+    <script type="text/javascript" src="<%= jsFile %>"></script>
+
+    <% } %>
+
     <% } else { %>
-        <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-            <% var jsFile = htmlWebpackPlugin.files.chunks[chunk].entry.substr(htmlWebpackPlugin.files.publicPath.length); %>
-            <script type="text/javascript" src="<%= jsFile %>"></script>
-        <% } %>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+
+    <% var jsFile = htmlWebpackPlugin.files.chunks[chunk].entry.substr(htmlWebpackPlugin.files.publicPath.length); %>
+
+    <script type="text/javascript" src="<%= jsFile %>"></script>
+
+    <% } %>
+
     <% } %>
 
     </body>

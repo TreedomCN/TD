@@ -1,49 +1,24 @@
 .hide {
     display: none;
 }
-.full {
+.abs {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.absf {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
 }
-.abs {
-    position: absolute;
-}
-.l0{
-    left: 0;
-}
-.t0{
-    top: 0;
-}
-.lhalf {
-    left: 50%;
-}
-.thalf {
-    top: 50%;
-}
-.absf {
-    .l0;
-    .t0;
-    .abs;
-    .full;
-}
 .abcter {
-    .abs;
-    .thalf;
-    .lhalf;
-    -webkit-transform: translate3d(-50%, -50%, 0);
-    transform: translate3d(-50%, -50%, 0);
-}
-.lcter {
-    .abs;
-    .lhalf;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-}
-.tcter {
-    .abs;
-    .thalf;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 .sizcont {
     background-repeat: no-repeat;
@@ -56,9 +31,4 @@
     background-size: cover;
     -webkit-background-size: cover;
     background-position: center;
-}
-
-.outline{
-    border: 1px solid #fff;
-    box-sizing: border-box;
 }
