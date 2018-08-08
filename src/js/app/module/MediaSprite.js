@@ -8,6 +8,16 @@ todo: 1、2、3优先，4、5次优先
  */
 
 export default class MediaSprite {
+    /**
+     * 雪碧媒体库
+     * @param {*} element media的父元素节点
+     * @param {string} src media的地址
+     * @param {object} timeline 视频片段的时间线，例如
+     * {
+     *  first: [0, 10.2],
+     *  second: [10.2, 11.2]
+     * }
+     */
     constructor (element, src, timeline) {
         this.view = null;
     }
