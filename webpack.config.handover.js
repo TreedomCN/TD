@@ -6,6 +6,8 @@ const webpack = require('webpack');
 const config = require('./config.path');
 const fs = require('fs');
 
+const WebpackStrip = require('webpack-strip');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -13,7 +15,7 @@ const CleanPlugin = require('clean-webpack-plugin');
 
 const DefinePlugin = webpack.DefinePlugin;
 
-// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 var copyItem = [];
 
@@ -39,24 +41,96 @@ module.exports = function () {
             rules: [
                 {
                     test: /\.less$/,
+                    include: [
+                        path.resolve(__dirname, 'src/less')
+                    ],
                     use: ExtractTextPlugin.extract({
                         fallback: 'style-loader',
-                        use: ['css-loader', 'postcss-loader', 'less-loader']
-                    }),
-                    exclude: /(node_modules|bower_components)/
-                },
-                {
-                    test: /js[\/|\\]lib[\/||\\][\w|\.|_|-]+js$/,
-                    use: 'url-loader?limit=1000&name=js/lib/[name].[ext]'
-                },
-                {
-                    test: /\.(png|jpg|gif|svg|mp3|mp4)$/,
-                    use: 'url-loader?limit=10000&name=[name].[ext]'
+                        use: [
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    minimize: true  // css压缩，不需要时 false
+                                }
+                            },
+                            {
+                                loader: 'postcss-loader',
+                                options: {}
+                            },
+                            {
+                                loader: 'less-loader',
+                                options: {}
+                            }
+                        ]
+                    })
                 },
                 {
                     test: /\.js$/,
-                    exclude: /(node_modules|dist|lib|fx_methods)/,
-                    use: ['webpack-strip?strip[]=TD.debug.*', 'babel-loader', 'eslint-loader']
+                    include: [
+                        path.resolve(__dirname, 'src/js/lib')
+                    ],
+                    use: [
+                        {
+                            loader: 'url-loader',
+                            options: {
+                                limit: 1,
+                                name: 'js/lib/[name].[ext]'
+                            }
+                        }
+                    ]
+                },
+                {
+                    test: /\.js$/,
+                    include: [
+                        path.resolve(__dirname, 'src/js')
+                    ],
+                    exclude: [
+                        path.resolve(__dirname, 'src/js/lib')
+                    ],
+                    use: [
+                        {
+                            // loader:  WebpackStrip.loader('TD.debug(\\.\\w+)+', 'debug', 'console.log')
+                            loader:  WebpackStrip.loader('TD.debug(\\.\\w+)+', 'debug')
+                        },
+                        {
+                            loader: 'babel-loader',
+                            options: {}
+                        },
+                        {
+                            loader: 'eslint-loader',
+                            options: {}
+                        }
+                    ]
+                },
+                {
+                    test: /\.(png|jpg|gif|svg)$/,
+                    include: [
+                        path.resolve(__dirname, 'src/img')
+                    ],
+                    use: [
+                        {
+                            loader: 'url-loader',
+                            options: {
+                                limit: 3000,
+                                name: '[name].[ext]'
+                            }
+                        }
+                    ]
+                },
+                {
+                    test: /\.(mp3|mp4)$/,
+                    include: [
+                        path.resolve(__dirname, 'src/media')
+                    ],
+                    use: [
+                        {
+                            loader: 'url-loader',
+                            options: {
+                                limit: 1,
+                                name: '[name].[ext]'
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -80,9 +154,18 @@ module.exports = function () {
                 hash: false,
                 minify: {
                     removeComments: true, // 移除HTML中的注释
-                    collapseWhitespace: false // 删除空白符与换行符
+                    collapseWhitespace: false, // 删除空白符与换行符
+                    minifyCSS: true, // 压缩 HTML 中出现的 CSS 代码
+                    minifyJS: true // 压缩 HTML 中出现的 JS 代码
                 }
-            })
+            }),
+            // new UglifyJSPlugin({
+            //     uglifyOptions: {
+            //         compress: {
+            //             drop_console: false
+            //         }
+            //     }
+            // })
         ],
         externals: {
             '$': 'window.$',
