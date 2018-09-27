@@ -1,11 +1,10 @@
 
-require('../less/style.less');
-
-// require('./app/module/fx_methods');// 以动画形式的 show, hide, toggle, 和 fade*()方法.依赖fx模块。
+import '../less/style.less';
+// import './lib/fx_methods';// 以动画形式的 show, hide, toggle, 和 fade*()方法.依赖fx模块。
 
 // 引入的包根据实际情况而定
-var LoadViewController = require('./app/LoadViewController');
-var IndexViewController = require('./app/IndexViewController');
+import LoadViewController from './app/LoadViewController';
+import IndexViewController from './app/IndexViewController';
 
 /*
 *

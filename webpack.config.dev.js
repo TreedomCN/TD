@@ -24,18 +24,47 @@ module.exports = function (env) {
             rules: [
                 {
                     test: /\.less$/,
-                    use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
-                    exclude: /(node_modules|bower_components)/,
-                },
-                {
-                    test: /\.css$/,
-                    use: ['postcss-loader'],
-                    exclude: /(node_modules|bower_components)/,
+                    include: [
+                        path.resolve(__dirname, 'src/less')
+                    ],
+                    use: [
+                        {
+                            loader: 'style-loader',
+                            options: {}
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: {}
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {}
+                        },
+                        {
+                            loader: 'less-loader',
+                            options: {}
+                        }
+                    ]
                 },
                 {
                     test: /\.js$/,
-                    exclude: /(node_modules|dist|lib|fx_methods)/,
-                    use: ['babel-loader?cacheDirectory', 'eslint-loader']
+                    include: [
+                        path.resolve(__dirname, 'src/js')
+                    ],
+                    exclude: [
+                        path.resolve(__dirname, 'src/js/lib')
+                    ],
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: {
+                                cacheDirectory: true
+                            }
+                        },
+                        {
+                            loader: 'eslint-loader'
+                        }
+                    ]
                 }
             ]
         },
@@ -52,7 +81,7 @@ module.exports = function (env) {
             host: '0.0.0.0',
             contentBase: path.join(__dirname, './'),
             compress: true,
-            port: 3000,
+            // port: 3000,
             inline: true,
             hot: true,
             disableHostCheck: true

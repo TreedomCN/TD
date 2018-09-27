@@ -1,5 +1,5 @@
-var Config = require('./Config');
-// var TD = require('./module/TD');
+import Config from './Config.js';
+// import TD from './module/TD.js';
 
 // 项目初始化的一些函数
 // ----- 交接版 start -----
@@ -136,17 +136,17 @@ var LoadViewController = function () {
         _private.gload.load();
     };
 
-    var rotateELSize = function (e) {
-        var winWidth = document.documentElement.clientWidth;
-        var winHeight = document.documentElement.clientHeight;
-        // var width,height;
+    // var rotateELSize = function (e) {
+    //     var winWidth = document.documentElement.clientWidth;
+    //     var winHeight = document.documentElement.clientHeight;
+    //     // var width,height;
 
-        if (e && winWidth / winHeight < 1.2 && winWidth / winHeight > 0.8) {
-            return false;
-        }
+    //     if (e && winWidth / winHeight < 1.2 && winWidth / winHeight > 0.8) {
+    //         return false;
+    //     }
 
-        window.addEventListener('resize', rotateELSize);
-    };
+    //     window.addEventListener('resize', rotateELSize);
+    // };
 
     _private.init();
 };

@@ -1,5 +1,5 @@
 
-var Preload = require('./module/Preload');
+import Preload from './module/Preload.js';
 
 var Config = {};
 
