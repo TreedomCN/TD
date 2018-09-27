@@ -6,13 +6,12 @@
 *  复制到相应的文件夹
 *  引入的less会对less进行编译存放到css文件夹
 * */
-require('../less/style.less');
-
-// require('./app/module/fx_methods');// 以动画形式的 show, hide, toggle, 和 fade*()方法.依赖fx模块。
+import '../less/style.less';
+import './lib/fx_methods';// 以动画形式的 show, hide, toggle, 和 fade*()方法.依赖fx模块。
 
 // 引入的包根据实际情况而定
-var LoadViewController = require('./app/LoadViewController');
-var IndexViewController = require('./app/IndexViewController');
+import LoadViewController from './app/LoadViewController';
+import IndexViewController from './app/IndexViewController';
 
 // 页面级对象池
 var pagePool = {
