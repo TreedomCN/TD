@@ -1,4 +1,3 @@
-
 /*
 *
 *  引入lib库文件和LESS文件
@@ -8,7 +7,10 @@
 * */
 require('../less/style.less');
 
-// require('./app/module/fx_methods');// 以动画形式的 show, hide, toggle, 和 fade*()方法.依赖fx模块。
+/** The animate() method */
+require('./util/fx');
+/** Animated show, hide, toggle, and fade*() methods. */
+require('./util/fx_methods');
 
 // 引入的包根据实际情况而定
 var LoadViewController = require('./app/LoadViewController');
