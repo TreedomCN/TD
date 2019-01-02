@@ -1,5 +1,5 @@
-var TD = require('./module/TD');
-var Config = require('./Config');
+import TD from './module/TD.js';
+import Config from './Config.js';
 
 // 项目初始化的一些函数
 var initProject = function () {

@@ -1,5 +1,4 @@
-
-var Preload = require('./module/Preload');
+import Preload from './module/Preload.js';
 
 var Config = {};
 
@@ -29,14 +28,14 @@ Config.Preload = Preload;
 // 预加载的图片
 Config.pageImgs = {
     imgs: [
-        // {
-        //     name: 'test',
-        //     url: require('../../img/1.png')
-        // },
-        // {
-        //     name: 'test2',
-        //     url: require('../../img/2.png')
-        // }
+        {
+            name: 'test',
+            url: require('../../media/test_audio.mp3')
+        },
+        {
+            name: 'test2',
+            url: require('../../img/2.png')
+        }
     ],
     sprites: [
         /*

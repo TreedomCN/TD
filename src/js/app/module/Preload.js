@@ -75,7 +75,7 @@ Preload.buffer = {
 }
 */
 
-var TD = require('./TD');
+import TD from './TD.js';
 
 const Preload = function (pm, keyW) {
     let that = this;

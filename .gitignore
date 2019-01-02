@@ -3,4 +3,3 @@ node_modules
 *.bat
 dist/
 .DS_Store
-package-lock.json
