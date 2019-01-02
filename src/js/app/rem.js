@@ -32,24 +32,3 @@
     if (!doc.addEventListener) return;
     win.addEventListener(rszEvt, reCalc);
 })(document, window);
-
-(function () {
-    var getQuery = function (name) {
-        var m = window.location.search.match(new RegExp('(\\?|&)' + name + '=([^&]*)(&|$)'));
-        return !m ? '' : decodeURIComponent(m[2]);
-    };
-
-    // 去手Q工具栏
-    if (!getQuery('_wv')) {
-        if (window.location.search) {
-            window.location.href += '&_wv=1';
-        } else {
-            window.location.href += '?_wv=1';
-        }
-    }
-
-    // 解决安卓不读取“|”
-    if (/\|/.test(location.href)) {
-        location.href = encodeURI(location.href);
-    }
-}());
