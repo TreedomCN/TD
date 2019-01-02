@@ -1,5 +1,8 @@
-/**
- * Created by z on 2017/6/5.
+/*
+ * @Author: z
+ * @Date: 2017-06-05 11:29:16
+ * @Last Modified by: xieshengyong
+ * @Last Modified time: 2019-01-02 11:32:08
  */
 const path = require('path');
 // const webpack = require('webpack');
@@ -54,7 +57,7 @@ module.exports = function () {
                     ]
                 },
                 {
-                    test: /\.(png|jpg|gif|svg)$/,
+                    test: /\.(png|jpg|gif|svg|plist|int)$/,
                     include: [
                         path.resolve(__dirname, 'src/img')
                     ],

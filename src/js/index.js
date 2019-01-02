@@ -1,4 +1,3 @@
-
 /*
 *
 *  引入lib库文件和LESS文件
@@ -7,7 +6,11 @@
 *  引入的less会对less进行编译存放到css文件夹
 * */
 import '../less/style.less';
-import './lib/fx_methods';// 以动画形式的 show, hide, toggle, 和 fade*()方法.依赖fx模块。
+
+/** The animate() method */
+import './util/fx';
+/** Animated show, hide, toggle, and fade*() methods. */
+import './util/fx_methods';
 
 // 引入的包根据实际情况而定
 import LoadViewController from './app/LoadViewController';

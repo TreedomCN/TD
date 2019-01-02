@@ -1,5 +1,8 @@
-/**
- * Created by z on 2017/6/5.
+/*
+ * @Author: z
+ * @Date: 2017-06-05 11:29:16
+ * @Last Modified by: xieshengyong
+ * @Last Modified time: 2019-01-02 11:48:31
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -11,7 +14,6 @@ const WebpackStrip = require('webpack-strip');
 const commonConfig = require('./webpack.config.base.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
-
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
@@ -30,11 +32,12 @@ if (isProduction()) {
             path.resolve(__dirname, 'src/js')
         ],
         exclude: [
-            path.resolve(__dirname, 'src/js/lib')
+            path.resolve(__dirname, 'src/js/lib'),
+            path.resolve(__dirname, 'src/js/util')
         ],
         use: [
             {
-                loader:  WebpackStrip.loader('TD.debug(\\.\\w+)+', 'debug', 'console.log')
+                loader: WebpackStrip.loader('TD.debug(\\.\\w+)+', 'debug', 'console.log')
             },
             {
                 loader: 'babel-loader',
@@ -53,7 +56,8 @@ if (isProduction()) {
             path.resolve(__dirname, 'src/js')
         ],
         exclude: [
-            path.resolve(__dirname, 'src/js/lib')
+            path.resolve(__dirname, 'src/js/lib'),
+            path.resolve(__dirname, 'src/js/util')
         ],
         use: [
             {
@@ -102,7 +106,7 @@ module.exports = function (env) {
                                 options: {}
                             }
                         ]
-                    }),
+                    })
                 },
                 jsRules
             ]
@@ -125,5 +129,4 @@ module.exports = function (env) {
             })
         ]
     });
-}
-;
+};
