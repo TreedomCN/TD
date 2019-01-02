@@ -459,31 +459,38 @@ TD.push = function (category, action, label, value, e, el) {
 };
 
 /*
-判断访问终端和语言
+    判断访问终端和语言（精简）
+    date：20190102
     使用：
-    if ( TD.browser.versions.qq ) {
+    if ( TD.browser.versions.QQ ) {
         console.log('go go');
     }
-    注意BUG：在微信内TD.browser.versions.qq也会返回true；
-    解决：在判断手Q之后加上微信判断；
+    其他详细判断参考：https://github.com/mumuy/browser
 */
 TD.browser = {
     versions: (function () {
         var u = navigator.userAgent;
-        // var app = navigator.appVersion;
         return {
-            trident: u.indexOf('Trident') > -1, // IE内核
+            trident: u.indexOf('Trident') > -1 || u.indexOf('NET CLR') > -1, // IE内核
             presto: u.indexOf('Presto') > -1, // opera内核
             webKit: u.indexOf('AppleWebKit') > -1, // 苹果、谷歌内核
             gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') === -1, // 火狐内核
-            mobile: !!u.match(/AppleWebKit.*Mobile.*/), // 是否为移动终端
-            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), // ios终端
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/), // 移动终端
+            Tablet: u.indexOf('Tablet') > -1 || u.indexOf('Pad') > -1 || u.indexOf('Nexus 7') > -1, // 平板
+            ios: u.indexOf('like Mac OS X') > -1, // ios终端
             android: u.indexOf('Android') > -1 || u.indexOf('Adr') > -1, // android终端
-            iPhone: u.indexOf('iPhone') > -1, // 是否为iPhone或者QQHD浏览器
-            iPad: u.indexOf('iPad') > -1, // 是否iPad
-            webApp: u.indexOf('Safari') === -1, // 是否web应该程序，没有头部与底部
-            weixin: u.indexOf('MicroMessenger') > -1, // 是否微信 （2015-01-22新增）
-            qq: u.match(/QQ/i) === 'QQ' // 是否QQ
+            Safari: u.indexOf('Safari') > -1,
+            Chrome: u.indexOf('Chrome') > -1 || u.indexOf('CriOS') > -1,
+            IE: u.indexOf('MSIE') > -1 || u.indexOf('Trident') > -1,
+            Edge: u.indexOf('Edge') > -1,
+            QQBrowser: u.indexOf('QQBrowser') > -1,
+            QQ: u.indexOf('QQ/') > -1,
+            Wechat: u.indexOf('MicroMessenger') > -1,
+            Weibo: u.indexOf('Weibo') > -1,
+            360: u.indexOf('QihooBrowser') > -1,
+            UC: u.indexOf('UC') > -1 || u.indexOf(' UBrowser') > -1,
+            Taobao: u.indexOf('AliApp(TB') > -1,
+            Alipay: u.indexOf('AliApp(AP') > -1
         };
     })(),
     language: (navigator.browserLanguage || navigator.language).toLowerCase()
