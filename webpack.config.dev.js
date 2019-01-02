@@ -1,5 +1,8 @@
-/**
- * Created by z on 2017/6/5.
+/*
+ * @Author: z
+ * @Date: 2017-06-05 11:29:16
+ * @Last Modified by: xieshengyong
+ * @Last Modified time: 2019-01-02 11:34:27
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -52,7 +55,8 @@ module.exports = function (env) {
                         path.resolve(__dirname, 'src/js')
                     ],
                     exclude: [
-                        path.resolve(__dirname, 'src/js/lib')
+                        path.resolve(__dirname, 'src/js/lib'),
+                        path.resolve(__dirname, 'src/js/util')
                     ],
                     use: [
                         {
@@ -79,7 +83,7 @@ module.exports = function (env) {
         ],
         devServer: {
             host: '0.0.0.0',
-            contentBase: path.join(__dirname, './'),
+            contentBase: [path.join(__dirname, './*.ejs'), path.join(__dirname, './src/')],
             compress: true,
             // port: 3000,
             inline: true,
