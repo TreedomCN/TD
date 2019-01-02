@@ -485,10 +485,6 @@ TD.browser = {
     versions: (function () {
         var u = navigator.userAgent;
         return {
-            trident: u.indexOf('Trident') > -1 || u.indexOf('NET CLR') > -1, // IE内核
-            presto: u.indexOf('Presto') > -1, // opera内核
-            webKit: u.indexOf('AppleWebKit') > -1, // 苹果、谷歌内核
-            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') === -1, // 火狐内核
             mobile: !!u.match(/AppleWebKit.*Mobile.*/), // 移动终端
             Tablet: u.indexOf('Tablet') > -1 || u.indexOf('Pad') > -1 || u.indexOf('Nexus 7') > -1, // 平板
             ios: u.indexOf('like Mac OS X') > -1, // ios终端
