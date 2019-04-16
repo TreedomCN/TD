@@ -1,12 +1,12 @@
 (function (doc, win) {
     var width = 750;
-    var height = 1500;
-    var rootValue = 100;  // 此处值与postcss配置中'postcss-pxtorem'的值一样
+    var height = 1600;
+    var rootValue = 100; // 此处值与postcss配置中'postcss-pxtorem'的值一样
 
-    var docEl = doc.documentElement;
     var rszEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
     var reCalc = (function () {
         var reCalc = function () {
+            var docEl = doc.documentElement;
             var winWidth = docEl.clientWidth;
             var winHeight = docEl.clientHeight;
             if (!winWidth) return;
@@ -29,6 +29,12 @@
         };
         return reCalc();
     })();
+    reCalc();
+    setTimeout(function () {
+        reCalc();
+    }, 300);
+    win.addEventListener('load', reCalc, false);
+    win.addEventListener(rszEvt, reCalc, false);
     if (!doc.addEventListener) return;
-    win.addEventListener(rszEvt, reCalc);
+    doc.addEventListener('DOMContentLoaded', reCalc, false);
 })(document, window);
