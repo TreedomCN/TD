@@ -1,5 +1,8 @@
-/**
- * Created by z on 2017/6/5.
+/*
+ * @Author: z
+ * @Date: 2017-06-05 22:06:42
+ * @Last Modified by: xieshengyong
+ * @Last Modified time: 2019-05-24 22:10:27
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -17,6 +20,8 @@ const DefinePlugin = webpack.DefinePlugin;
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
+const handoverDir = /a20[\w]*/.exec(config.handover)[0];
+
 var copyItem = [];
 
 if (fs.existsSync('src/img/kf')) {
@@ -33,8 +38,8 @@ module.exports = function () {
             main: './src/js/index.js'
         },
         output: {
-            path: path.resolve(__dirname, './dist/ossweb-img'),
-            filename: '[name].js',
+            path: path.resolve(__dirname, './dist/' + handoverDir + '/ossweb-img'),
+            filename: '[name].[hash:8].js',
             publicPath: config.handover
         },
         module: {
@@ -85,7 +90,8 @@ module.exports = function () {
                         path.resolve(__dirname, 'src/js')
                     ],
                     exclude: [
-                        path.resolve(__dirname, 'src/js/lib')
+                        path.resolve(__dirname, 'src/js/lib'),
+                        path.resolve(__dirname, 'src/js/util')
                     ],
                     use: [
                         {
@@ -103,7 +109,7 @@ module.exports = function () {
                     ]
                 },
                 {
-                    test: /\.(png|jpg|gif|svg)$/,
+                    test: /\.(png|jpg|gif|svg|plist|int|ttf)$/,
                     include: [
                         path.resolve(__dirname, 'src/img')
                     ],
@@ -112,7 +118,7 @@ module.exports = function () {
                             loader: 'url-loader',
                             options: {
                                 limit: 3000,
-                                name: '[name].[ext]'
+                                name: '[name].[hash:8].[ext]'
                             }
                         }
                     ]
@@ -127,7 +133,7 @@ module.exports = function () {
                             loader: 'url-loader',
                             options: {
                                 limit: 1,
-                                name: '[name].[ext]'
+                                name: '[name].[hash:8].[ext]'
                             }
                         }
                     ]
@@ -139,7 +145,7 @@ module.exports = function () {
         },
         plugins: [
             new CleanPlugin('dist'),
-            new ExtractTextPlugin('[name].css'),
+            new ExtractTextPlugin('[name].[hash:8].css'),
             new CopyWebpackPlugin(copyItem),
             new DefinePlugin({
                 'process.env': {

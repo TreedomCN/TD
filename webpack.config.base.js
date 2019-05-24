@@ -2,7 +2,7 @@
  * @Author: z
  * @Date: 2017-06-05 11:29:16
  * @Last Modified by: xieshengyong
- * @Last Modified time: 2019-01-02 11:32:08
+ * @Last Modified time: 2019-05-24 22:01:15
  */
 const path = require('path');
 // const webpack = require('webpack');
@@ -57,7 +57,7 @@ module.exports = function () {
                     ]
                 },
                 {
-                    test: /\.(png|jpg|gif|svg|plist|int)$/,
+                    test: /\.(png|jpg|gif|svg|plist|int|ttf)$/,
                     include: [
                         path.resolve(__dirname, 'src/img')
                     ],
