@@ -17,6 +17,11 @@ var initProject = function () {
     document.body.addEventListener('touchmove', function (e) {
         e.preventDefault();
     }, {passive: false});
+
+    /** 解决微信6.7.4 ios12 软键盘收回时页面不回弹 */
+    $('input').on('blur', () => {
+        window.scrollTo(0, 0);
+    });
 };
 
 // 加载页对象
