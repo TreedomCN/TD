@@ -22,6 +22,18 @@ var initProject = function () {
     $('input').on('blur', () => {
         window.scrollTo(0, 0);
     });
+
+    // debug工具
+    if (TD.util.getQuery('vconsole')) {
+        let script = document.createElement('script');
+        script.setAttribute('type', 'text/javascript');
+        document.body.appendChild(script);
+        script.onload = () => {
+            var vConsole = new VConsole(); // eslint-disable-line
+            console.log('Hello world');
+        };
+        script.src = require('../lib/vconsole.min.js');
+    }
 };
 
 // 加载页对象
