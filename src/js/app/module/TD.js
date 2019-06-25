@@ -472,7 +472,7 @@ TD.getRandom = (m, n, Integer) => {
     return Math[Integer](Math.random() * (n - m) + m);
 };
 
-/** 为数字添加千位分隔符
+/** 为数字添加千位分隔符 
  *
  * el: formatNum(10001) => 10,001
  *     formatNum(123456789) => 123,456,789
