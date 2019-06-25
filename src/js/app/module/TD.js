@@ -1,4 +1,3 @@
-
 var TD = {};
 
 // 美林版ajax对应接口
@@ -111,7 +110,7 @@ TD.wxShare = function (data, callback) {
             _czc && _czc.push(['_trackEvent', '分享', 'QQ好友']);
         },
         cancel: function () {
-           //  用户取消分享后执行的回调函数
+            //  用户取消分享后执行的回调函数
         }
     });
     wx.onMenuShareQZone({
@@ -120,7 +119,7 @@ TD.wxShare = function (data, callback) {
         link: data.link, //  分享链接
         imgUrl: data.img, //  分享图标
         success: function () {
-           //  用户确认分享后执行的回调函数
+            //  用户确认分享后执行的回调函数
             callback && callback();
             // 上报朋友
             TD.ajax({
@@ -319,19 +318,19 @@ TD.rotateScreen = (function () {
         rotate = function (e) {
             if (Math.abs(e.beta) < 15 && e.gamma < -40) {
                 num = 1;
-                callback && callback(num);// 左转屏
+                callback && callback(num); // 左转屏
             }
             if (Math.abs(e.beta) < 15 && e.gamma > 40) {
                 num = 2;
-                callback && callback(num);// 右转屏
+                callback && callback(num); // 右转屏
             }
             if (e.beta > 40 && Math.abs(e.gamma) < 15) {
                 num = 3;
-                callback && callback(num);// 竖屏
+                callback && callback(num); // 竖屏
             }
             if (e.beta < -40 && Math.abs(e.gamma) < 15) {
                 num = 4;
-                callback && callback(num);// 倒屏
+                callback && callback(num); // 倒屏
             }
         };
 
@@ -455,7 +454,126 @@ TD.debug.videoJump = function () {
     return 'test';
 };
 
-// cnzz事件统计
+TD.pad = (num, n) => {
+    let tbl = [];
+    n = n || 5;
+    let len = n - num.toString().length;
+    if (len <= 0) return num;
+    if (!tbl[len]) tbl[len] = (new Array(len + 1)).join('0');
+    return tbl[len] + num;
+};
+
+/**
+ * 获取m~n的随机数
+ * @param {Number} m
+ * @param {Number} n
+ */
+TD.getRandom = (m, n, Integer) => {
+    return Math[Integer](Math.random() * (n - m) + m);
+};
+
+/** 为数字添加千位分隔符
+ *
+ * el: formatNum(10001) => 10,001
+ *     formatNum(123456789) => 123,456,789
+ */
+TD.formatNum = (str) => {
+    str += '';
+    return str.replace(/\d{1,3}(?=(\d{3})+$)/g, function (s) {
+        return s + ',';
+    });
+};
+
+TD.loadingAni = function () {
+    let loadingEl = document.createElement('div');
+    loadingEl.style.display = 'none';
+    loadingEl.style.width = '80px';
+    loadingEl.style.height = '80px';
+    loadingEl.style.borderRadius = '10px';
+    loadingEl.style.backgroundColor = 'rgba(0, 0, 0, 0.65)';
+    loadingEl.style.zIndex = '999';
+    loadingEl.style.position = 'absolute';
+    loadingEl.style.top = '50%';
+    loadingEl.style.left = '50%';
+    loadingEl.style.margin = '-40px 0 0 -40px';
+    let loadingAniEl = document.createElement('div');
+    loadingEl.appendChild(loadingAniEl);
+    loadingAniEl.style.width = '16px';
+    loadingAniEl.style.height = '11px';
+    loadingAniEl.style.position = 'absolute';
+    loadingAniEl.style.top = '50%';
+    loadingAniEl.style.left = '50%';
+    loadingAniEl.style.margin = '-5.5px 0 0 -8px';
+    loadingAniEl.style.backgroundImage = 'url(data:image/gif;base64,R0lGODlhEAALAPQAAP///wAAANra2tDQ0Orq6gcHBwAAAC8vL4KCgmFhYbq6uiMjI0tLS4qKimVlZb6+vicnJwUFBU9PT+bm5tjY2PT09Dk5Odzc3PLy8ra2tqCgoMrKyu7u7gAAAAAAAAAAACH5BAkLAAAAIf4aQ3JlYXRlZCB3aXRoIGFqYXhsb2FkLmluZm8AIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7)';
+    document.body.appendChild(loadingEl);
+
+    let ctr = {};
+    ctr.show = function () {
+        loadingEl.style.display = 'block';
+    };
+    ctr.hide = function () {
+        loadingEl.style.display = 'none';
+    };
+
+    return ctr;
+};
+
+TD.canvas2Img = function (param, width, height) {
+    let canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    let ctx = canvas.getContext('2d');
+
+    const draw = () => {
+        return new Promise((resolve, reject) => {
+            let para = param.shift();
+
+            if (para.type === 'img') {
+                let img = document.createElement('img');
+                img.onload = () => {
+                    if (para.isArc) {
+
+                    }
+                    ctx.drawImage(img, para.x, para.y, para.w, para.h);
+                    param.length && draw();
+                    resolve();
+                };
+                img.setAttribute('crossOrigin', 'Anonymous');
+                img.src = para.src;
+            } else if (para.type === 'text') {
+                ctx.font = para.font || '30px Microsoft Yahei';
+                ctx.fillStyle = para.color || '#000';
+                ctx.textAlign = para.textAlign || 'start';
+                ctx.fillText(para.string, para.x, para.y);
+            } else if (para.type === 'imgArc') {
+
+            }
+        });
+    };
+    draw();
+};
+
+TD.imgLoader = function (imgSrc, notAnonymous) {
+    return new Promise((resolve, reject) => {
+        let img = document.createElement('img');
+        img.onload = resolve.bind(this, img);
+        !notAnonymous && img.setAttribute('crossOrigin', 'Anonymous');
+        img.src = imgSrc;
+    });
+};
+
+TD.getCanvas = function (w, h) {
+    let canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    let ctx = canvas.getContext('2d');
+    return {
+        canvas: canvas,
+        ctx: ctx
+    };
+};
+
+// 事件统计
 TD.push = function (category, action, label, value, e, el) {
     /*
     category:事件类别;action:事件操作;label:事件标签;value:事件值;
@@ -464,11 +582,14 @@ TD.push = function (category, action, label, value, e, el) {
     var _action = action || '';
     var _label = label || '';
     var _value = value || '';
-    try {
+    if (typeof _czc !== 'undefined') {
         _czc.push(['_trackEvent', _category, _action, _label, _value]);
+    }
+    if (typeof _tdga !== 'undefined') {
         _tdga && _tdga.addEvent(_category, _action, _label, _value, e, el);
-    } catch (e) {
-        console.log(e);
+    }
+    if (typeof PTTSendClick !== 'undefined') {
+        PTTSendClick(category, action, label);
     }
 };
 
