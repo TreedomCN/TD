@@ -21,6 +21,14 @@ if (fs.existsSync('src/img/kf')) {
     });
 }
 
+if (fs.existsSync('src/json')) {
+    copyItem.push({
+        from: 'src/json',
+        to: 'img',
+        flatten: true
+    });
+}
+
 module.exports = function () {
     return {
         entry: {
@@ -65,7 +73,7 @@ module.exports = function () {
                         {
                             loader: 'url-loader',
                             options: {
-                                limit: 3000,
+                                limit: 10000,
                                 name: 'img/[name].[hash:8].[ext]'
                             }
                         }

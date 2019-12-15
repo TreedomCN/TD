@@ -51,5 +51,8 @@
         "webpack-merge": "^4.1.0",
         "webpack-strip": "^0.1.0",
         "zip-webpack-plugin": "^2.1.0"
+    },
+    "dependencies": {
+        "pixi.js": "^5.2.0"
     }
 }

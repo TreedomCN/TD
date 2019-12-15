@@ -466,7 +466,7 @@ TD.push = function (category, action, label, value, e, el) {
     var _value = value || '';
     try {
         _czc.push(['_trackEvent', _category, _action, _label, _value]);
-        _tdga && _tdga.addEvent(_category, _action, _label, _value, e, el);
+        // _tdga && _tdga.addEvent(_category, _action, _label, _value, e, el);
     } catch (e) {
         console.log(e);
     }

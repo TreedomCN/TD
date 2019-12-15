@@ -31,6 +31,9 @@ var LoadViewController = function () {
 
     _private.isInit = false;
 
+    var videoBox = _private.pageEl.find('.video-box');
+    var video = videoBox.find('.loading-video').get(0);
+
     // 初始化，包括整体页面
     _private.init = function () {
         if (_private.isInit === true) {
@@ -38,18 +41,48 @@ var LoadViewController = function () {
         }
         initProject();
 
+        let ratio = window.innerHeight / 1600;
+        $('.loading_fire').css('transform', 'scale(' + ratio + ')');
+        $('.loading_fire').css('webkitTransform', 'scale(' + ratio + ')');
+        let fireSprite = new Image();
+        fireSprite.src = require('../../img/css_sprites_350.png');
+        fireSprite.onload = () => {
+            $('.loading_fire').addClass('light');
+        };
+
         // 加载体现在页面上
-        _private.processLineEl = _private.pageEl.find('.loadProcess .inner');
+        _private.processLineEl = _private.pageEl.find('.loadProcess');
 
         _private.gload = new Config.Preload(Config.pageImgs);
 
         _private.gload.onloading = function (p) {
             console.log(p);
-            _private.processLineEl.css('height', p + '%');
+            _private.processLineEl.text(p + '%');
+            // document.querySelector('.num').innerText = p + '%';
+            // document.querySelector('.loading_text').classList.add('animation_fadein');
+            // 预加载完成
+            // document.querySelector('.step1').onclick = function () {
+            //     if (p === 100) {
+            //         loading_click();
+            //     }
+            // };
         };
 
         _private.gload.onload = function () {
-            _that.hide();
+            var videoClickFn = (e) => {
+                _private.pageEl.find('.loading_text').fadeOut();
+                _private.pageEl.find('.go-tips').fadeIn();
+                video.play();
+                _private.pageEl.off('click', videoClickFn);
+                TD.push('用户操作', '点击开始按钮', '播放视频');
+            };
+            _private.processLineEl.fadeOut();
+            setTimeout(() => {
+                _private.pageEl.find('.loading_text').fadeIn();
+            }, 300);
+
+            _private.pageEl.on('click', videoClickFn);
+            // _that.hide();
         };
 
         _private.gload.onfail = function (msg) {
@@ -61,13 +94,29 @@ var LoadViewController = function () {
 
     // 显示
     _that.show = function () {
-        _private.pageEl.show();
+        _private.pageEl.fadeIn();
+        var timeFn = () => {
+            videoBox.fadeIn();
+            video.removeEventListener('timeupdate', timeFn);
+        };
+        video.addEventListener('timeupdate', timeFn);
+
+        _private.pageEl.find('.video-skip').on('click', () => {
+            video.pause();
+            _that.hide();
+            $('.m-index').fadeIn();
+        });
+
+        video.addEventListener('ended', () => {
+            _that.hide();
+            $('.m-index').css('display', 'block');
+        });
     };
 
     // 隐藏
     _that.hide = function () {
         _that.onhide && _that.onhide();
-        _private.pageEl.hide();
+        _private.pageEl.fadeOut();
     };
 
     // 执行加载

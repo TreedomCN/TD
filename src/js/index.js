@@ -11,10 +11,16 @@ import '../less/style.less';
 import './util/fx';
 /** Animated show, hide, toggle, and fade*() methods. */
 import './util/fx_methods';
+// import TD from './app/module/TD.js';
 
 // 引入的包根据实际情况而定
 import LoadViewController from './app/LoadViewController';
 import IndexViewController from './app/IndexViewController';
+
+// import './model/Far';
+// import './model/Mid';
+// import './model/Scroller';
+// import Main2 from './model/Main2';
 
 // 页面级对象池
 var pagePool = {
@@ -23,7 +29,6 @@ var pagePool = {
 };
 
 var init = function () {
-    // load页面
     var loadPageBack = function () {
         pagePool.loadView = pagePool.loadView || new LoadViewController();
 
@@ -47,3 +52,16 @@ var init = function () {
 };
 
 init();
+
+// document.querySelector('.step1').addEventListener('click', function () {
+//     TD.push('用户操作', '点击开始按钮', '播放视频');
+// });
+
+// document.querySelector('.input_confirm_btn').addEventListener('click', function () {
+//     TD.push('用户操作', '点击昵称确认按钮', '弹出科目，确认昵称');
+// });
+// for (var i = 0; i < 8; i++) {
+//     document.querySelector('.select' + (i + 1)).addEventListener('click', function () {
+//         TD.push('用户操作', '点击科目按钮', '选择科目');
+//     });
+// };

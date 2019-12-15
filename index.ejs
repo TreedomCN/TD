@@ -12,6 +12,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <style>
+        .flow:nth-child(1) {
+            border: 1px solid #D5DFF3;
+            border-radius: 32% 58% 69% 43% / 48% 32% 59% 55%;
+            transition: 0.5s;
+            animation: animate_flow1 6s linear infinite;
+        }
+        .flow:nth-child(2) {
+
+            border: 1px solid #B6F0FE;
+            border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+            transition: 0.5s;
+            animation: animate_flow1 4s linear infinite;
+        }
+        .flow:nth-child(3) {
+
+            border: 1px solid #D5DFF3;
+            border-radius: 31% 45% 74% 35% / 38% 56% 51% 87%;
+            transition: 0.5s;
+            animation: animate_flow2 10s linear infinite;
+        }
+        .flow:nth-child(4) {
+
+            border: 1px solid #CFEAF8;
+            border-radius: 31% 40% 70% 35% / 38% 59% 51% 82%;
+            transition: 0.4s;
+            animation: animate_flow2 10s linear infinite;
+        }
+        .flow:nth-child(5) {
+            border: 1px solid #D5DFF3;
+            border-radius: 31% 45% 78% 45% / 42% 60% 52% 82%;
+            transition: 0.3s;
+            animation: animate_flow1 10s linear infinite;
+        }
+    </style>
     
     <!-- rem布局初始化设置start -->
     <script type="text/javascript">
@@ -32,38 +68,128 @@
     <% } %>
 
     <!-- 授权加代码统计系统 -->
-    <!-- <script id="__ga" type="text/javascript" src="https://ga.treedom.cn/ga.js?v=0.3.4&pid=9999"></script> -->
+    <script id="__ga" type="text/javascript" src="https://ga.treedom.cn/ga.js?v=0.3.4&pid=9999"></script>
+
+    <!-- ui库 -->
+    <!-- <link rel="stylesheet" href="http://i.gtimg.cn/vipstyle/frozenui/2.0.0/css/frozen.css"> -->
+
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
+    <!-- jQuery -->
+    <!-- <script src="https://ma-5.github.io/ma5slider/js/jquery.min.js"></script> -->
+     
+    <!-- jQuery UI mouse draggable widget -->
+    <!-- <script src="https://ma-5.github.io/ma5slider/js/jquery-ui.min.js"></script> -->
+     
+    <!-- Touch Event Support for jQuery UI -->
+    <!-- <script src="https://ma-5.github.io/ma5slider/js/jquery.ui.touch-punch.min.js"></script> -->
+     
+    <!-- MA5 Slider -->
+    <!-- <link href="https://ma-5.github.io/ma5slider/css/ma5slider.min.css" rel="stylesheet" type="text/css">
+    <script src="https://ma-5.github.io/ma5slider/js/ma5slider.min.js"></script> -->
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.0.0/pixi.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.0.2/pixi.min.js"></script> -->
+    <!-- <script src="<%= require('./src/js/lib/pixi.min.js') %>"></script> -->
+
+    <script src="<%= require('./src/js/lib/Watcher.js') %>"></script>
+
 </head>
+
 <body>
-    <div class="m-main-wrap absf">
+    <div class="m-main-wrap absf"> 
+        <!-- 竖屏页 --> 
+        <div class="m-vertical absf"> 
+            <div class="m-wrap sizcover abcter"> 
+            <!-- 业务逻辑代码 stat --> 
+                <div class="m-loading abcter">
+                    <div class="loadProcess">1%</div>
+                    <div class="loading_fire"></div>
+                    <div class="loading_text"></div>
+                    <div class="go-tips" style="display: none;">
+                        <div class="inner">
+                            <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                                <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                                <animateTransform attributeType="xml"
+                                attributeName="transform"
+                                type="rotate"
+                                from="0 25 25"
+                                to="360 25 25"
+                                dur="0.6s"
+                                repeatCount="indefinite"/>
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="video-box abcter">
+                        <video class="loading-video abcter" src="<%= require('./src/media/douzhi_1214_final.mp4') %>" webkit-playsinline="" playsinline=""></video>
+                        <div class="video-skip"></div>
+                    </div>
+                </div> 
+                <div class="m-index abcter">
+                    <audio class="music hide" src="<%= require('./src/media/256_loop5_your-map_0017.mp3') %>" autoplay controls style="visibility: hidden;"></audio>
+                    
+                    <div class="flow"></div>
+                    <div class="flow"></div>
+                    <div class="flow"></div>
+                    <div class="flow"></div>
+                    <div class="flow"></div>
 
-        <!-- 可删除 start -->
-        <button style="position: absolute;z-index: 2;top: 40%;left: 20%;" onclick="document.querySelector('.m-vertical').style.display='block';document.querySelector('.m-horizontal').style.display='none'">竖屏显示</button>
-        <button style="position: absolute;z-index: 2;right: 20%;top: 40%;" onclick="document.querySelector('.m-vertical').style.display='none';document.querySelector('.m-horizontal').style.display='block'">横屏显示</button>
-        <!-- 可删除 end -->
-        
-        <!-- 竖屏页 -->
-        <div class="m-vertical absf">
-            <div class="m-wrap sizcover abcter">
-                <!-- 业务逻辑代码 stat -->
+                    <div class="animation-box">
+                    </div>
 
-                <div class="m-loading"></div>
-                <div class="m-end"></div>
-                
-                <!-- 业务逻辑代码 end -->
-            </div>
-        </div>
-        
-        <!-- 横屏页 -->
-        <div class="m-horizontal absf">
-            <div class="m-wrap sizcover abcter">
-                <!-- 同上 -->
-            </div>
-        </div>
+                    <div class="input-box abcter">
+                        <!-- <div class="input-name-box abcter"> -->
+                            <input class="input abcter">
+                            <div class="btn-confirm abcter"></div>
+                        <!-- </div> -->
+                    </div>
+
+                    <div class="title"></div>
+
+
+                    <div class="result-box abcter">
+                        
+                        <div class="tip-select"></div>
+                        <div class="subject-name"></div>
+                        <div class="subject">
+                            <div class="subject-jianzhu subject-start"></div>
+                            <div class="subject-wenxue subject-start"></div>
+                            <div class="subject-tianwen subject-start"></div>
+                            <div class="subject-jisuanji subject-start"></div>
+
+                            <div class="subject-shengwu subject-start"></div>
+                            <div class="subject-xinli subject-start"></div>
+                            <div class="subject-jingji subject-start"></div>
+                            <div class="subject-huaxue subject-start"></div>
+                        </div>
+
+                        
+
+                    </div>
+                </div> 
+                <div class="bill">
+                    <div class="bill-close"></div>
+                </div>
+            <!-- 业务逻辑代码 end --> 
+            </div> 
+        </div> 
+            <!-- 横屏页 --> 
+        <!-- <div class="m-horizontal absf"> 
+            <div class="m-wrap sizcover abcter">  -->
+                <!-- 同上 --> 
+            <!-- </div> 
+        </div>  -->
     </div>
-
+    
     <!-- 微信分享JSDK 需要时打开 -->
-    <!-- <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+    <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
+    <!-- <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+    <script>
+        var vc = new VConsole();
+    </script> -->
 
     <!--  正式上线可替换此zepto（腾讯CDN） -->
     <!-- <script src="//cdnjs.gtimg.com/cdnjs/libs/zepto/1.0rc1/zepto.min.js"></script> -->
@@ -83,5 +209,222 @@
         <% } %>
     <% } %>
 
-    </body>
+</body>
+
+
+<!--
+<script>
+    // watcher
+var wm = new Watcher({
+    data: { 
+        step: 1,
+    },
+    watch: {
+        step (newVal, oldVal) {
+            console.log('step:',newVal)
+            for(var i=0;i<4;i++){
+                document.querySelector(".step"+(i+1)).style.display="none"
+            }
+            document.querySelector(".step"+newVal).style.display="block"
+
+            if(newVal==4){
+                
+            }
+        },
+    }
+});
+
+var obj={'心理学':['借心理学的慧眼，DOU出不一样的世界',
+                    '生活中让你不解的行为，其实DOU大有学问',
+                    '一切人际关系，DOU是心理学'],
+            '计算机':['浩瀚世界，在计算机眼中都是“1”和“0”的跳跃',
+                    'hello world',
+                    '它在我的机器上可以很好地运行'],
+            '化学':['别眨眼，DOU是见证奇迹的时刻',
+                    '每一个化学老师，DOU是神奇魔术师',
+                    '学霸和学渣之间，隔的那DOU是分子式'],
+            '生物学':['还没走出人类视野，DOU不算看过世界',
+                    '每一次好奇，DOU是认识新物种的开始',
+                    '生物，DOU是宇宙不宣于口的情话'],
+
+            '经济学':['那些年走过最长的路，DOU是经济学套路',
+                    '从生活看经济，DOU蕴含着奥妙与玄机',
+                    'DOU知一下，发现暗藏身边的经济学'],
+            '文学':['所谓生活的教科书，DOU是文学艺术',
+                    '心灵和胃一样，DOU需要填饱',
+                    '有些气质谈吐，藏DOU藏不住'],
+            '天文学':['DOU出星际，感受来自远方星球的问候',
+                    '宇宙的秘密，DOU在知识星球里',
+                    '不要回答，不要回答，不要回答！'],
+            '古建筑学':['确认过眼神，DOU是有故事的人',
+                    '它浑身散发的魅力，DOU藏在前世今生里',
+                    '古建筑的点点滴滴，DOU是活着的历史'],            
+        }
+
+function step () {
+    wm.step++
+}
+
+function changeColor() { 
+         var color="orange|#FFFFFF"; 
+         color="rgb("+ (parseInt(Math.random() * 240 ) + 9) + ","+ (parseInt(Math.random() * 220 )+18) +",203)";
+         $("#setxfld").css("background",color);
+     }
+setInterval('changeColor()',400);
+
+
+document.querySelector("body").onclick=function(e){
+    console.log(e.clientX,e.clientY,"xy")
+}
+
+function focus(){
+    document.querySelector(".input_name").focus()
+}
+
+
+// 点击昵称确认
+var confirm=document.querySelector(".input_confirm_btn")
+var name
+confirm.onclick=function(){
+    console.log("click confirm")
+    // 获取昵称
+    name=document.querySelector('.input_name').value
+    console.log('name:',name)
+    // buildCanvas(name);
+    if(name){
+        // 波纹
+        var flow=document.querySelectorAll('.flow')
+        for(var i=0;i<flow.length;i++){
+            flow[i].style.display="block"
+        }
+        // step()
+        //盒子动画
+        document.querySelector(".box").classList.add("box_animation")
+
+        // 输入框消失
+        document.querySelector(".input_name").style.display="none"
+        document.querySelector(".input_name_box").style.display="none"
+        document.querySelector(".input_confirm_btn").style.display="none"
+
+        // setTimeout(function(){
+        for(var i=0;i<8;i++){
+            document.querySelector(".container_select"+(i+1)).style.display="block"
+        }
+        // },0)
+
+
+
+        document.querySelector(".tip_select").style.display='block'
+        // var btn_msg=document.querySelector(".btn_msg")
+        setTimeout(function(){
+            console.log('btn_msg')
+            document.querySelector(".tip_select").classList.add("animation_twinkle")
+        },1000)
+    } else {
+        console.log("请输入昵称")
+    }
+
+    
+}
+
+var bill_flag=true
+// 选择学科 生成海报
+for(var i=1;i<9;i++){
+    document.querySelector('.select'+i).onclick=function(){
+            console.log('subject choose')
+            document.querySelector(".share_bill").style.display="block"
+            document.querySelector(".share_close").style.display="block"
+            // 判断是否生成海报
+            if(bill_flag){
+                buildCanvas(name);
+                bill_flag=false
+            }
+            
+    }
+}
+
+//关闭海报
+function bill_close(){
+    document.querySelector(".share_bill").style.display='none'
+    document.querySelector(".share_close").style.display='none'
+}
+
+// 视频
+function loading_click () {
+            console.log('loading_click')
+            step()
+
+            video_play()
+
+            console.log(1)
+        }
+function video_play () {
+    document.querySelector('.loading-video').play()
+    console.log('video_play')
+}
+function video_skip () {
+    step2_to_3()
+    document.querySelector('.loading-video').pause()
+    console.log("skip")
+    document.querySelector('.input_confirm_btn').style.display="block"
+}
+function step2_to_3(){
+    step()
+    // focus()
+    console.log("2to3")
+    document.querySelector('.input_name').classList.add('animation_fadein')
+    document.querySelector('.input_name_box').classList.add('animation_fadein')
+    document.querySelector('.btn_msg').classList.add('animation_fadein')
+}
+document.querySelector('.loading-video').onended=function(){
+    console.log("video_end")
+    video_skip ()
+}
+// 生成海报
+function buildCanvas (name) {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    var imgBg = Preload.buffer.imgs['test1'];
+    var imgCanvas = new Image();
+    var shareImgData;
+
+    canvas.width = 750;
+    canvas.height = 1600;
+
+    setTimeout(() => {
+        ctx.drawImage(imgBg, 0, 0, canvas.width, canvas.height);
+        ctx.font = '24px Heiti';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText(name, canvas.width / 2, canvas.height / 2);
+        shareImgData = canvas.toDataURL('image/png');
+        imgCanvas.src = shareImgData;
+
+        document.querySelector('.m-share').appendChild(imgCanvas);
+        document.querySelector('.m-share').style.display = 'block';
+    }, 100);
+}
+
+// ios输入bug
+function input_blur(){
+    console.log('blur')
+    document.body.scrollTop = 0;
+}
+(function() {
+$('input').on('click', function () {
+var target = this;
+// 使用定时器是为了让输入框上滑时更加自然
+setTimeout(function(){
+target.scrollIntoView(true);
+},100);
+})});
+
+// window.onload=function(){
+//     document.querySelector('.loading_fire').style.transform='scale('+window.innerHeight/1600+')'+'translate(-50%,-50%)'
+//     document.querySelector('.loading_fire').style.left='25%'
+//     document.querySelector('.loading_fire').style.top='40.2%'
+// }
+timeupdate
+</script>
+-->
+
 </html>
