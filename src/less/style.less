@@ -1,63 +1,76 @@
-@import "reset.less";
-@import "keyframe.less";
-@import "common.less";
+@import 'reset.less';
+@import 'keyframe.less';
+@import 'common.less';
 
 @img: '../img/';
 
-html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #000;
-    font-size: 14px;
-    -webkit-user-select: none;
-    user-select: none;
+html,
+body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: #000;
+	font-size: 14px;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 // 横竖屏布局相关，慎删；
 .m-vertical {
-    // display: none;
-    -webkit-transform-origin: center center;
-    transform-origin: center center;
-    .m-wrap {
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        background-image: url('@{img}1.png');
-    }
+	// display: none;
+	-webkit-transform-origin: center center;
+	transform-origin: center center;
+	.m-wrap {
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		background-image: url('@{img}1.png');
+	}
 }
 
 // 横竖屏布局相关，慎删；
 .m-horizontal {
-    display: none;
-    -webkit-transform-origin: center center;
-    transform-origin: center center;
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
-    .m-wrap {
-        width: 100vh;
-        height: 100vw;
-        background-image: url('@{img}2.png');
-    }
+	display: none;
+	-webkit-transform-origin: center center;
+	transform-origin: center center;
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+	.m-wrap {
+		width: 100vh;
+		height: 100vw;
+		background-image: url('@{img}2.png');
+	}
 }
-
 
 // 横竖屏布局相关，慎删；
 @media all and (orientation: landscape) {
-    .m-horizontal {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-        .m-wrap {
-            width: 100vw;
-            height: 100vh;
-        }
-    }
-    .m-vertical {
-        -webkit-transform: rotate(-90deg);
-        transform: rotate(-90deg);
-        .m-wrap {
-            width: 100vh;
-            height: 100vw;
-        }
-    }
+	.m-horizontal {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+		.m-wrap {
+			width: 100vw;
+			height: 100vh;
+		}
+	}
+	.m-vertical {
+		-webkit-transform: rotate(-90deg);
+		transform: rotate(-90deg);
+		.m-wrap {
+			width: 100vh;
+			height: 100vw;
+		}
+	}
+}
+
+.icon-loading {
+	.inner {
+		width: 120px;
+		height: 120px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+		svg path,
+		svg rect {
+			fill: #fff;
+		}
+	}
 }

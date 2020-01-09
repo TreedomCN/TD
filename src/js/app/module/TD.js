@@ -479,40 +479,6 @@ TD.formatNum = (str) => {
     });
 };
 
-TD.loadingAni = function () {
-    let loadingEl = document.createElement('div');
-    loadingEl.style.display = 'none';
-    loadingEl.style.width = '80px';
-    loadingEl.style.height = '80px';
-    loadingEl.style.borderRadius = '10px';
-    loadingEl.style.backgroundColor = 'rgba(0, 0, 0, 0.65)';
-    loadingEl.style.zIndex = '999';
-    loadingEl.style.position = 'absolute';
-    loadingEl.style.top = '50%';
-    loadingEl.style.left = '50%';
-    loadingEl.style.margin = '-40px 0 0 -40px';
-    let loadingAniEl = document.createElement('div');
-    loadingEl.appendChild(loadingAniEl);
-    loadingAniEl.style.width = '16px';
-    loadingAniEl.style.height = '11px';
-    loadingAniEl.style.position = 'absolute';
-    loadingAniEl.style.top = '50%';
-    loadingAniEl.style.left = '50%';
-    loadingAniEl.style.margin = '-5.5px 0 0 -8px';
-    loadingAniEl.style.backgroundImage = 'url(data:image/gif;base64,R0lGODlhEAALAPQAAP///wAAANra2tDQ0Orq6gcHBwAAAC8vL4KCgmFhYbq6uiMjI0tLS4qKimVlZb6+vicnJwUFBU9PT+bm5tjY2PT09Dk5Odzc3PLy8ra2tqCgoMrKyu7u7gAAAAAAAAAAACH5BAkLAAAAIf4aQ3JlYXRlZCB3aXRoIGFqYXhsb2FkLmluZm8AIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7)';
-    document.body.appendChild(loadingEl);
-
-    let ctr = {};
-    ctr.show = function () {
-        loadingEl.style.display = 'block';
-    };
-    ctr.hide = function () {
-        loadingEl.style.display = 'none';
-    };
-
-    return ctr;
-};
-
 TD.canvas2Img = function (param, width, height) {
     let canvas = document.createElement('canvas');
     canvas.width = width;
@@ -581,7 +547,7 @@ TD.push = function (category, action, label, value, e, el) {
         _czc.push(['_trackEvent', _category, _action, _label, _value]);
     }
     if (typeof _tdga !== 'undefined') {
-        _tdga && _tdga.addEvent(_category, _action, _label, _value, e, el);
+        _tdga.addEvent(_category, _action, _label, _value, e, el);
     }
     if (typeof PTTSendClick !== 'undefined') {
         PTTSendClick(category, action, label);
