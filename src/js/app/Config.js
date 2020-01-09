@@ -19,8 +19,8 @@ Config.defShare = {
     // 项目名，数据查询时候用
     proj: 'streetgame',
     // 填写公众号绑定的appid
-    appid: 'wx12380ea254191f1b',
-    cnzz: '1259179479'
+    appid: '', // 例如: wx12380ea254191f1b
+    cnzz: '' // 例如: 1259179479
 };
 
 Config.Preload = Preload;
