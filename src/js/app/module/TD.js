@@ -137,11 +137,6 @@ TD.wxShare = function (data, callback) {
             //  用户取消分享后执行的回调函数
         }
     });
-
-    // 手Q分享
-    $('#share-name').attr('content', data.title);
-    $('#share-description').attr('content', data.desc);
-    $('#share-image').attr('content', data.img);
 };
 
 // 初始化微信接口
@@ -196,6 +191,11 @@ TD.initWxApi = function (shareData, errback, succback) {
     }, function (err) {
         console.log(err);
     });
+
+    // 手Q分享
+    document.querySelector('#share-name').content = shareData.title;
+    document.querySelector('#share-description').content = shareData.desc;
+    document.querySelector('#share-image').content = shareData.img;
 };
 
 // 元素基于屏幕自适应缩放，dom上有data-response属性的元素都会受它影响

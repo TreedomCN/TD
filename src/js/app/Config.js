@@ -15,7 +15,7 @@ Config.defShare = {
     desc: '分享描述',
     link: location.href,
     // 分享配图
-    img: Config.imgPath + 'share.jpg',
+    img: require('../../img/share.jpg'),
     // 项目名，数据查询时候用
     proj: 'streetgame',
     // 填写公众号绑定的appid
