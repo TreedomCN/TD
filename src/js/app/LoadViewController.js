@@ -15,10 +15,27 @@ var initProject = function () {
         e.preventDefault();
     }, {passive: false});
 
-    /** 解决微信6.7.4 ios12 软键盘收回时页面不回弹 */
-    $('input').on('blur', () => {
-        window.scrollTo(0, 0);
-    });
+    /** 解决ios12微信input软键盘收回时页面不回弹，兼容动态添加dom(腾讯登录组件)的情况 */
+    var resetScroll = (function () {
+        var timeWindow = 500;
+        var timeout; // time in ms
+        var functionName = function (args) {
+            let inputEl = $('input, select, textarea');
+            // TODO: 连续添加元素时，可能存在重复绑定事件的情况
+            inputEl && inputEl.on('blur', () => {
+                var scrollHeight = document.documentElement.scrollTop || document.body.scrollTop || 0;
+                window.scrollTo(0, Math.max(scrollHeight, 0));
+            });
+        };
+
+        return function () {
+            clearTimeout(timeout);
+            timeout = setTimeout(function () {
+                functionName.apply();
+            }, timeWindow);
+        };
+    }());
+    TD.browser.versions.ios && $('body').on('DOMSubtreeModified', resetScroll);
 
     // debug工具
     if (TD.util.getQuery('vconsole')) {
