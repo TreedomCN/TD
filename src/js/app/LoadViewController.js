@@ -48,9 +48,6 @@ var initProject = function () {
         };
         script.src = require('../lib/vconsole.min.js');
     }
-
-    // let loading = TD.loadingAni();
-    // loading.show();
 };
 
 // 加载页对象

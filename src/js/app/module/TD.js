@@ -347,6 +347,7 @@ TD.rotateScreen = (function () {
 
 // 网络工具包
 TD.util = {};
+// URI复杂操作参考使用https://github.com/medialize/URI.js
 TD.util.getQuery = function (name) {
     var m = window.location.search.match(new RegExp('(\\?|&)' + name + '=([^&]*)(&|$)'));
     return !m ? '' : decodeURIComponent(m[2]);
@@ -370,92 +371,11 @@ TD.util.getCookie = function (name) {
     return '';
 };
 
-// todo: webpack-strip 不能去除TD.debug.xx(function () {}) 与 TD.debug.xx()形式, 函数回掉不要用匿名函数
-/*
-  例：
-  let jumpCallback = function () {};
-
-  TD.debug.jump(jumpCallback)
-
+/**
+ * 补位
  */
-/*
-debug工具包
-*/
-TD.debug = {};
-
-/*
-移动端console.log()
-*/
-TD.debug.log = function (info, num) {
-    var _num = num || 50;
-    console.log(info);
-    if (info instanceof Array) {
-        info.join();
-    } else if (typeof info === 'object') {
-        var _info = JSON.stringify(info);
-        console.log(_info);
-    } else {
-        info.toString();
-    }
-    if (!window.lloogg) {
-        var dom = document.createElement('div');
-        dom.setAttribute('id', 'log');
-        document.body.appendChild(dom);
-        dom.style.position = 'absolute';
-        dom.style.zIndex = '9999';
-        dom.style.color = '#fff';
-        dom.style.backgroundColor = 'rgba(0,0,0,0.6)';
-        dom.style.fontSize = '13px';
-        window.lloogg = 0;
-    }
-    var domWrap = document.getElementById('log');
-    if (window.lloogg > _num) {
-        domWrap.removeChild(domWrap.childNodes[0]);
-    }
-    var text = document.createElement('p');
-    text.style.margin = '0';
-    text.style.padding = '0';
-    text.innerHTML = info + '</br>';
-    domWrap.appendChild(text);
-    window.lloogg++;
-};
-
-/*
-隐藏手势功能，在视频项目时非常好用；
- 触发方式：相对于竖屏状态的双击左划左划；
- el：
- TD.debug.jump(function () {
- _video.currentTime = 100;
- })
- */
-
-TD.debug.jump = function (name, callback) {
-    callback && callback();
-    // $('body').one('doubleTap', function (e) {
-    //     var data = new Date().getTime();
-    //     $('body').one('swipeLeft', function (e) {
-    //         $('body').one('swipeLeft', function (e) {
-    //             if ((new Date().getTime() - data) > 2000) {
-    //                 return false;
-    //             } else {
-    //                 callback && callback();
-    //             }
-    //         });
-    //     });
-    // });
-};
-
-TD.debug.videoJump = function () {
-    return 'test';
-};
-
 TD.pad = (num, n) => {
-    let tbl = [];
-    n = n || 5;
-    let len = n - num.toString().length;
-    if (len <= 0) return num;
-    if (!tbl[len]) tbl[len] = (new Array(len + 1)).join('0');
-    return tbl[len] + num;
+    return (Array(n).join(0) + num).slice(-n);
 };
 
 /**
@@ -473,8 +393,7 @@ TD.getRandom = (m, n, Integer) => {
  *     formatNum(123456789) => 123,456,789
  */
 TD.formatNum = (str) => {
-    str += '';
-    return str.replace(/\d{1,3}(?=(\d{3})+$)/g, function (s) {
+    return str.toString().replace(/\d{1,3}(?=(\d{3})+$)/g, function (s) {
         return s + ',';
     });
 };
